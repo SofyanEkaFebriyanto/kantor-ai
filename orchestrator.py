@@ -86,7 +86,7 @@ class Orchestrator:
 
     # -- turn selection --
     def _pick(self):
-        """Return (agent_name, directive) atau (None, None)."""
+        """Return (agent_name, directive, use_tools) atau (None, None, False)."""
         quiet = in_quiet(hhmm(), self.qstart, self.qend)
 
         # (0) Bos baru ngomong -> wajib dibales duluan (prioritas tertinggi)
@@ -109,9 +109,9 @@ class Orchestrator:
                 self._rr_idx += 1
             return responder, (
                 f"Bos baru aja bilang di chat: \"{text}\". "
-                f"JAWAB LANGSUNG 1-3 kalimat, natural kayak rekan kerja. "
-                f"Kalau itu perintah kerjaan konkret dan lo bisa, kerjain pakai tools "
-                f"lalu lapor singkat. Kalau cuma sapaan/tes, jawab santai aja, jangan lebay.")
+                f"Tugas lo cuma satu: JAWAB PESAN ITU 1-3 kalimat, natural kayak rekan kerja. "
+                f"DILARANG pakai tools, DILARANG bahas task board, DILARANG assign task. "
+                f"Hanya jawab dengan teks. Kalau cuma sapaan/tes, jawab santai aja, jangan lebay."), False
 
         # (a) task doing yang stale -> assignee lanjutin (max 1 nudge per task per nudge_mins)
         stale = self.db.stale_doing_tasks(self.nudge_mins * 60)
@@ -133,7 +133,7 @@ class Orchestrator:
                     f"tanpa update. LANJUTIN pakai tools sampai ada progres nyata, lalu lapor "
                     f"1-2 kalimat. Kalau selesai, update task jadi done via... "
                     f"(catatan: ubah status task dengan menulis pesan '[DONE #id]' di chat, "
-                    f"orchestrator yang akan update board).")
+                    f"orchestrator yang akan update board)."), True
 
         # (b) backlog -> Bagas assign, atau agent ambil sendiri
         backlog = self.db.list_tasks("backlog")
@@ -148,24 +148,24 @@ class Orchestrator:
                     f"MULAI kerjain sekarang pakai tools. Pertama: bikin todo list via todo_write, "
                     f"lalu eksekusi sampai SELESAI BENERAN (file ada, bisa dibaca balik). "
                     f"JANGAN klaim selesai sebelum hasilnya terverifikasi via read_file/list_dir. "
-                    f"Kalau selesai, tulis '[DONE #id]' di pesan terakhir lo.")
+                    f"Kalau selesai, tulis '[DONE #id]' di pesan terakhir lo."), True
             # Bagas assign
             return "Bagas", (
                 f"Ada {len(backlog)} task backlog. Pilih 1 yang paling prioritas, assign ke anggota "
                 f"tim pakai assign_task. ATURAN KERAS: assignee HARUS salah satu dari: {members}. "
                 f"DILARANG assign ke diri sendiri (Bagas) atau ke Bos. "
                 f"Jelaskan singkat di chat kenapa lo pilih dia. "
-                f"Task: " + "; ".join(f"#{x['id']} '{x['title']}'" for x in backlog[:5]))
+                f"Task: " + "; ".join(f"#{x['id']} '{x['title']}'" for x in backlog[:5])), True
 
         # (c) free chat round-robin (skip saat quiet hours)
         if quiet:
-            return None, None
+            return None, None, False
         name = self.order[self._rr_idx % len(self.order)]
         self._rr_idx += 1
         return name, (
             "Obrolan santai kantor 1 pesan pendek (maks 3 kalimat). Boleh nanggepin obrolan "
             "terakhir, nanya kabar kerjaan tim, atau lempar ide. Jangan bahas task board "
-            "kecuali relevan. Natural aja kayak lagi di pantry.")
+            "kecuali relevan. Natural aja kayak lagi di pantry."), True
 
     def _apply_done_markers(self, text, agent_name):
         import re
@@ -187,19 +187,26 @@ class Orchestrator:
             pick = self._pick()
             if not pick[0]:
                 return
-            name, directive = pick
+            name, directive, use_tools = pick
             agent = self.agents[name]
             self.log(f"[turn] {name}: {directive[:80]}...")
-            # tools: semua agent dapat full set; assign_task dibatasi di eksekutor
+            # tools: full set untuk kerja; turn balasan Bos = chat murni tanpa tools
             from tools import TOOL_SCHEMAS
-            text = agent.turn(directive, TOOL_SCHEMAS)
+            text = agent.turn(directive, TOOL_SCHEMAS if use_tools else None)
+            if not use_tools and not (text or "").strip():
+                # jangan pernah diam kalau Bos ngomong
+                text = "Siap, Bos."
+                self.db.add_message(name, "chat", text)
+                self.log(f"[chat] {name}: {text} (fallback)")
             self._apply_done_markers(text, name)
             # tandai doing: kalau agent mulai task backlog miliknya -> doing
-            for t in self.db.list_tasks("backlog"):
-                if t["assignee"] == name:
-                    self.db.update_task(t["id"], status="doing")
-                    self.log(f"[task] #{t['id']} -> doing ({name})")
-                    break
+            # (jangan untuk turn balasan Bos yang chat-only)
+            if use_tools:
+                for t in self.db.list_tasks("backlog"):
+                    if t["assignee"] == name:
+                        self.db.update_task(t["id"], status="doing")
+                        self.log(f"[task] #{t['id']} -> doing ({name})")
+                        break
             self._spend()
         except Exception:
             self.log("[orchestrator-error]\n" + traceback.format_exc())

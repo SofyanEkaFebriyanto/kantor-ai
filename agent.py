@@ -82,15 +82,15 @@ class Agent:
         ]
 
     def turn(self, directive, tools):
-        """Jalankan 1 giliran. Return pesan akhir (atau '' bila murni tool work)."""
-        from tools import TOOL_SCHEMAS
+        """Jalankan 1 giliran. Return pesan akhir (atau '' bila murni tool work).
+        tools=None -> chat murni tanpa tool calls."""
         messages = self.build_messages(directive)
         self.db.set_agent_status(self.name, "working")
         final_text = ""
         used_tools = False
         try:
             for step in range(self.max_steps):
-                text, tool_calls = self.llm.chat(messages, tools=TOOL_SCHEMAS,
+                text, tool_calls = self.llm.chat(messages, tools=tools,
                                                  max_tokens=800)
                 if not tool_calls:
                     final_text = (text or "").strip()
