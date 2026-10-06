@@ -90,7 +90,7 @@ PAGE = """<!doctype html>
 </aside>
 <div id="bossbar">
   <div id="bossbox"><input id="bosin" placeholder="Ngomong sebagai Bos...  /tugas @Dimas bikin API auth" autocomplete="off"><button id="bossend">Kirim</button></div>
-  <div class="hint"><b>/tugas @Nama judul task</b> buat assign kerjaan &middot; klik agent di kantor buat lihat kartunya</div>
+  <div class="hint"><b>/tugas @Nama judul task</b> buat assign kerjaan &middot; klik karakter buat lihat kartunya &middot; geser layar buat jelajah kantor</div>
 </div>
 <script src="/static/kantor.js"></script>
 </body></html>
