@@ -253,12 +253,16 @@ class Handler(BaseHTTPRequestHandler):
             names = [a["name"] for a in self.db.list_agents()]
             if who in names:
                 tid = self.db.add_task(title, who, created_by="Bos")
-                self.db.add_message("Bos", "task", f"/tugas: #{tid} untuk {who}: {title}")
+                mid = self.db.add_message("Bos", "task", f"/tugas: #{tid} untuk {who}: {title}")
+                self.db.set_memory("orchestrator", "boss_pending", str(mid))
                 self._json({"ok": True, "task_id": tid})
                 return
+            mid = self.db.add_message("Bos", "chat", text)
+            self.db.set_memory("orchestrator", "boss_pending", str(mid))
             self._json({"ok": False, "error": f"tidak kenal @{who}"})
             return
-        self.db.add_message("Bos", "chat", text)
+        mid = self.db.add_message("Bos", "chat", text)
+        self.db.set_memory("orchestrator", "boss_pending", str(mid))
         self._json({"ok": True})
 
     def log_message(self, *a):

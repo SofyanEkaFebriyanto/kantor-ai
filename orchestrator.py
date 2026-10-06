@@ -7,6 +7,7 @@ Tiap tick:
 Event: standup 09:00, istirahat 12:00 (sekali sehari, WIB).
 Pacing: max_turns_per_hour giliran agent per jam.
 """
+import re
 import time
 import traceback
 
@@ -88,11 +89,45 @@ class Orchestrator:
         """Return (agent_name, directive) atau (None, None)."""
         quiet = in_quiet(hhmm(), self.qstart, self.qend)
 
-        # (a) task doing yang stale -> assignee lanjutin
+        # (0) Bos baru ngomong -> wajib dibales duluan (prioritas tertinggi)
+        boss_mid = self.db.get_memory("orchestrator", "boss_pending", "")
+        replied = self.db.get_memory("orchestrator", "boss_replied", "")
+        if boss_mid and boss_mid != replied:
+            self.db.set_memory("orchestrator", "boss_replied", boss_mid)
+            text = ""
+            for m in self.db.recent_messages(30):
+                if str(m["id"]) == str(boss_mid) and m["sender"] == "Bos":
+                    text = m["text"]
+                    break
+            # kalau mention @Nama, yang disebut yang jawab; kalau bukan, round-robin
+            responder = None
+            mm = re.search(r"@(\w+)", text or "")
+            if mm and mm.group(1) in self.agents:
+                responder = mm.group(1)
+            if not responder:
+                responder = self.order[self._rr_idx % len(self.order)]
+                self._rr_idx += 1
+            return responder, (
+                f"Bos baru aja bilang di chat: \"{text}\". "
+                f"JAWAB LANGSUNG 1-3 kalimat, natural kayak rekan kerja. "
+                f"Kalau itu perintah kerjaan konkret dan lo bisa, kerjain pakai tools "
+                f"lalu lapor singkat. Kalau cuma sapaan/tes, jawab santai aja, jangan lebay.")
+
+        # (a) task doing yang stale -> assignee lanjutin (max 1 nudge per task per nudge_mins)
         stale = self.db.stale_doing_tasks(self.nudge_mins * 60)
-        if stale:
-            t = stale[0]
+        now_ts = time.time()
+        fresh = []
+        for t in stale:
+            try:
+                last_nudge = float(self.db.get_memory("orchestrator", f"nudge:{t['id']}", "0"))
+            except ValueError:
+                last_nudge = 0
+            if now_ts - last_nudge >= self.nudge_mins * 60:
+                fresh.append(t)
+        if fresh:
+            t = fresh[0]
             if t["assignee"] in self.agents:
+                self.db.set_memory("orchestrator", f"nudge:{t['id']}", str(now_ts))
                 return t["assignee"], (
                     f"Task #{t['id']} '{t['title']}' status doing tapi {self.nudge_mins}+ menit "
                     f"tanpa update. LANJUTIN pakai tools sampai ada progres nyata, lalu lapor "
