@@ -63,7 +63,7 @@ PAGE = """<!doctype html>
 <html lang="id"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>kantor-ai — tim AI yang kerja beneran</title>
-<link rel="stylesheet" href="/static/kantor.css">
+<link rel="stylesheet" href="/static/kantor.css?v=2">
 </head><body>
 <div id="stage"><canvas id="scene"></canvas><div id="vignette"></div></div>
 <header id="topbar">
@@ -92,7 +92,7 @@ PAGE = """<!doctype html>
   <div id="bossbox"><input id="bosin" placeholder="Ngomong sebagai Bos...  /tugas @Dimas bikin API auth" autocomplete="off"><button id="bossend">Kirim</button></div>
   <div class="hint"><b>/tugas @Nama judul task</b> buat assign kerjaan &middot; klik karakter buat lihat kartunya &middot; geser layar buat jelajah kantor</div>
 </div>
-<script src="/static/kantor.js"></script>
+<script src="/static/kantor.js?v=2"></script>
 </body></html>
 """
 
