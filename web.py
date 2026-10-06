@@ -6,6 +6,7 @@ Routes (SEMUA butuh token, kecuali form login):
   GET  /api/tasks
   GET  /api/agents        -> status agent
   POST /api/boss          -> {"text": "..."} ; perintah "/tugas @Nama judul" = assign
+  GET  /static/*          -> aset publik (avatar dkk, tanpa auth)
 
 Auth: query param ?token=... atau header Authorization: Bearer ...
 Token: env KANTOR_TOKEN, fallback file <data_dir>/.ui_token
@@ -24,6 +25,14 @@ import urllib.parse
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 TOKEN_FILE = ".ui_token"
+
+# Direktori aset statis publik (avatar dkk). BUKAN rahasia -> boleh tanpa auth.
+STATIC_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "static")
+_STATIC_TYPES = {
+    ".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg",
+    ".gif": "image/gif", ".webp": "image/webp", ".svg": "image/svg+xml",
+    ".css": "text/css", ".js": "application/javascript",
+}
 
 
 def load_token(data_dir):
@@ -77,6 +86,28 @@ main{max-width:900px;margin:0 auto;padding:12px;display:grid;gap:12px}
 #agents .a{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #222836;font-size:14px}
 .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
 .working{background:#5ad08a}.idle{background:#6b7488}
+/* --- avatar & animasi --- */
+.av{width:44px;height:44px;border-radius:50%;object-fit:cover;flex:none;background:#222836}
+.acard{display:flex;gap:10px;align-items:center;padding:8px 0;border-bottom:1px solid #222836}
+.acard:last-child{border-bottom:0}
+.acard .nm{font-weight:700;font-size:14px}
+.acard .rl{color:#8b93a7;font-size:12px}
+.acard .st{margin-left:auto;font-size:12px;text-align:right}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes popglow{0%{transform:scale(1)}30%{transform:scale(1.28)}100%{transform:scale(1)}}
+@keyframes glowring{0%,100%{box-shadow:0 0 0 0 rgba(90,208,138,0)}35%{box-shadow:0 0 0 6px rgba(90,208,138,.5)}}
+.av.idle{animation:floaty 4s ease-in-out infinite}
+.av.working{animation:bounce 1.1s ease-in-out infinite}
+.av.pop{animation:popglow .6s ease,glowring 2s ease}
+.typing i{display:inline-block;width:5px;height:5px;border-radius:50%;background:#5ad08a;margin:0 1px;animation:tblink 1.2s infinite}
+.typing i:nth-child(2){animation-delay:.2s}.typing i:nth-child(3){animation-delay:.4s}
+@keyframes tblink{0%,60%,100%{opacity:.25}30%{opacity:1}}
+@keyframes slidein{from{opacity:0;transform:translateX(-16px)}to{opacity:1;transform:none}}
+.msg{display:flex;gap:8px;align-items:flex-start}
+.msg .body{flex:1;min-width:0}
+.msg .txt{overflow-wrap:break-word}
+.msg.new{animation:slidein .35s ease}
 #bossbox{display:flex;gap:8px}#bossbox input{flex:1;background:#0f1115;border:1px solid #2c3342;
 color:#e8eaf0;border-radius:8px;padding:10px}#bossbox button{background:#2f6fed;border:0;color:#fff;
 border-radius:8px;padding:10px 16px;font-weight:700}
@@ -110,11 +141,30 @@ function api(p,opts){
   return fetch(p+sep+'token='+encodeURIComponent(TOKEN),opts);
 }
 let lastId=0;
+let firstPoll=true;
+const AVATARS={Bagas:'bagas.png',Dimas:'dimas.png',Putri:'putri.png',Eko:'eko.png',Intan:'intan.png'};
+const ROLES={Bagas:'Project Manager',Dimas:'Backend Developer',Putri:'Frontend Developer',Eko:'QA Engineer',Intan:'Researcher'};
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
-function renderMsg(m){
+function avatarFor(s,cls){return AVATARS[s]?`<img class="av ${cls||''}" src="/static/avatars/${AVATARS[s]}" alt="${esc(s)}" loading="lazy">`:''}
+function renderMsg(m,isNew){
   const d=new Date(m.ts*1000);
   const ts=d.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
-  return `<div class="msg ${m.kind} ${esc(m.sender)}"><div class="who">${esc(m.sender)}<span class="ts">${ts}</span></div><div>${esc(m.text)}</div></div>`;
+  return `<div class="msg ${m.kind} ${esc(m.sender)}${isNew?' new':''}">${avatarFor(m.sender)}<div class="body"><div class="who">${esc(m.sender)}<span class="ts">${ts}</span></div><div class="txt">${esc(m.text)}</div></div></div>`;
+}
+function popAvatar(name){
+  const img=document.querySelector('#ac-'+CSS.escape(name)+' .av');
+  if(!img)return;
+  img.classList.remove('pop');void img.offsetWidth;img.classList.add('pop');
+  setTimeout(()=>img.classList.remove('pop'),2100);
+}
+function renderAgents(list){
+  document.getElementById('agents').innerHTML=list.map(x=>{
+    const st=x.state==='working'?'working':'idle';
+    const right=x.state==='working'
+      ?'<span class="typing"><i></i><i></i><i></i></span> <span class="hint">kerja...</span>'
+      :`<span class="hint">${esc(x.current_task||'idle')}</span>`;
+    return `<div class="acard" id="ac-${esc(x.agent)}">${avatarFor(x.agent,st)}<div><div class="nm">${esc(x.agent)}</div><div class="rl">${ROLES[x.agent]||''}</div></div><div class="st">${right}</div></div>`;
+  }).join('');
 }
 async function poll(){
   try{
@@ -122,7 +172,12 @@ async function poll(){
     if(r.status===401){location.href='/';return;}
     const j=await r.json();
     const feed=document.getElementById('feed');
-    for(const m of j.messages){feed.insertAdjacentHTML('beforeend',renderMsg(m));lastId=m.id;}
+    const fresh=[];
+    for(const m of j.messages){
+      feed.insertAdjacentHTML('beforeend',renderMsg(m,!firstPoll));
+      lastId=m.id;
+      if(!firstPoll&&AVATARS[m.sender])fresh.push(m.sender);
+    }
     if(j.messages.length)feed.scrollTop=feed.scrollHeight;
     const t=await (await api('/api/tasks')).json();
     for(const s of ['backlog','doing','done']){
@@ -130,8 +185,9 @@ async function poll(){
         .map(x=>`<div class="task">#${x.id} ${esc(x.title)}<small>${esc(x.assignee)} · ${esc(x.created_by)}</small></div>`).join('')||'<div class="hint">-</div>';
     }
     const a=await (await api('/api/agents')).json();
-    document.getElementById('agents').innerHTML=a.agents.map(x=>
-      `<div class="a"><span><span class="dot ${x.state}"></span>${esc(x.agent)}</span><span class="hint">${esc(x.current_task||x.state)}</span></div>`).join('');
+    renderAgents(a.agents);
+    fresh.forEach(popAvatar);
+    firstPoll=false;
   }catch(e){}
 }
 async function sendBos(){
@@ -206,8 +262,39 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(body)
 
+    def _serve_static(self, rel):
+        # Serve file di bawah STATIC_DIR saja. Tolak traversal & tipe tak dikenal.
+        rel = urllib.parse.unquote(rel)
+        if not rel or rel.startswith("/") or ".." in rel.split("/"):
+            self.send_error(404)
+            return
+        base = os.path.realpath(STATIC_DIR)
+        full = os.path.realpath(os.path.join(base, rel))
+        if not full.startswith(base + os.sep) or not os.path.isfile(full):
+            self.send_error(404)
+            return
+        ctype = _STATIC_TYPES.get(os.path.splitext(full)[1].lower())
+        if not ctype:
+            self.send_error(404)
+            return
+        try:
+            with open(full, "rb") as f:
+                body = f.read()
+        except OSError:
+            self.send_error(404)
+            return
+        self.send_response(200)
+        self.send_header("Content-Type", ctype)
+        self.send_header("Content-Length", str(len(body)))
+        self.send_header("Cache-Control", "public, max-age=3600")
+        self.end_headers()
+        self.wfile.write(body)
+
     def do_GET(self):
         parsed = urllib.parse.urlparse(self.path)
+        if parsed.path == "/static/" or parsed.path.startswith("/static/"):
+            self._serve_static(parsed.path[len("/static/"):])
+            return
         if parsed.path == "/":
             if self._authed():
                 self._html(PAGE)
