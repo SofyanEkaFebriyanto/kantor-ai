@@ -32,10 +32,20 @@ atau `LLM_API_KEY` di `/opt/noir-brain/.env`. Tidak pernah ditulis ke disk kanto
 - Denylist: `rm -rf /`, `mkfs`, `shutdown/reboot`, `curl|sh`, `wget|sh`, fork bomb, dsb.
 - File kredensial (`.env`, `*key*`, `*secret*`, `*token*`, `.ssh`, dsb) tidak bisa
   dibaca/ditulis/disebut di perintah shell.
-- Web UI **tanpa auth** — aman hanya karena akses via Tailscale. JANGAN expose
-  port 8091 ke publik tanpa pasang auth (basic auth / Cloudflare Access).
-- Service jalan sebagai user `noir` (bukan root) — cukup untuk baca key 9Router
-  dan tulis ke /opt/kantor-ai.
+## Akses web UI
+
+UI dilindungi token (wajib sebelum dibuka ke publik):
+- Token dibaca dari env `KANTOR_TOKEN`; kalau tidak ada, service generate otomatis
+  via `secrets.token_urlsafe(32)` dan simpan di `/opt/kantor-ai/data/.ui_token`
+  (chmod 600, milik user `noir`). Token TIDAK PERNAH ditulis ke log/repo.
+- Akses: `https://kantor.sefy.my.id/?token=<token>` atau masukkan token di form login.
+  API juga menerima header `Authorization: Bearer <token>`.
+- Lihat token di STB (sebagai root): `cat /opt/kantor-ai/data/.ui_token`
+- Ganti token: `systemctl stop kantor-ai && rm /opt/kantor-ai/data/.ui_token && systemctl start kantor-ai`
+  (atau set `KANTOR_TOKEN` via `systemctl edit kantor-ai` → `[Service] Environment=KANTOR_TOKEN=...`).
+
+⚠️ Jangan sebar URL + token sembarangan — siapa pun yang pegang token bisa
+ngomong sebagai Bos dan assign task ke tim.
 
 ## Operasional (di STB)
 
@@ -47,7 +57,8 @@ sqlite3 /opt/kantor-ai/data/office.db "select sender, substr(text,1,80) from mes
 systemctl restart kantor-ai
 ```
 
-UI: `http://100.84.6.21:8091` (via Tailscale).
+UI: `https://kantor.sefy.my.id/?token=<token>` (publik, butuh token) atau
+`http://100.84.6.21:8091` (via Tailscale).
 Perintah Bos di UI: `/tugas @Dimas bikin API login` → masuk backlog & di-assign.
 
 ## Tambah/ubah agent

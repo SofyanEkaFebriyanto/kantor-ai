@@ -1,18 +1,54 @@
 """web.py — web UI kantor-ai (stdlib http.server).
 
-Routes:
-  GET  /                  -> halaman utama (HTML inline)
+Routes (SEMUA butuh token, kecuali form login):
+  GET  /                  -> halaman utama (butuh token) / form login (tanpa token)
   GET  /api/messages?since=N
   GET  /api/tasks
   GET  /api/agents        -> status agent
   POST /api/boss          -> {"text": "..."} ; perintah "/tugas @Nama judul" = assign
+
+Auth: query param ?token=... atau header Authorization: Bearer ...
+Token: env KANTOR_TOKEN, fallback file <data_dir>/.ui_token
+(generate secrets.token_urlsafe(32) saat pertama kali, chmod 600).
+Token TIDAK PERNAH ditulis ke log.
 """
+import hashlib
+import hmac
 import html as htmlmod
 import json
+import os
 import re
+import secrets
 import time
 import urllib.parse
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+
+TOKEN_FILE = ".ui_token"
+
+
+def load_token(data_dir):
+    """Kembalikan (token, sumber). Sumber: 'env' | 'file' | 'generated'."""
+    env = os.environ.get("KANTOR_TOKEN", "").strip()
+    if env:
+        return env, "env"
+    path = os.path.join(data_dir, TOKEN_FILE)
+    try:
+        with open(path, encoding="utf-8") as f:
+            t = f.read().strip()
+        if t:
+            return t, "file"
+    except FileNotFoundError:
+        pass
+    t = secrets.token_urlsafe(32)
+    try:
+        fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+        with os.fdopen(fd, "w", encoding="utf-8") as f:
+            f.write(t + "\n")
+        return t, "generated"
+    except FileExistsError:
+        with open(path, encoding="utf-8") as f:
+            return f.read().strip(), "file"
+
 
 PAGE = """<!doctype html>
 <html lang="id"><head><meta charset="utf-8">
@@ -66,8 +102,15 @@ border-radius:8px;padding:10px 16px;font-weight:700}
 </div>
 </main>
 <script>
+const TOKEN=new URLSearchParams(location.search).get('token')||'';
+function api(p,opts){
+  const sep=p.includes('?')?'&':'?';
+  opts=opts||{};
+  opts.headers=Object.assign({'Authorization':'Bearer '+TOKEN},opts.headers||{});
+  return fetch(p+sep+'token='+encodeURIComponent(TOKEN),opts);
+}
 let lastId=0;
-function esc(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 function renderMsg(m){
   const d=new Date(m.ts*1000);
   const ts=d.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
@@ -75,23 +118,25 @@ function renderMsg(m){
 }
 async function poll(){
   try{
-    const r=await fetch('/api/messages?since='+lastId);const j=await r.json();
+    const r=await api('/api/messages?since='+lastId);
+    if(r.status===401){location.href='/';return;}
+    const j=await r.json();
     const feed=document.getElementById('feed');
     for(const m of j.messages){feed.insertAdjacentHTML('beforeend',renderMsg(m));lastId=m.id;}
     if(j.messages.length)feed.scrollTop=feed.scrollHeight;
-    const t=await (await fetch('/api/tasks')).json();
+    const t=await (await api('/api/tasks')).json();
     for(const s of ['backlog','doing','done']){
       document.getElementById('b_'+s).innerHTML=t.tasks.filter(x=>x.status===s)
         .map(x=>`<div class="task">#${x.id} ${esc(x.title)}<small>${esc(x.assignee)} · ${esc(x.created_by)}</small></div>`).join('')||'<div class="hint">-</div>';
     }
-    const a=await (await fetch('/api/agents')).json();
+    const a=await (await api('/api/agents')).json();
     document.getElementById('agents').innerHTML=a.agents.map(x=>
       `<div class="a"><span><span class="dot ${x.state}"></span>${esc(x.agent)}</span><span class="hint">${esc(x.current_task||x.state)}</span></div>`).join('');
   }catch(e){}
 }
 async function sendBos(){
   const inp=document.getElementById('bosin');const v=inp.value.trim();if(!v)return;
-  await fetch('/api/boss',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:v})});
+  await api('/api/boss',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({text:v})});
   inp.value='';poll();
 }
 document.getElementById('bosin').addEventListener('keydown',e=>{if(e.key==='Enter')sendBos()});
@@ -100,10 +145,49 @@ setInterval(()=>{document.getElementById('clock').textContent=new Date().toLocal
 </script></body></html>
 """
 
+LOGIN_PAGE = """<!doctype html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>kantor-ai — login</title>
+<style>body{margin:0;background:#0f1115;color:#e8eaf0;font-family:system-ui,sans-serif;
+display:flex;align-items:center;justify-content:center;min-height:100vh}
+.card{background:#161a22;border:1px solid #262c38;border-radius:12px;padding:28px;width:320px;text-align:center}
+h1{font-size:20px;margin:0 0 6px}p{color:#8b93a7;font-size:13px}
+input{width:100%;background:#0f1115;border:1px solid #2c3342;color:#e8eaf0;border-radius:8px;
+padding:10px;margin:12px 0;box-sizing:border-box}
+button{width:100%;background:#2f6fed;border:0;color:#fff;border-radius:8px;padding:10px;font-weight:700;cursor:pointer}
+</style></head><body><div class="card">
+<h1>&#127970; kantor-ai</h1><p>Masukin token akses buat buka dashboard kantor.</p>
+<input id="t" type="password" placeholder="token" autocomplete="off">
+<button onclick="go()">Masuk</button></div>
+<script>function go(){const v=document.getElementById('t').value.trim();if(v)location.href='/?token='+encodeURIComponent(v);}
+document.getElementById('t').addEventListener('keydown',e=>{if(e.key==='Enter')go()});</script>
+</body></html>
+"""
+
 
 class Handler(BaseHTTPRequestHandler):
     db = None
     agent_names = []
+    ui_token = ""
+
+    def _authed(self):
+        parsed = urllib.parse.urlparse(self.path)
+        q = urllib.parse.parse_qs(parsed.query)
+        tok = q.get("token", [""])[0]
+        if not tok:
+            ah = self.headers.get("Authorization", "")
+            if ah.startswith("Bearer "):
+                tok = ah[7:].strip()
+        return bool(tok) and hmac.compare_digest(tok, self.ui_token)
+
+    def _html(self, page, code=200):
+        body = page.encode()
+        self.send_response(code)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
 
     def _json(self, obj, code=200):
         body = json.dumps(obj, ensure_ascii=False).encode()
@@ -113,19 +197,32 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(body)
 
+    def _unauthorized(self):
+        self.send_response(401)
+        self.send_header("WWW-Authenticate", 'Bearer realm="kantor-ai"')
+        body = b'{"error":"unauthorized"}'
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
     def do_GET(self):
         parsed = urllib.parse.urlparse(self.path)
         if parsed.path == "/":
-            body = PAGE.encode()
-            self.send_response(200)
-            self.send_header("Content-Type", "text/html; charset=utf-8")
-            self.send_header("Content-Length", str(len(body)))
-            self.end_headers()
-            self.wfile.write(body)
+            if self._authed():
+                self._html(PAGE)
+            else:
+                self._html(LOGIN_PAGE)
+            return
+        if not self._authed():
+            self._unauthorized()
             return
         if parsed.path == "/api/messages":
             q = urllib.parse.parse_qs(parsed.query)
-            since = int(q.get("since", ["0"])[0])
+            try:
+                since = int(q.get("since", ["0"])[0])
+            except ValueError:
+                since = 0
             msgs = self.db.messages_since(since)
             if not msgs and since == 0:
                 msgs = self.db.recent_messages(50)
@@ -143,6 +240,9 @@ class Handler(BaseHTTPRequestHandler):
         parsed = urllib.parse.urlparse(self.path)
         if parsed.path != "/api/boss":
             self.send_error(404)
+            return
+        if not self._authed():
+            self._unauthorized()
             return
         length = int(self.headers.get("Content-Length", 0))
         try:
@@ -171,8 +271,12 @@ class Handler(BaseHTTPRequestHandler):
         pass
 
 
-def run(db, agent_names, host, port):
+def run(db, agent_names, host, port, data_dir):
+    token, src = load_token(data_dir)
     Handler.db = db
     Handler.agent_names = agent_names
+    Handler.ui_token = token
+    # NOTE: nilai token TIDAK PERNAH di-log
+    print(f"[web] token auth aktif (sumber: {src}); UI di http://{host}:{port}", flush=True)
     srv = ThreadingHTTPServer((host, port), Handler)
     srv.serve_forever()

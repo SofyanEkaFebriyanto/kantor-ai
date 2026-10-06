@@ -70,7 +70,9 @@ def main():
     web_cfg = cfg.get("web", {})
     host = os.environ.get("KANTOR_WEB_HOST", web_cfg.get("host", "0.0.0.0"))
     port = int(os.environ.get("KANTOR_WEB_PORT", web_cfg.get("port", 8091)))
-    t = threading.Thread(target=web_mod.run, args=(db, names, host, port), daemon=True)
+    t = threading.Thread(target=web_mod.run,
+                       args=(db, names, host, port, cfg["paths"]["data_dir"]),
+                       daemon=True)
     t.start()
     log(f"[web] UI di http://{host}:{port}")
 
