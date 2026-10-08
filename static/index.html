@@ -2,9 +2,9 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <title>Kantor AI — Diorama 3D</title>
-<link rel="stylesheet" href="static/style.css?v=6">
+<link rel="stylesheet" href="static/style.css?v=10">
 <script type="importmap">
 {"imports": {"three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}
 </script>
@@ -19,6 +19,7 @@
   <div class="hud-mid">
     <span id="clock" title="Waktu Indonesia Barat">--:--:--</span>
     <span id="live-badge" class="badge ambient">AMBIENT</span>
+    <span id="rhythm-badge" class="badge rhythm" title="Ritme realtime kantor (WIB)">--</span>
     <span id="demo-badge" class="badge demo hidden">MODE DEMO</span>
   </div>
   <div class="hud-right">
@@ -47,7 +48,10 @@
   <div id="panel-handle" title="Geser/tap untuk ciutkan"></div>
   <div class="tabs">
     <button class="tab active" data-tab="cmd">💬 Perintah</button>
+    <button class="tab" data-tab="chat">🤖 Ngobrol</button>
     <button class="tab" data-tab="queue">📋 Antrean <span id="queue-count"></span></button>
+    <button class="tab" data-tab="appr">🛡️ Approval <span id="appr-count"></span></button>
+    <button class="tab" data-tab="goals">🎯 Goals</button>
     <button class="tab" data-tab="log">📜 Log</button>
     <button id="panel-close" title="Tutup panel">✕</button>
   </div>
@@ -57,7 +61,30 @@
     <button id="cmd-send">🚀 Kirim perintah</button>
     <div id="cmd-status" class="hint"></div>
   </div>
+  <div class="tab-body hidden" id="tab-chat">
+    <p class="hint">Ngobrol langsung sama Noir, atau briefing manager tiap divisi — mereka teruskan ke timnya.</p>
+    <select id="chat-thread" title="Pilih lawan bicara"></select>
+    <div id="chat-list"></div>
+    <div id="chat-typing" class="hidden"><span id="chat-typing-who">Noir</span> sedang mengetik<span class="tdots"><i>.</i><i>.</i><i>.</i></span></div>
+    <div id="chat-row">
+      <button id="chat-attach" title="Lampirkan file (gambar/dokumen, max 10MB)">📎</button>
+      <input id="chat-file" type="file" class="hidden" accept="image/*,.pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.md,.csv">
+      <input id="chat-input" type="text" placeholder="Ngobrol sama Noir..." maxlength="2000">
+      <button id="chat-mic" title="Bicara (voice input)">🎤</button>
+      <button id="chat-send" title="Kirim">➤</button>
+    </div>
+    <div id="chat-status" class="hint"></div>
+  </div>
   <div class="tab-body hidden" id="tab-queue"><div id="queue-list"></div></div>
+  <div class="tab-body hidden" id="tab-appr"><div id="appr-list"></div></div>
+  <div class="tab-body hidden" id="tab-goals">
+    <div id="goal-form">
+      <input id="goal-title" type="text" placeholder="Target baru, mis: 100 konten IG bulan ini" maxlength="200">
+      <input id="goal-target" type="text" placeholder="Target ukur (mis: 100)" maxlength="200">
+      <button id="goal-add">＋ Tambah</button>
+    </div>
+    <div id="goal-list"></div>
+  </div>
   <div class="tab-body hidden" id="tab-log"><div id="log-list"></div></div>
 </aside>
 
@@ -76,10 +103,13 @@
   <span><i class="dot" style="background:#9e9e9e"></i>idle</span>
   <span><i class="dot" style="background:#e91e63"></i>waiting</span>
   <span><i class="dot" style="background:#8bc34a"></i>done</span>
+  <span><i class="dot" style="background:#9d4edd"></i>sholat</span>
 </div>
+
+<div id="adzan-banner" class="hidden"></div>
 
 <div id="toast" class="hidden"></div>
 
-<script type="module" src="static/app.js?v=4"></script>
+<script type="module" src="static/app.js?v=15"></script>
 </body>
 </html>
