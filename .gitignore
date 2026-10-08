@@ -1,6 +1,8 @@
-__pycache__/
-*.pyc
-data/
-work/
-*.db
+# runtime state — jangan commit
+data/queue.json
+data/live.json
+data/dispatch.json
+data/tunnel_url.txt
+data/server.lock
 *.log
+__pycache__/

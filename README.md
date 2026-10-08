@@ -1,73 +1,60 @@
-# kantor-ai 🏢
+# Kantor AI v3 — Diorama 3D Isometrik
 
-Tim multi-agent AI yang kerja beneran — terinspirasi video TikTok "kantor AI".
-5 agent (Bagas/PM, Dimas/backend, Putri/frontend, Eko/QA, Intan/riset) ngobrol,
-bikin task, dan ngerjain pakai tools beneran (baca/tulis file, shell, webfetch).
-Jalan 24/7 di STB via systemd, LLM numpang 9Router (model gratis).
+Webapp monitoring/orchestration **267 AI agent** dalam **18 divisi**, divisualkan
+sebagai satu gedung kantor 3D isometrik bergaya chibi (Three.js/WebGL asli).
 
-## Arsitektur
+**Live:** https://sefy.my.id/kantorv3/
 
-```
-main.py           entry: orchestrator thread + web UI thread
-orchestrator.py   loop tiap 90 dtk: pilih siapa yang jalan
-agent.py          prompt (persona + board + 30 pesan terakhir + todo) + tool loop (max 6 step)
-llm.py            client OpenAI-compatible -> 9Router (urllib, stdlib)
-tools.py          read/write/edit/list file, exec (sandbox), webfetch, todo, assign_task
-state.py          SQLite: messages, tasks, memories, agent_status
-web.py            UI: feed chat live, task board, status tim, "Ngomong sebagai Bos"
-config.yaml       daftar agent + setting orchestrator
-```
+## Konsep
 
-**Siklus kerja:** tiap tick orchestrator tentuin 1 agent jalan —
-(a) yang punya task `doing` stale >10 mnt lanjutin, (b) backlog → Bagas assign /
-agent ambil, (c) free chat round-robin (skip 23:00–06:00 WIB).
-Event: standup 09:00, istirahat 12:00. Pacing: max 8 giliran/jam (hemat rate limit).
+- 1 agent aktif = 1 karakter chibi 3D yang animasinya mencerminkan aktivitas nyatanya:
+  `working` (mengetik), `reading`, `running`, `idle`, `waiting`, `done`.
+- Backend mengirim snapshot live; snapshot kosong/basi → mode ambient
+  (karakter bergerak prosedural, jelas dibedakan dari data live).
+- 18 zona divisi + 5 ruang khusus: Lobi, Ruang Owner, Musholla, Kolam Renang,
+  Rooftop Café. Label nama anti-tabrakan, HUD (jam WIB, notifikasi, activity log),
+  direktori 267 agent, panel **"Perintah ke Noir"**.
 
-**API key 9Router:** dibaca transient saat start dari `NINEROUTER_API_KEY`,
-atau `LLM_API_KEY` di `/opt/noir-brain/.env`. Tidak pernah ditulis ke disk kantor-ai.
-
-## Safety model
-
-- `exec` di-jail ke `/opt/kantor-ai/work`: path absolut di luar jail & `..` ditolak.
-- Denylist: `rm -rf /`, `mkfs`, `shutdown/reboot`, `curl|sh`, `wget|sh`, fork bomb, dsb.
-- File kredensial (`.env`, `*key*`, `*secret*`, `*token*`, `.ssh`, dsb) tidak bisa
-  dibaca/ditulis/disebut di perintah shell.
-## Akses web UI
-
-UI dilindungi token (wajib sebelum dibuka ke publik):
-- Token dibaca dari env `KANTOR_TOKEN`; kalau tidak ada, service generate otomatis
-  via `secrets.token_urlsafe(32)` dan simpan di `/opt/kantor-ai/data/.ui_token`
-  (chmod 600, milik user `noir`). Token TIDAK PERNAH ditulis ke log/repo.
-- Akses: `https://kantor.sefy.my.id/?token=<token>` atau masukkan token di form login.
-  API juga menerima header `Authorization: Bearer <token>`.
-- Lihat token di STB (sebagai root): `cat /opt/kantor-ai/data/.ui_token`
-- Ganti token: `systemctl stop kantor-ai && rm /opt/kantor-ai/data/.ui_token && systemctl start kantor-ai`
-  (atau set `KANTOR_TOKEN` via `systemctl edit kantor-ai` → `[Service] Environment=KANTOR_TOKEN=...`).
-
-⚠️ Jangan sebar URL + token sembarangan — siapa pun yang pegang token bisa
-ngomong sebagai Bos dan assign task ke tim.
-
-## Operasional (di STB)
+## Cara jalan
 
 ```bash
-systemctl status kantor-ai        # cek service
-journalctl -u kantor-ai -f        # log systemd
-tail -f /opt/kantor-ai/data/orchestrator.log
-sqlite3 /opt/kantor-ai/data/office.db "select sender, substr(text,1,80) from messages order by id desc limit 10;"
-systemctl restart kantor-ai
+python3 tools/build_data.py   # generate data/divisions.json + data/agents.json (sekali saja)
+python3 server.py             # http://127.0.0.1:8092
 ```
 
-UI: `https://kantor.sefy.my.id/?token=<token>` (publik, butuh token) atau
-`http://100.84.6.21:8091` (via Tailscale).
-Perintah Bos di UI: `/tugas @Dimas bikin API login` → masuk backlog & di-assign.
+Tanpa dependensi — hanya Python stdlib. Frontend: Three.js via CDN.
 
-## Tambah/ubah agent
+## Cara kerja live feed
 
-Edit `config.yaml` → tambah entry di `agents:` (nama, role, persona, model),
-lalu `systemctl restart kantor-ai`. Task untuk agent baru bisa di-assign
-dari UI sebagai Bos.
+1. Bos kirim perintah bahasa natural via panel → antrean (`POST /api/commands`).
+2. Dispatcher (cron tiap 2 menit) mencocokkan perintah dengan 267 persona
+   spesialis (`agency-agents`), ACK via published action, lalu spawn **worker
+   subagent beneran** yang mengerjakan tugasnya.
+3. Worker lapor via published actions → karakternya animasi `working` secara live
+   di kantor 3D → selesai → `done` + ringkasan di antrean.
 
-## Ganti model
+## Published actions
 
-`model:` per agent di config.yaml, atau `llm.default_model` untuk semua.
-Daftar model: `curl http://127.0.0.1:20128/v1/models` di STB.
+| Action | Method | Deskripsi |
+|---|---|---|
+| `report_agent_activity` | `POST /api/actions/report_agent_activity` | `{agent_id, status, detail}` |
+| `get_ceo_commands` | `GET /api/actions/get_ceo_commands?status=baru` | Ambil perintah Bos |
+| `ack_ceo_command` | `POST /api/actions/ack_ceo_command` | `{command_id, agent_id}` → diproses |
+| `complete_ceo_command` | `POST /api/actions/complete_ceo_command` | `{command_id, ringkasan}` → selesai |
+
+## Struktur
+
+```
+server.py          # backend stdlib: static + API + published actions
+static/            # frontend Three.js (index.html, app.js, style.css)
+tools/build_data.py# generate data kantor dari agency-agents/INDEX.json
+data/divisions.json# 23 zona (18 divisi + 5 ruang khusus) + layout
+data/agents.json   # 267 agent + posisi meja
+```
+
+## Batasan jujur
+
+- 267 persona = brief spesialis; yang "kerja beneran" adalah worker yang
+  di-spawn per perintah — sisanya tampil ambient (bukan dummy disamarkan live).
+- Deploy referensi: VM (port 8092) → publik via SSH reverse tunnel ke STB →
+  Cloudflare Tunnel path `/kantorv3/*`.

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Kantor AI — Diorama 3D</title>
+<link rel="stylesheet" href="static/style.css?v=5">
+<script type="importmap">
+{"imports": {"three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}
+</script>
+</head>
+<body>
+<div id="scene-wrap"><canvas id="scene"></canvas></div>
+<div id="labels"></div>
+
+<!-- HUD atas -->
+<header id="hud-top">
+  <div class="brand">🏢 <b>KANTOR AI</b> <span class="ver">v3</span></div>
+  <div class="hud-mid">
+    <span id="clock" title="Waktu Indonesia Barat">--:--:--</span>
+    <span id="live-badge" class="badge ambient">AMBIENT</span>
+    <span id="demo-badge" class="badge demo hidden">MODE DEMO</span>
+  </div>
+  <div class="hud-right">
+    <button id="btn-dir" class="hbtn" title="Direktori agent">🗂️ <span class="lbl">Direktori</span></button>
+    <button id="btn-demo" class="hbtn" title="Demo 3 karakter contoh">▶️ <span class="lbl">Demo</span></button>
+    <button id="btn-home" class="hbtn" title="Reset tampilan">🎯</button>
+    <div id="bell-wrap">
+      <button id="btn-bell" class="hbtn" title="Notifikasi">🔔 <span id="bell-count" class="hidden">0</span></button>
+      <div id="bell-drop" class="hidden"></div>
+    </div>
+  </div>
+</header>
+
+<!-- Drawer direktori -->
+<aside id="drawer" class="hidden">
+  <div class="drawer-head">
+    <b>🗂️ Direktori Agent</b>
+    <input id="dir-search" type="text" placeholder="Cari nama / divisi...">
+    <button id="drawer-close" class="hbtn">✕</button>
+  </div>
+  <div id="dir-list"></div>
+</aside>
+
+<!-- Panel kanan / bottom-sheet -->
+<aside id="panel">
+  <div id="panel-handle" title="Geser/tap untuk ciutkan"></div>
+  <div class="tabs">
+    <button class="tab active" data-tab="cmd">💬 Perintah</button>
+    <button class="tab" data-tab="queue">📋 Antrean <span id="queue-count"></span></button>
+    <button class="tab" data-tab="log">📜 Log</button>
+    <button id="panel-close" title="Tutup panel">✕</button>
+  </div>
+  <div class="tab-body" id="tab-cmd">
+    <p class="hint">Ketik perintah bahasa natural. Noir meneruskannya ke agent spesialis yang paling pas — karakternya bakal kelihatan kerja <i>live</i> di kantor.</p>
+    <textarea id="cmd-text" rows="3" placeholder="Contoh: riset 3 emiten IDX dengan ROE tertinggi..."></textarea>
+    <button id="cmd-send">🚀 Kirim perintah</button>
+    <div id="cmd-status" class="hint"></div>
+  </div>
+  <div class="tab-body hidden" id="tab-queue"><div id="queue-list"></div></div>
+  <div class="tab-body hidden" id="tab-log"><div id="log-list"></div></div>
+</aside>
+
+<!-- Kartu info agent -->
+<div id="agent-card" class="hidden"></div>
+
+<!-- FAB perintah (mobile) + backdrop drawer -->
+<button id="fab-cmd" title="Perintah ke Noir">💬</button>
+<div id="drawer-backdrop" class="hidden"></div>
+
+<!-- Legenda -->
+<div id="legend">
+  <span><i class="dot" style="background:#4caf50"></i>working</span>
+  <span><i class="dot" style="background:#2196f3"></i>reading</span>
+  <span><i class="dot" style="background:#ff9800"></i>running</span>
+  <span><i class="dot" style="background:#9e9e9e"></i>idle</span>
+  <span><i class="dot" style="background:#e91e63"></i>waiting</span>
+  <span><i class="dot" style="background:#8bc34a"></i>done</span>
+</div>
+
+<div id="toast" class="hidden"></div>
+
+<script type="module" src="static/app.js"></script>
+</body>
+</html>

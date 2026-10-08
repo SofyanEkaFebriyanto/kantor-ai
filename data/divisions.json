@@ -1,0 +1,360 @@
+[
+ {
+  "id": "engineering",
+  "kind": "division",
+  "name": "Divisi Engineering",
+  "count": 65,
+  "color": "#4f8ff7",
+  "rect": {
+   "x": -60.5,
+   "z": 10.200000000000001,
+   "w": 29.0,
+   "d": 20.400000000000002
+  },
+  "baseY": 0,
+  "cols": 10,
+  "rows": 7
+ },
+ {
+  "id": "specialized",
+  "kind": "division",
+  "name": "Divisi Specialized",
+  "count": 59,
+  "color": "#9b7ede",
+  "rect": {
+   "x": -26.5,
+   "z": 9.100000000000001,
+   "w": 29.0,
+   "d": 18.200000000000003
+  },
+  "baseY": 0,
+  "cols": 10,
+  "rows": 6
+ },
+ {
+  "id": "marketing",
+  "kind": "division",
+  "name": "Divisi Marketing",
+  "count": 37,
+  "color": "#f76fa0",
+  "rect": {
+   "x": 5.099999999999994,
+   "z": 8.0,
+   "w": 24.2,
+   "d": 16.0
+  },
+  "baseY": 0,
+  "cols": 8,
+  "rows": 5
+ },
+ {
+  "id": "design",
+  "kind": "division",
+  "name": "Divisi Design",
+  "count": 10,
+  "color": "#ffb74d",
+  "rect": {
+   "x": 29.5,
+   "z": 5.800000000000001,
+   "w": 14.6,
+   "d": 11.600000000000001
+  },
+  "baseY": 0,
+  "cols": 4,
+  "rows": 3
+ },
+ {
+  "id": "gis",
+  "kind": "division",
+  "name": "Divisi GIS",
+  "count": 13,
+  "color": "#34b37a",
+  "rect": {
+   "x": 50.30000000000001,
+   "z": 5.800000000000001,
+   "w": 17.0,
+   "d": 11.600000000000001
+  },
+  "baseY": 0,
+  "cols": 5,
+  "rows": 3
+ },
+ {
+  "id": "sales",
+  "kind": "division",
+  "name": "Divisi Sales",
+  "count": 9,
+  "color": "#4dd0e1",
+  "rect": {
+   "x": -67.7,
+   "z": 31.200000000000003,
+   "w": 14.6,
+   "d": 11.600000000000001
+  },
+  "baseY": 0,
+  "cols": 4,
+  "rows": 3
+ },
+ {
+  "id": "security",
+  "kind": "division",
+  "name": "Divisi Security",
+  "count": 12,
+  "color": "#ef5350",
+  "rect": {
+   "x": -46.9,
+   "z": 31.200000000000003,
+   "w": 17.0,
+   "d": 11.600000000000001
+  },
+  "baseY": 0,
+  "cols": 5,
+  "rows": 3
+ },
+ {
+  "id": "testing",
+  "kind": "division",
+  "name": "Divisi Testing",
+  "count": 9,
+  "color": "#aed581",
+  "rect": {
+   "x": -26.1,
+   "z": 31.200000000000003,
+   "w": 14.6,
+   "d": 11.600000000000001
+  },
+  "baseY": 0,
+  "cols": 4,
+  "rows": 3
+ },
+ {
+  "id": "academic",
+  "kind": "division",
+  "name": "Divisi Academic",
+  "count": 6,
+  "color": "#fff176",
+  "rect": {
+   "x": -7.700000000000003,
+   "z": 30.1,
+   "w": 12.2,
+   "d": 9.4
+  },
+  "baseY": 0,
+  "cols": 3,
+  "rows": 2
+ },
+ {
+  "id": "finance",
+  "kind": "division",
+  "name": "Divisi Finance",
+  "count": 5,
+  "color": "#ffd54f",
+  "rect": {
+   "x": 9.5,
+   "z": 30.1,
+   "w": 12.2,
+   "d": 9.4
+  },
+  "baseY": 0,
+  "cols": 3,
+  "rows": 2
+ },
+ {
+  "id": "game-development",
+  "kind": "division",
+  "name": "Divisi Game Dev",
+  "count": 6,
+  "color": "#ff8a65",
+  "rect": {
+   "x": 26.700000000000003,
+   "z": 30.1,
+   "w": 12.2,
+   "d": 9.4
+  },
+  "baseY": 0,
+  "cols": 3,
+  "rows": 2
+ },
+ {
+  "id": "paid-media",
+  "kind": "division",
+  "name": "Divisi Paid Media",
+  "count": 7,
+  "color": "#ba68c8",
+  "rect": {
+   "x": 45.10000000000001,
+   "z": 30.1,
+   "w": 14.6,
+   "d": 9.4
+  },
+  "baseY": 0,
+  "cols": 4,
+  "rows": 2
+ },
+ {
+  "id": "product",
+  "kind": "division",
+  "name": "Divisi Product",
+  "count": 6,
+  "color": "#80cbc4",
+  "rect": {
+   "x": 63.5,
+   "z": 30.1,
+   "w": 12.2,
+   "d": 9.4
+  },
+  "baseY": 0,
+  "cols": 3,
+  "rows": 2
+ },
+ {
+  "id": "project-management",
+  "kind": "division",
+  "name": "Divisi Project Mgmt",
+  "count": 7,
+  "color": "#7986cb",
+  "rect": {
+   "x": -67.7,
+   "z": 46.7,
+   "w": 14.6,
+   "d": 9.4
+  },
+  "baseY": 0,
+  "cols": 4,
+  "rows": 2
+ },
+ {
+  "id": "spatial-computing",
+  "kind": "division",
+  "name": "Divisi Spatial",
+  "count": 6,
+  "color": "#90a4ae",
+  "rect": {
+   "x": -49.3,
+   "z": 46.7,
+   "w": 12.2,
+   "d": 9.4
+  },
+  "baseY": 0,
+  "cols": 3,
+  "rows": 2
+ },
+ {
+  "id": "support",
+  "kind": "division",
+  "name": "Divisi Support",
+  "count": 6,
+  "color": "#d7ccc8",
+  "rect": {
+   "x": -32.1,
+   "z": 46.7,
+   "w": 12.2,
+   "d": 9.4
+  },
+  "baseY": 0,
+  "cols": 3,
+  "rows": 2
+ },
+ {
+  "id": "healthcare",
+  "kind": "division",
+  "name": "Divisi Healthcare",
+  "count": 3,
+  "color": "#f48fb1",
+  "rect": {
+   "x": -14.899999999999999,
+   "z": 45.6,
+   "w": 12.2,
+   "d": 7.2
+  },
+  "baseY": 0,
+  "cols": 3,
+  "rows": 1
+ },
+ {
+  "id": "research",
+  "kind": "division",
+  "name": "Divisi Research",
+  "count": 1,
+  "color": "#ce93d8",
+  "rect": {
+   "x": 1.1000000000000085,
+   "z": 45.6,
+   "w": 9.8,
+   "d": 7.2
+  },
+  "baseY": 0,
+  "cols": 2,
+  "rows": 1
+ },
+ {
+  "id": "lobby",
+  "kind": "special",
+  "name": "Lobi",
+  "count": 0,
+  "color": "#e8dcc8",
+  "rect": {
+   "x": -64.0,
+   "z": 63.4,
+   "w": 22,
+   "d": 13
+  },
+  "baseY": 0
+ },
+ {
+  "id": "owner",
+  "kind": "special",
+  "name": "Ruang Owner",
+  "count": 0,
+  "color": "#d4af6e",
+  "rect": {
+   "x": -40.5,
+   "z": 63.4,
+   "w": 15,
+   "d": 11
+  },
+  "baseY": 0
+ },
+ {
+  "id": "musholla",
+  "kind": "special",
+  "name": "Musholla",
+  "count": 0,
+  "color": "#a8c8a8",
+  "rect": {
+   "x": -21.5,
+   "z": 63.4,
+   "w": 13,
+   "d": 11
+  },
+  "baseY": 0
+ },
+ {
+  "id": "pool",
+  "kind": "special",
+  "name": "Kolam Renang",
+  "count": 0,
+  "color": "#7fc4e8",
+  "rect": {
+   "x": -1.5,
+   "z": 63.4,
+   "w": 17,
+   "d": 13
+  },
+  "baseY": 0
+ },
+ {
+  "id": "cafe",
+  "kind": "special",
+  "name": "Rooftop Café",
+  "count": 0,
+  "color": "#e8b48a",
+  "rect": {
+   "x": 21.5,
+   "z": 63.4,
+   "w": 19,
+   "d": 13
+  },
+  "baseY": 3.0
+ }
+]
