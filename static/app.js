@@ -145,11 +145,63 @@ function cyl(rt,rb,h,color,x,y,z,seg=20){
 const FLOOR_TOP = z => z.baseY + 0.25;
 S.zones = {};
 
-function plant(x, y, z, s=1){
+function plant(x, y, z, s=1, tall=false){
   cyl(0.28*s, 0.34*s, 0.5*s, 0xa8572f, x, y+0.25*s, z, 12);
+  if(tall){ // pohon: batang + tajuk tinggi
+    cyl(0.09*s, 0.12*s, 1.4*s, 0x6e4a2f, x, y+1.1*s, z, 8);
+    const f = new THREE.Mesh(new THREE.IcosahedronGeometry(0.85*s, 1),
+      new THREE.MeshStandardMaterial({color:0x3f6b32, roughness:0.9, flatShading:true}));
+    f.position.set(x, y+2.2*s, z); f.castShadow=true; scene.add(f);
+    return;
+  }
   const f = new THREE.Mesh(new THREE.IcosahedronGeometry(0.55*s, 1),
     new THREE.MeshStandardMaterial({color:0x4d7c3a, roughness:0.9, flatShading:true}));
   f.position.set(x, y+0.95*s, z); f.castShadow=true; scene.add(f);
+}
+
+// hash deterministik per string -> variasi dekor tiap zona stabil antar reload
+function hashStr(s){ let h=2166136261; for(let i=0;i<s.length;i++){ h^=s.charCodeAt(i); h=Math.imul(h,16777619);} return h>>>0; }
+
+// bingkai karya seni di dinding
+function artFrame(x,y,z,color,w=2.2,h=1.4){
+  const g=new THREE.Group(); g.position.set(x,y,z);
+  const fr=new THREE.Mesh(new THREE.BoxGeometry(w,h,0.08),
+    new THREE.MeshStandardMaterial({color:0x4a3a2a,roughness:0.7}));
+  fr.castShadow=true; g.add(fr);
+  const cv=new THREE.Mesh(new THREE.BoxGeometry(w-0.24,h-0.24,0.1),
+    new THREE.MeshStandardMaterial({color,roughness:0.9}));
+  g.add(cv); scene.add(g);
+}
+
+// lampu lantai: tiang + kap + bohlam emissive (tanpa point light -> murah)
+function floorLamp(x,y,z){
+  cyl(0.09,0.12,2.2, 0x3a3a3a, x, y+1.1, z, 10);
+  const shade=new THREE.Mesh(new THREE.ConeGeometry(0.42,0.5,14,1,true),
+    new THREE.MeshStandardMaterial({color:0xf7ead2, roughness:0.9, side:THREE.DoubleSide}));
+  shade.position.set(x, y+2.15, z); shade.castShadow=true; scene.add(shade);
+  const bulb=new THREE.Mesh(new THREE.SphereGeometry(0.2,12,10),
+    new THREE.MeshStandardMaterial({color:0xfff3d6, emissive:0xffd98a, emissiveIntensity:1.8}));
+  bulb.position.set(x, y+2.05, z); scene.add(bulb);
+}
+
+// area luar zona: strip taman antar baris + pohon besar + lampu aksen hangat
+function buildOutdoors(){
+  const planter=(x,z)=>{
+    box(1.7,0.55,1.0, 0x8a5f3a, x, 0.28, z);
+    box(1.5,0.25,0.8, 0x4a6b3a, x, 0.62, z);
+    plant(x-0.4, 0.55, z, 0.55); plant(x+0.45, 0.55, z, 0.7, true);
+  };
+  for(let i=0;i<8;i++) planter(-68+i*19.5, 22.6);  // antara baris 1 & 2
+  for(let i=0;i<7;i++) planter(-58+i*19.5, 40.4);  // antara baris 2 & 3
+  plant(-80, 0, 2, 1.6, true); plant(80, 0, 70, 1.7, true); plant(80, 0, -2, 1.3, true);
+  // lampu aksen di ruang khusus (tanpa shadow — murah di forward renderer)
+  const glow=(x,y,z,color,i,dist)=>{
+    const L=new THREE.PointLight(color, i, dist, 2); L.position.set(x,y,z); scene.add(L);
+  };
+  glow(-64, 5, 63.4, 0xffd9a0, 30, 42);    // lobi hangat
+  glow(-1.5, 4, 63.4, 0x7fd4ff, 22, 36);   // kolam sejuk
+  glow(21.5, 7, 63.4, 0xffc890, 30, 42);   // cafe hangat
+  glow(-40.5, 4.5, 63.4, 0xffe2b0, 18, 30);// ruang owner
 }
 
 function buildZones(){
@@ -158,10 +210,11 @@ function buildZones(){
     const baseY = d.baseY||0, top = baseY+0.25;
     S.zones[d.id] = {...d, top};
     const col = new THREE.Color(d.color);
-    // lantai zona
+    const rnd = hashStr(d.id), openPlan = d.kind!=='special' && rnd%3===0;
+    // lantai zona: dua tone hangat bergantian agar tidak seragam
     const h = d.id==='cafe' ? 3 : 0.5;
     const fl = new THREE.Mesh(new THREE.BoxGeometry(w, h, dd),
-      new THREE.MeshStandardMaterial({color:0xefe6d4, roughness:0.95}));
+      new THREE.MeshStandardMaterial({color:(rnd%2)?0xefe6d4:0xe7dac0, roughness:0.95}));
     fl.position.set(x, baseY + h/2 - (d.id==='cafe'?0:0), z);
     if(d.id==='cafe') fl.position.y = baseY - h/2 + 0.25; // top slab di baseY+0.25
     fl.receiveShadow = true; scene.add(fl);
@@ -169,21 +222,53 @@ function buildZones(){
     const edge = new THREE.Mesh(new THREE.BoxGeometry(w+0.3, 0.1, dd+0.3),
       new THREE.MeshStandardMaterial({color:col, roughness:0.8}));
     edge.position.set(x, top-0.12, z); scene.add(edge);
-    // dinding cutaway: belakang (-z) & kiri (-x)
-    const wh = 2.6, wt = 0.35;
-    const wallMat = new THREE.MeshStandardMaterial({color:0xf5eedd, roughness:0.95});
-    const wb = new THREE.Mesh(new THREE.BoxGeometry(w, wh, wt), wallMat);
-    wb.position.set(x, top+wh/2, z-dd/2+wt/2); wb.castShadow=wb.receiveShadow=true; scene.add(wb);
-    const wl = new THREE.Mesh(new THREE.BoxGeometry(wt, wh, dd), wallMat);
-    wl.position.set(x-w/2+wt/2, top+wh/2, z); wl.castShadow=wl.receiveShadow=true; scene.add(wl);
-    const trim = new THREE.Mesh(new THREE.BoxGeometry(w, 0.18, wt+0.06),
-      new THREE.MeshStandardMaterial({color:col, roughness:0.7}));
-    trim.position.set(x, top+wh+0.09, z-dd/2+wt/2); scene.add(trim);
-    // tanaman sudut
-    plant(x-w/2+1.2, top, z+dd/2-1.2, 0.9);
-    if(w>14) plant(x+w/2-1.2, top, z+dd/2-1.2, 0.7);
+    // karpet tematik: pastel dari warna divisi, di tengah zona
+    const carpet = box(w*0.62, 0.07, dd*0.55,
+      col.clone().lerp(new THREE.Color(0xffffff), 0.62).getHex(), x, top+0.035, z);
+    carpet.castShadow = false;
+    // dinding cutaway: tinted ke warna divisi + tinggi bervariasi per zona
+    const wh = 2.35 + (rnd%5)*0.12, wt = 0.35;
+    const wallMat = new THREE.MeshStandardMaterial(
+      {color:new THREE.Color(0xf5eedd).lerp(col, 0.10), roughness:0.95});
+    const trimMat = new THREE.MeshStandardMaterial({color:col, roughness:0.7});
+    if(openPlan){
+      // open-plan: divider rendah di belakang + satu divider aksen miring di tengah
+      const dv = new THREE.Mesh(new THREE.BoxGeometry(w, 1.1, 0.22), wallMat);
+      dv.position.set(x, top+0.55, z-dd/2+0.11); dv.castShadow=dv.receiveShadow=true; scene.add(dv);
+      const tr2 = new THREE.Mesh(new THREE.BoxGeometry(w, 0.14, 0.26), trimMat);
+      tr2.position.set(x, top+1.17, z-dd/2+0.11); scene.add(tr2);
+      const dv2 = new THREE.Mesh(new THREE.BoxGeometry(w*0.45, 1.1, 0.22),
+        new THREE.MeshStandardMaterial({color:col.clone().lerp(new THREE.Color(0xffffff),0.45), roughness:0.9}));
+      dv2.position.set(x-w*0.12, top+0.55, z+dd*0.08);
+      dv2.rotation.y = (rnd%2?1:-1)*0.35;
+      dv2.castShadow=dv2.receiveShadow=true; scene.add(dv2);
+    } else {
+      // dinding cutaway: belakang (-z) & kiri (-x)
+      const wb = new THREE.Mesh(new THREE.BoxGeometry(w, wh, wt), wallMat);
+      wb.position.set(x, top+wh/2, z-dd/2+wt/2); wb.castShadow=wb.receiveShadow=true; scene.add(wb);
+      const wl = new THREE.Mesh(new THREE.BoxGeometry(wt, wh, dd), wallMat);
+      wl.position.set(x-w/2+wt/2, top+wh/2, z); wl.castShadow=wl.receiveShadow=true; scene.add(wl);
+      const trim = new THREE.Mesh(new THREE.BoxGeometry(w, 0.18, wt+0.06), trimMat);
+      trim.position.set(x, top+wh+0.09, z-dd/2+wt/2); scene.add(trim);
+      // karya seni di dinding belakang (zona divisi lebar berdinding; ruang khusus punya dekor sendiri)
+      if(w>12 && d.kind!=='special'){
+        const nArt = w>24 ? 3 : 2;
+        const pal = [0x4f8ff7, 0xf76fa0, 0xffb74d, 0x34b37a, 0x9b7ede];
+        for(let i=0;i<nArt;i++)
+          artFrame(x-w/2+w*(i+1)/(nArt+1), top+wh-0.95, z-dd/2+wt+0.07, pal[(rnd+i)%pal.length]);
+      }
+    }
+    // lampu lantai di sudut (zona besar)
+    if(w>16){
+      floorLamp(x-w/2+1.7, top, z+dd/2-1.7);
+      if(dd>12) floorLamp(x+w/2-1.7, top, z-dd/2+1.7);
+    }
+    // tanaman sudut, bentuk bervariasi
+    plant(x-w/2+1.2, top, z+dd/2-1.2, 0.9, rnd%3===0);
+    if(w>14) plant(x+w/2-1.2, top, z+dd/2-1.2, 0.7, rnd%4===0);
     if(d.kind==='special') buildSpecial(d, top);
   }
+  buildOutdoors();
 }
 
 function buildSpecial(d, top){
@@ -194,6 +279,10 @@ function buildSpecial(d, top){
     const rug = cyl(2.2,2.2,0.06, 0xb34a4a, x+2.5, top+0.03, z+1, 28); rug.receiveShadow=true;
     sofa(x+1.2, top, z+2.2, 0); sofa(x+4.2, top, z+0.2, Math.PI/2);
     plant(x+w/2-1.5, top, z-dd/2+1.5, 1.1);
+    // galeri mini di dinding belakang lobi
+    artFrame(x-4, top+1.7, z-dd/2+0.42, 0x4f8ff7);
+    artFrame(x-1.4, top+1.7, z-dd/2+0.42, 0xf76fa0);
+    artFrame(x+1.2, top+1.7, z-dd/2+0.42, 0x34b37a, 1.6, 1.1);
   }
   if(d.id==='owner'){
     box(2.6,0.75,1.3, 0x6e4a2f, x, top+0.38, z-1);                     // meja besar
@@ -270,6 +359,16 @@ function buildFurniture(){
     // (digabung ke deskBody? tidak — skip, cukup)
   });
   [tT,tB,tS,tB2].forEach(im=>im.instanceMatrix.needsUpdate=true);
+  // variasi warna meja & kursi per divisi -> tiap zona punya karakter sendiri
+  const woodTints=[0xffffff,0xf5e8d4,0xe6d3b3,0xd8c2a0], _wht=new THREE.Color(0xffffff);
+  S.agents.forEach((a,i)=>{
+    const zc=new THREE.Color((S.zones[a.division]||{}).color||'#888888');
+    tT.setColorAt(i, new THREE.Color(woodTints[hashStr(a.id)%4]));
+    tB.setColorAt(i, new THREE.Color(woodTints[(hashStr(a.id)+1)%4]));
+    tS.setColorAt(i, zc.clone().lerp(_wht, 0.55));
+    tB2.setColorAt(i, zc.clone().lerp(_wht, 0.55));
+  });
+  [tT,tB,tS,tB2].forEach(im=>{ if(im.instanceColor) im.instanceColor.needsUpdate=true; });
   // monitor: 1 instanced lagi (layar)
   const monG = new THREE.BoxGeometry(0.62,0.4,0.06);
   const monM = new THREE.MeshStandardMaterial({color:0x2b3a4a, roughness:0.4, emissive:0x1a2a3a, emissiveIntensity:0.5});
@@ -384,7 +483,7 @@ function buildCrowd(){
   S.agents.forEach((a,i)=>{
     const zn=S.zones[a.division];
     const it={x:a.desk.x+(Math.random()-0.5)*3, z:a.desk.z+(Math.random()-0.5)*3,
-              tx:0,tz:0,y:zn.top,speed:0.9+Math.random()*0.7,ph:Math.random()*9,
+              tx:0,tz:0,ty:zn.top,y:zn.top,speed:0.9+Math.random()*0.7,ph:Math.random()*9,
               zn, wait:Math.random()*4};
     pickTarget(it); it.x=it.tx; it.z=it.tz; pickTarget(it);
     crowd.items.push(it);
@@ -396,7 +495,14 @@ function buildCrowd(){
 }
 function pickTarget(it){
   const r=it.zn.rect;
-  it.tx=r.x+(Math.random()-0.5)*(r.w-3); it.tz=r.z+(Math.random()-0.5)*(r.d-3);
+  if(Math.random()<0.3){
+    // spot menawan: sudut dekat lampu/tanaman, bukan tengah kerumunan meja
+    it.tx=r.x+(Math.random()<0.5?-1:1)*(r.w/2-2.2);
+    it.tz=r.z+(Math.random()<0.5?-1:1)*(r.d/2-2.2);
+  } else {
+    it.tx=r.x+(Math.random()-0.5)*(r.w-3); it.tz=r.z+(Math.random()-0.5)*(r.d-3);
+  }
+  it.ty=it.zn.top;
   it.wait=2+Math.random()*7;
 }
 function updateCrowd(dt,t){
@@ -406,6 +512,7 @@ function updateCrowd(dt,t){
         ZERO=new THREE.Matrix4().makeScale(0,0,0);
   crowd.items.forEach((it,i)=>{
     if(crowd.hidden.has(i)){ crowd.body.setMatrixAt(i,ZERO); crowd.head.setMatrixAt(i,ZERO); crowd.hair.setMatrixAt(i,ZERO); return; }
+    it.y += ((it.ty!==undefined?it.ty:it.y)-it.y)*Math.min(1,dt*2.5); // transisi level halus
     const dx=it.tx-it.x, dz=it.tz-it.z, dist=Math.hypot(dx,dz);
     let bob=0, yaw=it.yaw||0;
     if(dist>0.4){
