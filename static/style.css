@@ -93,6 +93,8 @@ html,body{margin:0;padding:0;height:100%;overflow:hidden;
 .qitem .ringkasan{margin-top:6px;background:#f1f8e9;border-radius:8px;padding:7px 9px;font-size:12px;line-height:1.45;}
 .litem{padding:7px 4px;border-bottom:1px solid var(--line);font-size:12px;line-height:1.4;}
 .litem .ts{color:var(--muted);font-size:10.5px;display:block;}
+.lfull{white-space:pre-wrap;}
+.more{background:none;border:0;color:var(--accent);font-size:11px;cursor:pointer;padding:0 0 0 4px;text-decoration:underline;}
 
 #legend{position:fixed;left:10px;bottom:10px;z-index:10;background:rgba(20,14,8,.78);color:#ffe9c9;
   border-radius:12px;padding:7px 12px;font-size:11px;display:flex;gap:10px;flex-wrap:wrap;

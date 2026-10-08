@@ -13,6 +13,212 @@ const API = {
 const STATUS_COLOR = {working:'#4caf50',reading:'#2196f3',running:'#ff9800',idle:'#9e9e9e',waiting:'#e91e63',done:'#8bc34a'};
 const LIVE_TTL_MS = 120000;
 
+// ==================== BAGIAN A2: REDESIGN DENAH TOTAL (Level Designer) ====================
+// Denah "kampus organik": 4 distrik (Tech Campus / Creative Quarter / Ops Row / Social Wing),
+// 3 boulevard pejalan kaki (z=15, 37, 56), 1 plaza courtyard dengan fountain sebagai focal point.
+// Rect dari API TIDAK diubah di server — di-override client-side di sini, lalu posisi
+// meja setiap agent di-remap proporsional ke ruangan barunya. API & fungsi inti tak tersentuh.
+const LAYOUT = {
+  // --- Tech Campus (utara) ---
+  'engineering':       {x:-52, z:3,  w:44, d:18},
+  'specialized':       {x:-14, z:3,  w:30, d:18},
+  'spatial-computing': {x:18,  z:2,  w:26, d:16},
+  'gis':               {x:52,  z:4,  w:28, d:16},
+  // --- Creative Quarter (tengah-utara) ---
+  'design':            {x:-62, z:27, w:26, d:15},
+  'marketing':         {x:-34, z:27, w:22, d:15},
+  'product':           {x:-8,  z:27, w:20, d:15},
+  'project-management':{x:16,  z:27, w:20, d:15},
+  'game-development':  {x:38,  z:27, w:16, d:15},
+  'academic':          {x:58,  z:27, w:18, d:15},
+  'research':          {x:76,  z:27, w:16, d:15},
+  // --- Ops Row (tengah-selatan; celah di tengah = plaza courtyard) ---
+  'finance':           {x:-64, z:47, w:22, d:13},
+  'sales':             {x:-40, z:47, w:22, d:13},
+  'paid-media':        {x:-20, z:47, w:16, d:13},
+  'support':           {x:16,  z:47, w:20, d:13},
+  'security':          {x:36,  z:47, w:18, d:13},
+  'testing':           {x:58,  z:47, w:18, d:13},
+  'healthcare':        {x:77,  z:47, w:14, d:13},
+  // --- Social Wing (selatan) ---
+  'lobby':             {x:-8,  z:72, w:34, d:16},
+  'owner':             {x:-42, z:72, w:18, d:12},
+  'musholla':         {x:24,  z:72, w:14, d:12},
+  'pool':              {x:46,  z:72, w:20, d:14},
+  'cafe':              {x:70,  z:72, w:24, d:14, baseY:3}, // rooftop cafe: dek elevated
+  // --- Ruang Rapat (client-side; dekat Ruang Owner, bukan bagian divisions.json) ---
+  'meeting':           {x:-62, z:72, w:16, d:12},
+};
+// boulevard pejalan kaki (koridor sirkulasi utama)
+const WALKS = [15, 37, 56];
+// label distrik untuk zonasi yang terbaca
+const DISTRICTS = [
+  {name:'TECH CAMPUS',     x:-18, z:3,  y:9},
+  {name:'CREATIVE QUARTER',x:2,   z:27, y:8.5},
+  {name:'OPS ROW',         x:-30, z:47, y:8},
+  {name:'SOCIAL WING',     x:14,  z:72, y:10},
+];
+// obrolan kantin: singkat, natural, kasual
+const CHATTER = [
+  'eh, deploy tadi lolos QA nggak?',
+  'kopi di rooftop juara sih',
+  'nanti standup jam 3 ya',
+  'PR-ku udah di-review belum?',
+  'habis ini makan di mana?',
+  'bug kemarin ternyata typo doang',
+  'desain barunya udah di-approve?',
+  'sore ini jadi futsal kan?',
+  'nanti pulang bareng yuk',
+  'brief besok siapa yang pegang?',
+  'eh lihat dashboard barunya belum?',
+  'kopi pahitnya nendang banget',
+];
+
+function applyNewLayout(){
+  const byDiv = {}; for(const d of S.divisions) byDiv[d.id]=d;
+  const orig = {}; for(const d of S.divisions) orig[d.id]={...d.rect};
+  for(const [id,L] of Object.entries(LAYOUT)){
+    const d=byDiv[id]; if(!d) continue;
+    d.rect={x:L.x, z:L.z, w:L.w, d:L.d};
+    if(L.baseY!==undefined) d.baseY=L.baseY;
+  }
+  // remap meja: posisi relatif di ruangan lama -> ruangan baru
+  for(const a of S.agents){
+    const o=orig[a.division], d=byDiv[a.division]; if(!o||!d) continue;
+    const n=d.rect;
+    const fx=Math.min(0.92,Math.max(0.08,(a.desk.x-(o.x-o.w/2))/o.w));
+    const fz=Math.min(0.92,Math.max(0.08,(a.desk.z-(o.z-o.d/2))/o.d));
+    a.desk={x:n.x-n.w/2+fx*n.w, y:0, z:n.z-n.d/2+fz*n.d};
+  }
+}
+function nearestWalk(z){
+  let b=WALKS[0],bd=1e12;
+  for(const w of WALKS){ const dd=Math.abs(z-w); if(dd<bd){bd=dd;b=w;} }
+  return b;
+}
+// rute jalan kaki via boulevard: keluar ruangan -> susur koridor -> masuk tujuan
+function routeTo(fx,fz,tx,tz){
+  const w1=nearestWalk(fz), w2=nearestWalk(tz), path=[];
+  if(Math.abs(fz-w1)>1.2) path.push({x:fx,z:w1});
+  if(w1!==w2){ path.push({x:tx,z:w1}); path.push({x:tx,z:w2}); }
+  else if(Math.abs(fx-tx)>1.2) path.push({x:tx,z:w1});
+  path.push({x:tx,z:tz});
+  return path;
+}
+
+// ---------- kehidupan sosial: spot nongkrong, grup ngobrol, bubble chat ----------
+function initSocial(){
+  S.social={spots:[],bubbles:[]};
+  const Z=id=>S.zones[id]; if(!Z('cafe')) return;
+  const add=(id,dx,dz,kind)=>{ const zn=Z(id); if(!zn) return;
+    S.social.spots.push({x:zn.rect.x+dx, z:zn.rect.z+dz, top:zn.top,
+      zone:id, kind, occupants:new Set()}); };
+  add('cafe',-6,-2,'cafe'); add('cafe',2,-2,'cafe');   // meja rooftop cafe
+  add('cafe',-2,3,'cafe');  add('cafe',6,3,'cafe');
+  add('pool',-3,5.5,'pool'); add('pool',3,5.5,'pool'); // dek kolam
+  add('lobby',3.5,3,'lobby'); add('lobby',-6,4,'lobby');// sofa lobi
+  add('musholla',0,1,'musholla');                      // sudut tenang
+  for(let i=0;i<6;i++){ const a=i/6*Math.PI*2;          // ring plaza fountain (focal point)
+    S.social.spots.push({x:-3+Math.cos(a)*5, z:47+Math.sin(a)*4.4, top:0.25,
+      zone:'plaza', kind:'plaza', occupants:new Set()}); }
+  for(let i=0;i<6;i++){
+    const el=document.createElement('div'); el.className='chat-bubble'; el.style.display='none';
+    labelLayer.appendChild(el); S.social.bubbles.push({el,g:null,line:0,textT:0});
+  }
+}
+function sendToSocial(it){
+  const r=Math.random();
+  let tx,tz,ttop,spot=null;
+  if(r<0.24){
+    // kunjungan antar divisi: mampir ke ruangan divisi lain
+    const others=S.divisions.filter(d=>d.kind==='division'&&d.id!==(it.zn&&it.zn.id));
+    const dd=others[(Math.random()*others.length)|0]; if(!dd) return;
+    const zn=S.zones[dd.id];
+    tx=zn.rect.x+(Math.random()-0.5)*zn.rect.w*0.55;
+    tz=zn.rect.z+(Math.random()-0.5)*zn.rect.d*0.55;
+    ttop=zn.top;
+  } else {
+    const spots=S.social.spots, weights={cafe:3,plaza:3,lobby:1.5,pool:1.5,musholla:0.7};
+    let tot=0; for(const s of spots) tot+=weights[s.kind]||1;
+    let pick=Math.random()*tot, sp=spots[0];
+    for(const s of spots){ pick-=weights[s.kind]||1; if(pick<=0){ sp=s; break; } }
+    spot=sp; tx=sp.x+(Math.random()-0.5)*1.6; tz=sp.z+(Math.random()-0.5)*1.6; ttop=sp.top;
+  }
+  let path;
+  if(spot&&spot.kind==='cafe'){ // naik tangga ke dek rooftop
+    const cz=S.zones.cafe.rect;
+    path=routeTo(it.x,it.z, cz.x-cz.w/2-1.4, cz.z+cz.d/2+2.5);
+    path.push({x:tx,z:tz,top:ttop});
+  } else path=routeTo(it.x,it.z,tx,tz);
+  it.path=path; it.ty=ttop; it.spot=spot; it.mode='toSocial';
+  it.onArrive=()=>{ it.mode='hangout'; it.hangT=22+Math.random()*40; it.faceT=0;
+    if(it.spot) it.spot.occupants.add(it); };
+}
+function sendHome(it){
+  if(it.spot){ it.spot.occupants.delete(it); it.spot=null; }
+  const hx=it.zn? it.zn.rect.x+(Math.random()-0.5)*it.zn.rect.w*0.4 : it.x;
+  const hz=it.zn? it.zn.rect.z+(Math.random()-0.5)*it.zn.rect.d*0.4 : it.z;
+  it.path=routeTo(it.x,it.z,hx,hz);
+  it.ty=it.zn?it.zn.top:0.25; it.mode='toDesk';
+  it.onArrive=()=>{ it.mode='desk'; pickTarget(it); };
+}
+function updateSocial(dt){
+  const soc=S.social; if(!soc||!crowd) return;
+  let n=0; for(const it of crowd.items) if(it.mode!=='desk') n++;
+  for(let i=0;i<crowd.items.length;i++){
+    const it=crowd.items[i];
+    if(crowd.hidden.has(i)) continue; // karakter live: jangan diganggu
+    if(it.mode==='desk'){
+      it.nextSocial-=dt;
+      if(it.nextSocial<=0){ it.nextSocial=25+Math.random()*55;
+        if(n<42&&Math.random()<0.55){ sendToSocial(it); n++; } }
+    } else if(it.mode==='hangout'){
+      it.hangT-=dt;
+      if(it.spot) it.y+=(it.spot.top-it.y)*Math.min(1,dt*2);
+      it.faceT-=dt; // hadap lawan bicara — ngobrol beneran, bukan patroli
+      if(it.faceT<=0&&it.spot&&it.spot.occupants.size>1){
+        it.faceT=2+Math.random()*3;
+        const others=[...it.spot.occupants].filter(o=>o!==it);
+        const o=others[(Math.random()*others.length)|0];
+        if(o) it.yaw=Math.atan2(o.x-it.x,o.z-it.z);
+      }
+      if(it.hangT<=0) sendHome(it);
+    }
+  }
+  updateBubbles(dt);
+}
+function updateBubbles(dt){
+  const soc=S.social;
+  const groups=soc.spots.filter(s=>s.occupants.size>=2)
+    .map(s=>({s,n:s.occupants.size})).sort((a,b)=>b.n-a.n).slice(0,soc.bubbles.length);
+  soc.bubbles.forEach((b,i)=>{
+    const g=groups[i];
+    if(!g){ b.el.style.display='none'; b.g=null; return; }
+    let x=0,z=0,top=0.25;
+    for(const it of g.s.occupants){ x+=it.x; z+=it.z; top=Math.max(top,it.y||0.25); }
+    x/=g.s.occupants.size; z/=g.s.occupants.size;
+    b.textT-=dt;
+    if(b.g!==g.s||b.textT<=0){ b.g=g.s; b.line=(b.line+1)%CHATTER.length; b.textT=4+Math.random()*3; }
+    const p=toScreen(x,top+2.9,z);
+    if(!p){ b.el.style.display='none'; return; }
+    b.el.style.display='block'; b.el.textContent=CHATTER[b.line];
+    b.el.style.left=p.x+'px'; b.el.style.top=p.y+'px';
+  });
+}
+
+// style bubble chat + label distrik (di-inject agar tetap 1 file)
+{
+  const st=document.createElement('style'); st.textContent=
+    '.chat-bubble{position:absolute;transform:translate(-50%,-115%);background:rgba(255,255,255,.95);'+
+    'color:#333;font-size:11px;padding:5px 10px;border-radius:12px;pointer-events:none;white-space:nowrap;'+
+    'box-shadow:0 2px 8px rgba(0,0,0,.25);z-index:5}'+
+    '.chat-bubble:after{content:"";position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);'+
+    'border:6px solid transparent;border-top-color:rgba(255,255,255,.95);border-bottom:0}'+
+    '.alabel.district{font-size:10px;letter-spacing:2px;color:#ffe9c4;background:rgba(40,28,16,.55);'+
+    'border:1px solid rgba(255,220,160,.35);border-radius:6px;padding:3px 10px}';
+  document.head.appendChild(st);
+}
+
 // ---------- state ----------
 const S = {
   divisions: [], agents: [], byId: {}, byDiv: {},
@@ -184,24 +390,48 @@ function floorLamp(x,y,z){
   bulb.position.set(x, y+2.05, z); scene.add(bulb);
 }
 
-// area luar zona: strip taman antar baris + pohon besar + lampu aksen hangat
+// halaman kampus: 3 boulevard berpohon + plaza courtyard (focal point) + taman sudut
 function buildOutdoors(){
-  const planter=(x,z)=>{
-    box(1.7,0.55,1.0, 0x8a5f3a, x, 0.28, z);
-    box(1.5,0.25,0.8, 0x4a6b3a, x, 0.62, z);
-    plant(x-0.4, 0.55, z, 0.55); plant(x+0.45, 0.55, z, 0.7, true);
-  };
-  for(let i=0;i<8;i++) planter(-68+i*19.5, 22.6);  // antara baris 1 & 2
-  for(let i=0;i<7;i++) planter(-58+i*19.5, 40.4);  // antara baris 2 & 3
-  plant(-80, 0, 2, 1.6, true); plant(80, 0, 70, 1.7, true); plant(80, 0, -2, 1.3, true);
-  // lampu aksen di ruang khusus (tanpa shadow — murah di forward renderer)
+  // deretan pohon & lampu di sepanjang boulevard (sisi hijau di selatan tiap koridor)
+  for(const z of WALKS){
+    for(let i=0;i<10;i++){
+      const x=-76+i*(152/9);
+      if(Math.abs(x+3)<10&&z===56) continue; // beri napas di depan plaza
+      plant(x, 0, z-2.6, 0.8, i%3===0);
+    }
+    for(const x of [-60,-20,20,60]) floorLamp(x, 0, z+2.6);
+  }
+  // PLAZA COURTYARD — focal point: di celah Ops Row, dikelilingi ruangan
+  const px=-3, pz=47;
+  const ring=cyl(8.6,8.6,0.12, 0xb09a72, px, 0.06, pz, 36); ring.receiveShadow=true;
+  const disc=cyl(7.6,7.9,0.2, 0xdccdaa, px, 0.1, pz, 36); disc.receiveShadow=true;
+  // fountain
+  cyl(2.6,2.9,0.9, 0xcfc0a0, px, 0.45, pz, 24);
+  const wtr=cyl(2.3,2.3,0.25, 0x4fa8d8, px, 0.85, pz, 24);
+  wtr.material=new THREE.MeshStandardMaterial({color:0x4fa8d8,roughness:0.2,transparent:true,opacity:0.9});
+  S.fountain=wtr;
+  cyl(0.35,0.5,1.7, 0xbfb090, px, 1.45, pz, 12);
+  const orb=new THREE.Mesh(new THREE.SphereGeometry(0.45,14,12),
+    new THREE.MeshStandardMaterial({color:0x9fd4f0,roughness:0.15,metalness:0.3}));
+  orb.position.set(px,2.5,pz); orb.castShadow=true; scene.add(orb);
+  for(let i=0;i<6;i++){ const a=i/6*Math.PI*2+0.26; // bangku keliling plaza
+    box(1.7,0.35,0.6, 0x8a5f3a, px+Math.cos(a)*6.4, 0.18, pz+Math.sin(a)*5.6, -a); }
+  plant(px-10, 0, pz-4, 1.5, true); plant(px+10, 0, pz+3, 1.3, true);
+  const pgl=new THREE.PointLight(0xffd9a0, 40, 42, 2); pgl.position.set(px,6,pz); scene.add(pgl);
+  // taman sudut diorama
+  plant(-82,0,4,1.6,true); plant(82,0,74,1.7,true); plant(82,0,0,1.3,true); plant(-82,0,76,1.4,true);
+  // pilar penyangga dek rooftop cafe (elevated)
+  const cz={x:70,z:72,w:24,d:14};
+  for(const [ox,oz] of [[-10,-5],[0,-5],[10,-5],[-10,5],[0,5],[10,5]])
+    box(0.6,3,0.6, 0x8a6a45, cz.x+ox, 1.5, cz.z+oz);
+  // lampu aksen ruang khusus (tanpa shadow — murah di forward renderer)
   const glow=(x,y,z,color,i,dist)=>{
     const L=new THREE.PointLight(color, i, dist, 2); L.position.set(x,y,z); scene.add(L);
   };
-  glow(-64, 5, 63.4, 0xffd9a0, 30, 42);    // lobi hangat
-  glow(-1.5, 4, 63.4, 0x7fd4ff, 22, 36);   // kolam sejuk
-  glow(21.5, 7, 63.4, 0xffc890, 30, 42);   // cafe hangat
-  glow(-40.5, 4.5, 63.4, 0xffe2b0, 18, 30);// ruang owner
+  glow(-8, 5, 72, 0xffd9a0, 30, 44);   // lobi atrium
+  glow(46, 4, 72, 0x7fd4ff, 22, 36);   // kolam sejuk
+  glow(70, 8, 72, 0xffc890, 30, 44);   // rooftop cafe hangat
+  glow(-42, 4.5, 72, 0xffe2b0, 18, 30);// ruang owner
 }
 
 function buildZones(){
@@ -437,6 +667,12 @@ function animChibi(ch, dt){
     case 'waiting':
       p.head.rotation.y=0.65*Math.sin(t*1.15); A.x=-0.15; B.x=-0.15;
       ch.g.position.y=ch.baseY+Math.abs(Math.sin(t*2.2))*0.03; break;
+    case 'meeting': // duduk di kursi rapat: paha ke depan, tegak, angguk sesekali
+      L.x=-1.35; R.x=-1.35; L.z=0.06; R.z=-0.06;
+      A.x=-0.55; B.x=-0.55; A.z=0.2; B.z=-0.2;
+      p.head.rotation.x=0.14+0.08*Math.sin(t*1.4);
+      p.head.rotation.y=0.28*Math.sin(t*0.45+1);
+      ch.g.position.y=ch.baseY+Math.abs(Math.sin(t*1.4))*0.015; break;
     case 'running': case 'walk': {
       const run=ch.status==='running', f=run?11:6.5, amp=run?0.95:0.5;
       L.x=Math.sin(t*f)*amp; R.x=Math.sin(t*f+Math.PI)*amp;
@@ -484,7 +720,8 @@ function buildCrowd(){
     const zn=S.zones[a.division];
     const it={x:a.desk.x+(Math.random()-0.5)*3, z:a.desk.z+(Math.random()-0.5)*3,
               tx:0,tz:0,ty:zn.top,y:zn.top,speed:0.9+Math.random()*0.7,ph:Math.random()*9,
-              zn, wait:Math.random()*4};
+              zn, wait:Math.random()*4,
+              mode:'desk', path:[], spot:null, onArrive:null, nextSocial:8+Math.random()*50};
     pickTarget(it); it.x=it.tx; it.z=it.tz; pickTarget(it);
     crowd.items.push(it);
     crowd.body.setColorAt(i,_c(a.color)); crowd.head.setColorAt(i,_c(a.skin)); crowd.hair.setColorAt(i,_c(a.hair));
@@ -512,13 +749,26 @@ function updateCrowd(dt,t){
         ZERO=new THREE.Matrix4().makeScale(0,0,0);
   crowd.items.forEach((it,i)=>{
     if(crowd.hidden.has(i)){ crowd.body.setMatrixAt(i,ZERO); crowd.head.setMatrixAt(i,ZERO); crowd.hair.setMatrixAt(i,ZERO); return; }
-    it.y += ((it.ty!==undefined?it.ty:it.y)-it.y)*Math.min(1,dt*2.5); // transisi level halus
-    const dx=it.tx-it.x, dz=it.tz-it.z, dist=Math.hypot(dx,dz);
     let bob=0, yaw=it.yaw||0;
-    if(dist>0.4){
-      it.x+=dx/dist*it.speed*dt; it.z+=dz/dist*it.speed*dt;
-      yaw=Math.atan2(dx,dz); bob=Math.abs(Math.sin(t*7+it.ph))*0.07;
-    } else if((it.wait-=dt)<=0) pickTarget(it);
+    if(it.path&&it.path.length){
+      // mode sosial: jalan via waypoint koridor (bukan patroli acak)
+      const wp=it.path[0], dx=wp.x-it.x, dz=wp.z-it.z, dist=Math.hypot(dx,dz);
+      if(it.path.length===1) it.y+=((it.ty!==undefined?it.ty:it.y)-it.y)*Math.min(1,dt*2.5);
+      if(dist<0.5){ it.path.shift();
+        if(!it.path.length&&it.onArrive){ const f=it.onArrive; it.onArrive=null; f(); } }
+      else{ const sp=it.speed*1.5;
+        it.x+=dx/dist*sp*dt; it.z+=dz/dist*sp*dt;
+        yaw=Math.atan2(dx,dz); bob=Math.abs(Math.sin(t*7+it.ph))*0.07; }
+    } else if(it.mode==='hangout'){
+      bob=Math.abs(Math.sin(t*2+it.ph))*0.02; // diam ngobrol
+    } else {
+      it.y += ((it.ty!==undefined?it.ty:it.y)-it.y)*Math.min(1,dt*2.5); // transisi level halus
+      const dx=it.tx-it.x, dz=it.tz-it.z, dist=Math.hypot(dx,dz);
+      if(dist>0.4){
+        it.x+=dx/dist*it.speed*dt; it.z+=dz/dist*it.speed*dt;
+        yaw=Math.atan2(dx,dz); bob=Math.abs(Math.sin(t*7+it.ph))*0.07;
+      } else if((it.wait-=dt)<=0) pickTarget(it);
+    }
     it.yaw=yaw; E.set(0,yaw,0); Q.setFromEuler(E);
     V.set(it.x,it.y+0.98+bob,it.z); SC.set(1,1,1); M.compose(V,Q,SC); crowd.body.setMatrixAt(i,M);
     V.set(it.x,it.y+1.58+bob,it.z); M.compose(V,Q,SC); crowd.head.setMatrixAt(i,M);
@@ -630,6 +880,186 @@ function tickDemo(dt){
   }
 }
 
+// ==================== FITUR ORKESTRASI RAPAT (visual) ====================
+// Rapat = SIMULASI visual yang digerakkan state server (GET /api/meeting).
+// Kepala divisi (agent pertama tiap divisi terpilih) berjalan ke ruang rapat,
+// duduk mengelilingi meja bundar dengan bubble diskusi, lalu bubar kembali.
+// Kerja nyata tetap oleh worker subagent via dispatcher — tidak disentuh di sini.
+const MEET_TALK=[
+  'setuju, eksekusi dari sisi kami',
+  'butuh data divisi lain dulu',
+  'timeline-nya realistis?',
+  'catat ya, action item-nya jelas',
+  'kita support penuh',
+  'nanti sync lagi habis ini',
+  'oke, gas eksekusi!',
+  'siapa PIC-nya?',
+  'risiko-nya kita mitigasi bareng',
+  'deal, jalan!',
+];
+function meetChair(x,y,z,yaw){
+  const g=new THREE.Group(); g.position.set(x,y,z); g.rotation.y=yaw;
+  const mat=new THREE.MeshStandardMaterial({color:0x7a5a8a,roughness:0.85});
+  const seat=new THREE.Mesh(new THREE.BoxGeometry(0.72,0.12,0.72),mat);
+  seat.position.y=0.45; seat.castShadow=true; g.add(seat);
+  const back=new THREE.Mesh(new THREE.BoxGeometry(0.72,0.75,0.12),mat);
+  back.position.set(0,0.85,-0.34); back.castShadow=true; g.add(back);
+  for(const [sx,sz] of [[-0.3,-0.3],[0.3,-0.3],[-0.3,0.3],[0.3,0.3]]){
+    const leg=new THREE.Mesh(new THREE.CylinderGeometry(0.05,0.05,0.45,8),mat);
+    leg.position.set(sx,0.22,sz); g.add(leg);
+  }
+  scene.add(g);
+}
+function buildMeeting(){
+  const L=LAYOUT.meeting, top=0.25;
+  S.zones.meeting={id:'meeting',name:'Ruang Rapat',kind:'special',
+    rect:{x:L.x,z:L.z,w:L.w,d:L.d},top,color:'#d4af6e'};
+  const fl=new THREE.Mesh(new THREE.BoxGeometry(L.w,0.5,L.d),
+    new THREE.MeshStandardMaterial({color:0xe9dcc2,roughness:0.95}));
+  fl.position.set(L.x,0,L.z); fl.receiveShadow=true; scene.add(fl);
+  const edge=new THREE.Mesh(new THREE.BoxGeometry(L.w+0.3,0.1,L.d+0.3),
+    new THREE.MeshStandardMaterial({color:0xd4af6e,roughness:0.8}));
+  edge.position.set(L.x,top-0.12,L.z); scene.add(edge);
+  const rug=cyl(4.6,4.6,0.06, 0xc9a06a, L.x, top+0.03, L.z, 32); rug.receiveShadow=true;
+  const wallMat=new THREE.MeshStandardMaterial({color:0xf5eedd,roughness:0.95});
+  const wb=new THREE.Mesh(new THREE.BoxGeometry(L.w,2.6,0.35),wallMat);
+  wb.position.set(L.x,top+1.3,L.z-L.d/2+0.17); wb.castShadow=wb.receiveShadow=true; scene.add(wb);
+  const wl=new THREE.Mesh(new THREE.BoxGeometry(0.35,2.6,L.d),wallMat);
+  wl.position.set(L.x-L.w/2+0.17,top+1.3,L.z); wl.castShadow=wl.receiveShadow=true; scene.add(wl);
+  const trim=new THREE.Mesh(new THREE.BoxGeometry(L.w,0.18,0.41),
+    new THREE.MeshStandardMaterial({color:0xd4af6e,roughness:0.7}));
+  trim.position.set(L.x,top+2.69,L.z-L.d/2+0.17); scene.add(trim);
+  const board=box(5,2,0.1, 0xfafafa, L.x, top+1.6, L.z-L.d/2+0.45); board.castShadow=false;
+  cyl(2.3,2.3,0.14, 0x9c6b43, L.x, 0.95, L.z, 28);   // meja bundar
+  cyl(0.28,0.42,0.9, 0x6e4a2f, L.x, 0.48, L.z, 12); // kaki meja
+  S.meetSeats=[];
+  for(let i=0;i<8;i++){
+    const a=i/8*Math.PI*2, cx=L.x+Math.cos(a)*3.7, cz=L.z+Math.sin(a)*3.7;
+    const yaw=Math.atan2(L.x-cx,L.z-cz);
+    meetChair(cx,top,cz,yaw);
+    S.meetSeats.push({x:cx,z:cz,yaw});
+  }
+  plant(L.x+L.w/2-1.2, top, L.z+L.d/2-1.2, 0.9);
+  floorLamp(L.x-L.w/2+1.7, top, L.z+L.d/2-1.7);
+}
+function initMeetBubbles(){
+  S.meetChars={}; S.meetId=null; S.meetData=null; S.meetBubbleT=0; S.meetBubbles=[];
+  for(let i=0;i<4;i++){
+    const el=document.createElement('div'); el.className='chat-bubble'; el.style.display='none';
+    labelLayer.appendChild(el); S.meetBubbles.push({el,x:0,y:0,z:0,t:0});
+  }
+}
+// jalan via chain waypoint (chibi moveTo hanya 1 target)
+function walkPath(ch,path,done){
+  const step=()=>{
+    if(!path.length){ ch.status='idle'; ch.moveTo=null; done&&done(); return; }
+    const w=path.shift();
+    ch.status='walk';
+    ch.moveTo={x:w.x,z:w.z,speed:3.4,onDone:step};
+  };
+  step();
+}
+async function pollMeeting(){
+  try{ const m=await API.get('api/meeting'); onMeetingState(m); }catch(e){}
+}
+function onMeetingState(m){
+  const st=(m&&m.status)||'idle';
+  if(st==='idle'){ if(S.meetId) cleanupMeeting(); return; }
+  if(m.command_id===S.meetId){
+    S.meetData=m;
+    if(st==='dispersing'&&!S._dispersing){ S._dispersing=true; disperseMeeting(); }
+    return;
+  }
+  startMeetingVisual(m,st);
+}
+function startMeetingVisual(m,st){
+  if(st==='dispersing'){ return; } // telat join: lewati visual
+  S.meetId=m.command_id; S.meetData=m; S._dispersing=false;
+  S.meetChars={};
+  const parts=m.participants||[], n=parts.length;
+  parts.forEach((p,i)=>{
+    const a=S.byId[p.agent_id];
+    const ch=makeChibi({shirt:p.color||'#4f8ff7',skin:p.skin||'#f1c27d',hair:p.hair||'#232323'});
+    let sx,sz,stop;
+    if(a){ const zn=S.zones[a.division]; sx=a.desk.x; sz=a.desk.z; stop=zn.top;
+      const idx=S.agents.indexOf(a); if(idx>=0&&crowd) crowd.hidden.add(idx);
+    } else { const zn=S.zones.lobby; sx=zn.rect.x; sz=zn.rect.z; stop=zn.top; }
+    ch.g.position.set(sx,stop,sz); ch.baseY=stop;
+    ch.yaw=Math.PI; ch.g.rotation.y=Math.PI; ch.status='idle';
+    const seat=S.meetSeats[n>1?Math.round(i*(S.meetSeats.length-1)/(n-1)):3];
+    S.meetChars[p.agent_id]={ch,seat,agent:a||null,origTop:stop,seated:false};
+  });
+  if(st==='gathering'){
+    const mz=S.zones.meeting; focusOn(mz.rect.x,mz.rect.z);
+    toast('📋 Rapat koordinasi dimulai — kepala divisi menuju ruang rapat');
+    for(const id of Object.keys(S.meetChars)) sendToSeat(S.meetChars[id]);
+  } else { // in_progress: join tengah jalan -> langsung duduk
+    for(const id of Object.keys(S.meetChars)){
+      const e=S.meetChars[id], seatY=S.zones.meeting.top+0.51;
+      e.ch.baseY=seatY; e.ch.g.position.set(e.seat.x,seatY,e.seat.z);
+      e.ch.status='meeting'; e.ch.yaw=e.seat.yaw; e.ch.g.rotation.y=e.seat.yaw;
+      e.seated=true;
+    }
+  }
+}
+function sendToSeat(e){
+  const {ch,seat}=e;
+  const path=routeTo(ch.g.position.x,ch.g.position.z,seat.x,seat.z);
+  walkPath(ch,path,()=>{
+    ch.baseY=S.zones.meeting.top+0.51; // tinggi dudukan kursi
+    ch.g.position.set(seat.x,ch.baseY,seat.z);
+    ch.status='meeting'; ch.yaw=seat.yaw; ch.g.rotation.y=seat.yaw;
+    e.seated=true;
+  });
+}
+function disperseMeeting(){
+  toast('✅ Rapat selesai — ringkasan tercatat di activity log');
+  for(const id of Object.keys(S.meetChars)){
+    const e=S.meetChars[id];
+    e.seated=false; e.ch.baseY=e.origTop;
+    const home=e.agent
+      ? {x:e.agent.desk.x+(Math.random()-0.5)*2, z:e.agent.desk.z+(Math.random()-0.5)*2}
+      : {x:S.zones.lobby.rect.x, z:S.zones.lobby.rect.z};
+    const path=routeTo(e.ch.g.position.x,e.ch.g.position.z,home.x,home.z);
+    walkPath(e.ch,path,()=>removeMeetChar(id));
+  }
+}
+function removeMeetChar(id){
+  const e=S.meetChars[id]; if(!e) return;
+  scene.remove(e.ch.g);
+  if(e.agent&&crowd) crowd.hidden.delete(S.agents.indexOf(e.agent));
+  delete S.meetChars[id];
+}
+function cleanupMeeting(){
+  for(const id of Object.keys(S.meetChars||{})) removeMeetChar(id);
+  S.meetId=null; S.meetData=null; S._dispersing=false;
+}
+function updateMeeting(dt){
+  const active=S.meetId&&S.meetData&&S.meetData.status==='in_progress';
+  if(!active){
+    for(const b of (S.meetBubbles||[])){ b.el.style.display='none'; b.t=0; }
+    S.meetBubbleT=1.5; return;
+  }
+  S.meetBubbleT-=dt;
+  for(const b of S.meetBubbles){
+    if(b.t>0){ b.t-=dt;
+      if(b.t<=0) b.el.style.display='none';
+      else { const p=toScreen(b.x,b.y,b.z);
+        if(p){ b.el.style.left=p.x+'px'; b.el.style.top=p.y+'px'; } } }
+  }
+  if(S.meetBubbleT>0) return;
+  S.meetBubbleT=3+Math.random()*2.5;
+  const seated=Object.values(S.meetChars).filter(e=>e.seated);
+  const free=S.meetBubbles.find(b=>b.t<=0);
+  if(!seated.length||!free) return;
+  const e=seated[(Math.random()*seated.length)|0], p=e.ch.g.position;
+  const s=toScreen(p.x,p.y+2.9,p.z); if(!s) return;
+  free.x=p.x; free.y=p.y+2.9; free.z=p.z; free.t=3.2;
+  free.el.textContent=MEET_TALK[(Math.random()*MEET_TALK.length)|0];
+  free.el.style.display='block'; free.el.style.left=s.x+'px'; free.el.style.top=s.y+'px';
+}
+// ================== /FITUR ORKESTRASI RAPAT ==================
+
 // ==================== BAGIAN D: label, HUD, loop ====================
 const labelLayer=$('#labels');
 const labelEls=new Map(); // key -> div
@@ -683,6 +1113,14 @@ function updateLabels(){
     const zn=S.zones[d.id]; if(!zn) continue;
     add('room:'+d.id, zn.rect.x, zn.top+3.4, zn.rect.z,
       `${d.name}`, 2,'room',()=>focusOn(zn.rect.x,zn.rect.z));
+  }
+  // 4b2. label ruang rapat (zona client-side, dekat Ruang Owner)
+  if(S.zones.meeting){ const mz=S.zones.meeting;
+    add('room:meeting', mz.rect.x, mz.top+3.4, mz.rect.z,
+      'Ruang Rapat', 2,'room',()=>focusOn(mz.rect.x,mz.rect.z)); }
+  // 4b. label distrik — zonasi terbaca tanpa minimap
+  if(zoom>0.55) for(const ds of DISTRICTS){
+    add('dist:'+ds.name, ds.x, ds.y, ds.z, ds.name, 3, 'district');
   }
   // 5. hover ambient
   if(S.hovered&&!farZoom){
@@ -750,9 +1188,17 @@ $('#btn-bell').onclick=()=>{
 function renderBell(){
   const items=S.activity.slice(-12).reverse();
   $('#bell-drop').innerHTML=items.length?items.map(a=>
-    `<div class="nitem">${a.text}<span class="ts">${wib(a.ts)}</span></div>`).join('')
+    `<div class="nitem">${truncText(a.text)}<span class="ts">${wib(a.ts)}</span></div>`).join('')
     :'<div class="nitem">Belum ada aktivitas.</div>';
   const bc=$('#bell-count'); bc.textContent=unread; bc.classList.toggle('hidden',unread===0);
+}
+// Teks panjang: tampil ringkas + "baca selengkapnya" yang bisa buka-tutup
+const MORE_N=140;
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+function truncText(t){
+  t=String(t==null?'':t);
+  if(t.length<=MORE_N) return esc(t);
+  return `<span class="ltxt">${esc(t.slice(0,MORE_N))}…</span><span class="lfull hidden">${esc(t)}</span><button class="more" onclick="const b=this,f=b.previousElementSibling,p=f.previousElementSibling;f.classList.toggle('hidden');p.classList.toggle('hidden');b.textContent=b.textContent==='baca selengkapnya'?'tutup':'baca selengkapnya'">baca selengkapnya</button>`;
 }
 function wib(iso){ try{ return new Intl.DateTimeFormat('id-ID',{timeZone:'Asia/Jakarta',hour:'2-digit',minute:'2-digit',day:'2-digit',month:'short'}).format(new Date(iso)); }catch(e){ return ''; } }
 
@@ -833,7 +1279,7 @@ function renderQueue(){
 }
 function renderLog(){
   $('#log-list').innerHTML=S.activity.slice().reverse().map(a=>
-    `<div class="litem">${a.text}<span class="ts">${wib(a.ts)}</span></div>`).join('')||'<p class="hint">Kosong.</p>';
+    `<div class="litem">${truncText(a.text)}<span class="ts">${wib(a.ts)}</span></div>`).join('')||'<p class="hint">Kosong.</p>';
 }
 function toast(msg){ const t=$('#toast'); t.textContent=msg; t.classList.remove('hidden');
   clearTimeout(t._h); t._h=setTimeout(()=>t.classList.add('hidden'),3200); }
@@ -849,7 +1295,7 @@ async function pollLive(){
     if(newActs.length&&$('#bell-drop').classList.contains('hidden')){ unread+=newActs.length; lastSeen=Date.now(); }
     renderBell(); renderQueue(); renderLog();
     if($('#dir-search').value!==undefined&&!$('#drawer').classList.contains('hidden')) buildDirectory();
-    syncLive();
+    syncLive(); pollMeeting();
   }catch(e){ S.serverOk=false; syncLive(); }
 }
 
@@ -896,10 +1342,14 @@ function loop(){
   const dt=Math.min(clockT.getDelta(),0.05), t=clockT.elapsedTime;
   for(const ch of Object.values(S.liveChars)) animChibi(ch,dt);
   for(const ch of (S.specialChars||[])) animChibi(ch,dt);
+  for(const id of Object.keys(S.meetChars||{})) animChibi(S.meetChars[id].ch,dt);
   tickDemo(dt);
   for(const ch of S.demoChars) animChibi(ch,dt);
+  updateSocial(dt);
   updateCrowd(dt,t);
+  updateMeeting(dt);
   if(S.water) S.water.position.y+=Math.sin(t*1.8)*0.0009;
+  if(S.fountain){ const fs=1+Math.sin(t*3)*0.035; S.fountain.scale.set(fs,1,fs); }
   updateLabels();
   renderer.render(scene,camera);
 }
@@ -926,7 +1376,9 @@ addEventListener('resize',onResize); onResize();
   }catch(e){ toast('Gagal memuat data: '+e.message); return; }
   S.byId={}; S.byDiv={};
   for(const a of S.agents){ S.byId[a.id]=a; (S.byDiv[a.division]=S.byDiv[a.division]||[]).push(a); }
-  buildZones(); buildFurniture(); buildCrowd(); initSpecials(); buildDirectory();
+  applyNewLayout(); // redesign denah: override rect API -> tata kampus organik
+  buildZones(); buildMeeting(); buildFurniture(); buildCrowd(); initSocial(); initSpecials(); buildDirectory();
+  initMeetBubbles();
   await pollLive(); setInterval(pollLive,3000);
   loop();
   if(innerWidth<=760) setPanelCollapsed(true); // HP: panel mulai terlipat, buka via tombol 💬
