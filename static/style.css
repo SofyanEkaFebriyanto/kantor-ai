@@ -223,3 +223,17 @@ html,body{margin:0;padding:0;height:100%;overflow:hidden;
   #toast{max-width:92vw;font-size:12px;}
   #legend{display:none;}
 }
+
+/* ===== 2D additions ===== */
+#agent-card{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);min-width:280px;max-width:400px;background:#16213e;border:1px solid #2a3f6b;border-radius:12px;padding:14px;z-index:40;color:#fff;box-shadow:0 4px 20px rgba(0,0,0,.5);}
+#agent-card .card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
+#agent-card .card-head button{background:none;border:none;color:#fff;cursor:pointer;font-size:16px;}
+#notif-panel{position:fixed;top:56px;right:10px;width:320px;max-height:400px;overflow-y:auto;background:#16213e;border:1px solid #2a3f6b;border-radius:12px;z-index:35;color:#fff;}
+#notif-panel .drawer-head{padding:10px 12px;border-bottom:1px solid #2a3f6b;display:flex;justify-content:space-between;align-items:center;}
+.chat-msg{padding:8px 10px;margin:6px 0;border-radius:8px;background:#1a2340;font-size:13px;line-height:1.4;}
+.chat-msg.from-bos{background:#1e3a5f;border-left:3px solid #4caf50;}
+.queue-item,.appr-item,.goal-item,.log-item{padding:10px;margin:8px 0;background:#1a2340;border-radius:8px;font-size:13px;}
+.appr-item button,.goal-item button{margin:4px 4px 0 0;padding:6px 12px;border:none;border-radius:6px;cursor:pointer;background:#2a3f6b;color:#fff;}
+.appr-item button:hover{background:#3a5f9b;}
+.dir-div{padding:8px;border-bottom:1px solid #2a3f6b;font-size:13px;}
+.hint{color:#888;font-size:12px;padding:10px;text-align:center;}
