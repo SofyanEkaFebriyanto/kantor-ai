@@ -95,16 +95,21 @@ const IsoRender = {
     }
     items.sort((x,y)=>x.depth-y.depth);
     ctx.imageSmoothingEnabled = false;
+    const z2 = ISO2D.zoom;
     for(const it of items){
+      // hitung posisi dari grid (format baru)
+      const [cx2,cy2] = isoP(it.gx+0.5, it.gy+0.5);
+      const dw2=40*z2, dh2=56*z2;
+      const dx2=cx2-20*z2, dy2=cy2-50*z2-(it.dz||0)*z2;
       if(it.tint){
         ctx.save();
-        ctx.drawImage(it.sheet, it.sx,it.sy,it.sw,it.sh, it.dx,it.dy,it.dw,it.dh);
+        ctx.drawImage(it.sheet, it.sx,it.sy,it.sw,it.sh, dx2,dy2,dw2,dh2);
         ctx.globalCompositeOperation='multiply';
         ctx.fillStyle=it.tint;
-        ctx.fillRect(it.dx,it.dy,it.dw,it.dh);
+        ctx.fillRect(dx2,dy2,dw2,dh2);
         ctx.restore();
       } else {
-        ctx.drawImage(it.sheet, it.sx,it.sy,it.sw,it.sh, it.dx,it.dy,it.dw,it.dh);
+        ctx.drawImage(it.sheet, it.sx,it.sy,it.sw,it.sh, dx2,dy2,dw2,dh2);
       }
     }
     

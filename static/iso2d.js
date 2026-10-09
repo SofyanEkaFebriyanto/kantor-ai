@@ -48,58 +48,68 @@ function isoP(gx, gy){
 class IsoScene {
   constructor(){ this.items=[]; }
   clear(){ this.items.length=0; }
-  // tile di sel (gx,gy)
+  // tile di sel (gx,gy) — simpan grid, hitung posisi saat draw (ikut kamera)
   tile(name, gx, gy){
     const t = ISO2D.manifest.tiles[name]; if(!t) return;
-    const [x,y] = isoP(gx,gy);
-    this.items.push({depth: gx+gy-0.5, img: ISO2D.img[t.file],
-      dx: x-32*ISO2D.zoom, dy: y, dw: 64*ISO2D.zoom, dh: 32*ISO2D.zoom});
+    this.items.push({depth: gx+gy-0.5, img: ISO2D.img[t.file], gx, gy, type:'tile'});
   }
   // prop dengan anchor & footprint dari manifest
   prop(kind, name, gx, gy, depthBoost=0){
     const m = ISO2D.manifest[kind][name]; if(!m) return;
     const fw=m.footprint[0], fd=m.footprint[1];
-    const [cx,cy] = isoP(gx+fw/2, gy+fd/2);
-    const z = ISO2D.zoom;
     this.items.push({depth: gx+gy+fw+fd+depthBoost, img: ISO2D.img[m.file],
-      dx: cx-m.anchor[0]*z, dy: cy-m.anchor[1]*z, dw: m.w*z, dh: m.h*z});
+      gx, gy, fw, fd, m, type:'prop'});
   }
   // karakter: sprite-sheet 6x4, frame (col,row), posisi grid (bisa pecahan)
   char(name, gx, gy, col, row, tint=null, dz=0){
     const m = ISO2D.manifest.characters[name]; if(!m) return;
     const sheet = ISO2D.img[m.file]; if(!sheet) return;
-    const [cx,cy] = isoP(gx+0.5, gy+0.5);
-    const z = ISO2D.zoom;
     this.items.push({depth: gx+gy+1.2, sheet,
       sx: col*40, sy: row*56, sw: 40, sh: 56,
-      dx: cx-20*z, dy: cy-50*z-dz*z, dw: 40*z, dh: 56*z, tint});
+      gx, gy, dz, tint, type:'char'});
   }
   // gambar datar (fx, badge) di posisi layar
   fx(name, gx, gy, dz=0){
     const m = ISO2D.manifest.fx[name]; if(!m) return;
-    const [cx,cy] = isoP(gx+0.5, gy+0.5);
-    const z = ISO2D.zoom;
     this.items.push({depth: gx+gy+1.5, img: ISO2D.img[m.file],
-      dx: cx-(m.w/2)*z, dy: cy-m.h*z-dz*z, dw: m.w*z, dh: m.h*z});
+      gx, gy, dz, m, type:'fx'});
   }
   draw(ctx){
     this.items.sort((a,b)=>a.depth-b.depth);
     ctx.imageSmoothingEnabled = false;
+    const z = ISO2D.zoom;
     for(const it of this.items){
+      // hitung posisi layar dari grid + kamera saat ini (agar ikut pan/zoom)
+      let dx, dy, dw, dh;
+      if(it.type==='tile'){
+        const [x,y] = isoP(it.gx, it.gy);
+        dx=x-32*z; dy=y; dw=64*z; dh=32*z;
+      } else if(it.type==='prop'){
+        const [cx,cy] = isoP(it.gx+it.fw/2, it.gy+it.fd/2);
+        dw=it.m.w*z; dh=it.m.h*z;
+        dx=cx-it.m.anchor[0]*z; dy=cy-it.m.anchor[1]*z;
+      } else if(it.type==='char'){
+        const [cx,cy] = isoP(it.gx+0.5, it.gy+0.5);
+        dw=40*z; dh=56*z;
+        dx=cx-20*z; dy=cy-50*z-it.dz*z;
+      } else if(it.type==='fx'){
+        const [cx,cy] = isoP(it.gx+0.5, it.gy+0.5);
+        dw=it.m.w*z; dh=it.m.h*z;
+        dx=cx-(it.m.w/2)*z; dy=cy-it.m.h*z-it.dz*z;
+      } else { continue; }
       if(it.sheet){
         if(it.tint){
-          // tint via offscreen: gambar frame lalu overlay warna multiply
           ctx.save();
-          ctx.drawImage(it.sheet, it.sx,it.sy,it.sw,it.sh, it.dx,it.dy,it.dw,it.dh);
+          ctx.drawImage(it.sheet, it.sx,it.sy,it.sw,it.sh, dx,dy,dw,dh);
           ctx.globalCompositeOperation='multiply';
           ctx.fillStyle=it.tint;
-          ctx.fillRect(it.dx,it.dy,it.dw,it.dh);
+          ctx.fillRect(dx,dy,dw,dh);
           ctx.restore();
         } else {
-          ctx.drawImage(it.sheet, it.sx,it.sy,it.sw,it.sh, it.dx,it.dy,it.dw,it.dh);
+          ctx.drawImage(it.sheet, it.sx,it.sy,it.sw,it.sh, dx,dy,dw,dh);
         }
       } else if(it.img){
-        ctx.drawImage(it.img, it.dx,it.dy,it.dw,it.dh);
+        ctx.drawImage(it.img, dx,dy,dw,dh);
       }
     }
   }
