@@ -33,9 +33,10 @@ async function iso2dLoad(basePath){
     const im = new Image();
     im.onload = ()=>{ ISO2D.img[p]=im; res(); };
     im.onerror = ()=>res();
-    im.src = base+'assets/'+p;
+    im.src = base+p;
   })));
   ISO2D.ready = true;
+  ISO2D.loadedCount = Object.keys(ISO2D.img).length;
 }
 
 // --- proyeksi grid -> layar ---

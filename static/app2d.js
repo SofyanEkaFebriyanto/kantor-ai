@@ -21,16 +21,19 @@ async function apiPost(path, data){
 async function init2D(){
   await IsoRender.init('iso-canvas');
   
-  // load data
-  const [ag, div] = await Promise.all([
-    apiGet('api/agents'),
-    apiGet('api/divisions'),
-  ]);
-  App2D.agents = ag;
-  App2D.divisions = div;
+  // langsung mulai render loop (scene statis tampil dulu)
+  requestAnimationFrame(loop2D);
   
-  // tempatkan agent di grid (berdasarkan divisi)
-  placeAgents();
+  // load data agent async
+  try{
+    const [ag, div] = await Promise.all([
+      apiGet('api/agents'),
+      apiGet('api/divisions'),
+    ]);
+    App2D.agents = ag;
+    App2D.divisions = div;
+    placeAgents();
+  }catch(e){ console.error('Gagal load agents:', e); }
   
   // UI
   setupUI();
@@ -39,9 +42,6 @@ async function init2D(){
   // polling
   pollLive2D();
   setInterval(pollLive2D, 5000);
-  
-  // render loop
-  requestAnimationFrame(loop2D);
 }
 
 function placeAgents(){
@@ -106,7 +106,34 @@ function loop2D(){
 }
 
 function setupUI(){
-  // TODO: panel chat, commands, dll — reuse dari app.js
+  // tab switching
+  document.querySelectorAll('.tab[data-tab]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      document.querySelectorAll('.tab[data-tab]').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const tab = btn.dataset.tab;
+      document.querySelectorAll('.tab-body').forEach(p=>p.classList.add('hidden'));
+      const body = document.getElementById('tab-'+tab);
+      if(body) body.classList.remove('hidden');
+    });
+  });
+  
+  // jam
+  setInterval(()=>{
+    const el = document.getElementById('clock');
+    if(el) el.textContent = new Date().toLocaleTimeString('id-ID', {timeZone:'Asia/Jakarta'});
+  }, 1000);
+  
+  // tombol home (reset kamera)
+  const btnHome = document.getElementById('btn-home');
+  if(btnHome) btnHome.addEventListener('click', ()=>{ IsoRender.centerCamera(); });
+  
+  // panel close
+  const panelClose = document.getElementById('panel-close');
+  if(panelClose) panelClose.addEventListener('click', ()=>{
+    document.getElementById('panel').classList.add('hidden');
+  });
+  
   console.log('UI 2D siap');
 }
 
