@@ -34,6 +34,15 @@ restart service, push kredensial, eksekusi eksternal, dsb) WAJIB:
      detail menjelaskan pembatalan).
   4. Kalau "disetujui" -> lanjutkan langkah, catat hasilnya seperti biasa.
 Tidak ada worker yang boleh menjalankan aksi berisiko tanpa approval disetujui.
+
+ATURAN APPROVAL TERKUNCI (gaya Lembur.id — human-in-the-loop, tidak bisa
+di-override oleh worker):
+  1. UANG — bayar, ubah harga, kasih diskon, aksi berbiaya.
+  2. KIRIM KELUAR — posting/publish konten, email, chat ke pelanggan/pihak ketiga.
+  3. HAPUS — hapus file, data, akun.
+  4. DATA PELANGGAN — baca/tulis nama, nomor, alamat pembeli.
+Aturan ini dikunci di level sistem (bukan cuma instruksi). Kalau worker salah
+paham, perintahnya tetap ketahan di approval.
 """
 import json, os, threading, time, uuid
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
