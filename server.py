@@ -884,17 +884,32 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
 
 if __name__ == "__main__":
-    import fcntl
+    import fcntl, socket, time
     os.makedirs(DATA, exist_ok=True)
     os.makedirs(UPLOADS, exist_ok=True)
     # single-flight: hanya 1 instance boleh jalan; pendaftar lain keluar diam-diam.
     # (mencegah race keepalive: dua start bersamaan -> Address already in use)
+    # Anti-stale-lock: kalau lock dipegang tapi port tidak listen, lock dianggap basi.
     _lockf = open(os.path.join(DATA, "server.lock"), "w")
     try:
         fcntl.flock(_lockf, fcntl.LOCK_EX | fcntl.LOCK_NB)
     except BlockingIOError:
-        print(f"port {PORT}: server lain sedang berjalan — keluar.", flush=True)
-        raise SystemExit(0)
+        # cek apakah port beneran ada yang listen
+        s = socket.socket()
+        s.settimeout(2)
+        try:
+            s.connect(("127.0.0.1", PORT))
+            s.close()
+            print(f"port {PORT}: server lain sedang berjalan — keluar.", flush=True)
+            raise SystemExit(0)
+        except (ConnectionRefusedError, socket.timeout, OSError):
+            # port mati tapi lock nyangkut -> lock basi, paksa ambil
+            print(f"port {PORT}: lock basi terdeteksi, paksa ambil alih.", flush=True)
+            try:
+                fcntl.flock(_lockf, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            except BlockingIOError:
+                print(f"port {PORT}: tetap terkunci — keluar.", flush=True)
+                raise SystemExit(0)
     for name, default in (("queue.json", []), ("live.json", {}), ("dispatch.json", {}),
                           ("meeting.json", {"status": "idle"}),
                           ("approvals.json", []), ("chat.json", [])):
