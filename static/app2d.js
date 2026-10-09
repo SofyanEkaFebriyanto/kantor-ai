@@ -74,13 +74,59 @@ function pollLive2D(){
 
 function updateAgentVisuals(){
   const list = [];
+  const now = Date.now();
   for(const a of App2D.agents){
     const lv = App2D.live[a.id];
     const status = lv ? lv.status : 'idle';
-    // frame animasi berdasarkan status
-    let col = 0, row = 0;
-    if(status === 'working'){ col = Math.floor(Date.now()/300)%3; row = 0; }
-    else if(status === 'sholat'){ col = 0; row = 0; a._char = 'jamaah_pria_peci'; }
+    
+    // Inisialisasi state jalan
+    if(a._tx === undefined){
+      a._tx = a._gx; a._ty = a._gy;
+      a._speed = 0.05 + Math.random()*0.05;
+      a._phase = Math.random()*1000;
+      // Langsung kasih target biar langsung jalan (untuk test)
+      const g0 = ISO_GRID[a.division] || {gx: a._gx-2, gy: a._gy-2, gw: 5, gd: 5};
+      a._tx = g0.gx + 1 + Math.random() * Math.max(1, g0.gw-2);
+      a._ty = g0.gy + 1 + Math.random() * Math.max(1, g0.gd-2);
+    }
+    
+    // Gerakan: jalan ke target
+    const dx = a._tx - a._gx, dy = a._ty - a._gy;
+    const dist = Math.hypot(dx, dy);
+    let moving = false;
+    if(dist > 0.15){
+      moving = true;
+      a._gx += (dx/dist) * a._speed;
+      a._gy += (dy/dist) * a._speed;
+    } else {
+      // Sudah sampai, langsung pilih target baru (jangan diem lama)
+      const g = ISO_GRID[a.division] || {gx: a._gx-2, gy: a._gy-2, gw: 5, gd: 5};
+      a._tx = g.gx + 1 + Math.random() * Math.max(1, g.gw-2);
+      a._ty = g.gy + 1 + Math.random() * Math.max(1, g.gd-2);
+    }
+    
+    // Frame animasi: sprite 6x4
+    // Row 0: idle, Row 1-3: jalan/kerja
+    let col, row;
+    if(moving){
+      // Jalan: cycle cepat row 1
+      col = Math.floor(now/150 + a._phase) % 6;
+      row = 1;
+    } else if(status === 'working'){
+      // Kerja: cycle sedang row 0 (ngetik/aktif)
+      col = Math.floor(now/300 + a._phase) % 6;
+      row = 0;
+    } else {
+      // Idle: napas pelan (col 0-1)
+      col = Math.floor(now/800 + a._phase) % 2;
+      row = 0;
+    }
+    
+    // Khusus sholat
+    if(status === 'sholat'){ 
+      a._char = 'jamaah_pria_peci';
+      col = 0; row = 0;
+    }
     
     list.push({
       id: a.id,
