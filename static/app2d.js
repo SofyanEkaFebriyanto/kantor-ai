@@ -61,7 +61,7 @@ function placeAgents(){
     a._col = 0; a._row = 0;
   }
   // Bos di lobby
-  const bos = {_gx: 10, _gy: 30, _char: 'aldy_owner', _col: 0, _row: 0, id: 'bos', name: 'Bos'};
+  const bos = {_gx: 10, _gy: 30, _char: 'sofyan_owner', _col: 0, _row: 0, id: 'bos', name: 'Sofyan'};
   App2D.agents.push(bos);
 }
 

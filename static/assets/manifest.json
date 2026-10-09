@@ -548,60 +548,6 @@
   }
  },
  "characters": {
-  "aldy_owner": {
-   "file": "characters/aldy_owner.png",
-   "frame": [
-    40,
-    56
-   ],
-   "anchor": [
-    20,
-    50
-   ],
-   "rows": [
-    "SE",
-    "SW",
-    "NE",
-    "NW"
-   ],
-   "cols": [
-    "walk0",
-    "walk1",
-    "walk2",
-    "walk3",
-    "sit0",
-    "sit1"
-   ],
-   "walk_fps": 8,
-   "sit_fps": 3
-  },
-  "aldy_khatib": {
-   "file": "characters/aldy_khatib.png",
-   "frame": [
-    40,
-    56
-   ],
-   "anchor": [
-    20,
-    50
-   ],
-   "rows": [
-    "SE",
-    "SW",
-    "NE",
-    "NW"
-   ],
-   "cols": [
-    "walk0",
-    "walk1",
-    "walk2",
-    "walk3",
-    "sit0",
-    "sit1"
-   ],
-   "walk_fps": 8,
-   "sit_fps": 3
-  },
   "arif_riset": {
    "file": "characters/arif_riset.png",
    "frame": [
@@ -874,6 +820,60 @@
   },
   "jamaah_pria_peci": {
    "file": "characters/jamaah_pria_peci.png",
+   "frame": [
+    40,
+    56
+   ],
+   "anchor": [
+    20,
+    50
+   ],
+   "rows": [
+    "SE",
+    "SW",
+    "NE",
+    "NW"
+   ],
+   "cols": [
+    "walk0",
+    "walk1",
+    "walk2",
+    "walk3",
+    "sit0",
+    "sit1"
+   ],
+   "walk_fps": 8,
+   "sit_fps": 3
+  },
+  "sofyan_owner": {
+   "file": "characters/sofyan_owner.png",
+   "frame": [
+    40,
+    56
+   ],
+   "anchor": [
+    20,
+    50
+   ],
+   "rows": [
+    "SE",
+    "SW",
+    "NE",
+    "NW"
+   ],
+   "cols": [
+    "walk0",
+    "walk1",
+    "walk2",
+    "walk3",
+    "sit0",
+    "sit1"
+   ],
+   "walk_fps": 8,
+   "sit_fps": 3
+  },
+  "sofyan_khatib": {
+   "file": "characters/sofyan_khatib.png",
    "frame": [
     40,
     56

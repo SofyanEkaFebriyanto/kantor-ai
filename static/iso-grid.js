@@ -52,7 +52,7 @@ const ISO_PROPS = {
 
 // Karakter default per divisi (dari 13 sprite)
 const ISO_CHAR_MAP = {
-  'owner': 'aldy_owner',
+  'owner': 'sofyan_owner',
   'musholla': 'jamaah_pria_peci', // saat sholat; default npc
   'security': 'satpam_slop',
   'marketing': 'publisher',
@@ -63,7 +63,7 @@ const ISO_CHAR_MAP = {
 };
 // default: npc_male_a / npc_female_hijab (bergantian)
 function isoCharFor(agent){
-  if(agent.id==='bos') return 'aldy_owner';
+  if(agent.id==='bos') return 'sofyan_owner';
   if(ISO_CHAR_MAP[agent.division]) return ISO_CHAR_MAP[agent.division];
   // hash: pria/wanita bergantian
   let h=0; for(const c of agent.id) h=(h*31+c.charCodeAt(0))>>>0;
