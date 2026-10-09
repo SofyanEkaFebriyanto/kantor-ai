@@ -3,8 +3,8 @@
   "id": "engineering-ai-data-remediation-engineer",
   "name": "AI Data Remediation Engineer",
   "division": "engineering",
-  "desc": "Specialist in self-healing data pipelines — uses air-gapped local SLMs and semantic clustering to automatically detect, classify, and fix data anomalies at scale. Focuses exclusively on the remediation layer: intercepting bad data, generating deterministic fix logic via Ollama, and guaranteeing zero",
-  "vibe": "Fixes your broken data with surgical AI precision — no rows left behind.",
+  "desc": "Specialist in self-healing data pipelines \u2014 uses air-gapped local SLMs and semantic clustering to automatically detect, classify, and fix data anomalies at scale. Focuses exclusively on the remediation layer: intercepting bad data, generating deterministic fix logic via Ollama, and guaranteeing zero",
+  "vibe": "Fixes your broken data with surgical AI precision \u2014 no rows left behind.",
   "brief_path": "engineering/engineering-ai-data-remediation-engineer.md",
   "color": "#4f8ff7",
   "skin": "#f1c27d",
@@ -35,7 +35,7 @@
   "id": "engineering-api-platform-engineer",
   "name": "API Platform Engineer",
   "division": "engineering",
-  "desc": "Expert API platform engineer for public and partner APIs — contract-first design (OpenAPI/gRPC), versioning and deprecation policy, SDK generation, API gateway concerns (auth, rate limiting, quotas), and developer-portal DX.",
+  "desc": "Expert API platform engineer for public and partner APIs \u2014 contract-first design (OpenAPI/gRPC), versioning and deprecation policy, SDK generation, API gateway concerns (auth, rate limiting, quotas), and developer-portal DX.",
   "vibe": "A public API is a promise you can't take back. Design the contract like you'll live with it for a decade, because you will.",
   "brief_path": "engineering/engineering-api-platform-engineer.md",
   "color": "#4f8ff7",
@@ -84,7 +84,7 @@
   "name": "Backend Architect",
   "division": "engineering",
   "desc": "Senior backend architect specializing in scalable system design, database architecture, API development, and cloud infrastructure. Builds robust, secure, performant server-side applications and microservices",
-  "vibe": "Designs the systems that hold everything up — databases, APIs, cloud, scale.",
+  "vibe": "Designs the systems that hold everything up \u2014 databases, APIs, cloud, scale.",
   "brief_path": "engineering/engineering-backend-architect.md",
   "color": "#4f8ff7",
   "skin": "#ffdbac",
@@ -96,42 +96,10 @@
   }
  },
  {
-  "id": "engineering-china-network-engineer",
-  "name": "China Network Engineer",
-  "division": "engineering",
-  "desc": "Expert in mainland China's mainstream enterprise networking stacks — Huawei VRP, H3C Comware, Ruijie RGOS, and Hillstone StoneOS — covering routing, switching, firewalling, NAT, and MLPS 2.0 (等保) compliant border design for domestic deployments.",
-  "vibe": "VRP, Comware, RGOS, StoneOS — four CLIs, one network, zero lost packets. Change windows are real, rollback plans are written before the first command ",
-  "brief_path": "engineering/engineering-china-network-engineer.md",
-  "color": "#4f8ff7",
-  "skin": "#f1c27d",
-  "hair": "#232323",
-  "desk": {
-   "x": -58.1,
-   "y": 0,
-   "z": 2.6
-  }
- },
- {
-  "id": "engineering-cms-developer",
-  "name": "CMS Developer",
-  "division": "engineering",
-  "desc": "Drupal and WordPress specialist for theme development, custom plugins/modules, content architecture, and code-first CMS implementation",
-  "vibe": "",
-  "brief_path": "engineering/engineering-cms-developer.md",
-  "color": "#4f8ff7",
-  "skin": "#f1c27d",
-  "hair": "#4a3222",
-  "desk": {
-   "x": -55.7,
-   "y": 0,
-   "z": 2.6
-  }
- },
- {
   "id": "engineering-code-reviewer",
   "name": "Code Reviewer",
   "division": "engineering",
-  "desc": "Expert code reviewer who provides constructive, actionable feedback focused on correctness, maintainability, security, and performance — not style preferences.",
+  "desc": "Expert code reviewer who provides constructive, actionable feedback focused on correctness, maintainability, security, and performance \u2014 not style preferences.",
   "vibe": "Reviews code like a mentor, not a gatekeeper. Every comment teaches something.",
   "brief_path": "engineering/engineering-code-reviewer.md",
   "color": "#4f8ff7",
@@ -179,7 +147,7 @@
   "id": "engineering-data-visualization-engineer",
   "name": "Data Visualization Engineer",
   "division": "engineering",
-  "desc": "Expert data visualization engineer — chart-type selection by data and question, perceptually honest encodings, colorblind-safe data palettes, accessible and interactive charts, and rendering large datasets performantly with D3, Vega, and charting libraries.",
+  "desc": "Expert data visualization engineer \u2014 chart-type selection by data and question, perceptually honest encodings, colorblind-safe data palettes, accessible and interactive charts, and rendering large datasets performantly with D3, Vega, and charting libraries.",
   "vibe": "The chart's job is to tell the truth fast. Pick the encoding the eye reads accurately, and never let a pretty axis lie.",
   "brief_path": "engineering/engineering-data-visualization-engineer.md",
   "color": "#4f8ff7",
@@ -196,7 +164,7 @@
   "name": "Database Optimizer",
   "division": "engineering",
   "desc": "Expert database specialist focusing on schema design, query optimization, indexing strategies, and performance tuning for PostgreSQL, MySQL, and modern databases like Supabase and PlanetScale.",
-  "vibe": "Indexes, query plans, and schema design — databases that don't wake you at 3am.",
+  "vibe": "Indexes, query plans, and schema design \u2014 databases that don't wake you at 3am.",
   "brief_path": "engineering/engineering-database-optimizer.md",
   "color": "#4f8ff7",
   "skin": "#e0ac69",
@@ -211,7 +179,7 @@
   "id": "engineering-database-reliability-engineer",
   "name": "Database Reliability Engineer",
   "division": "engineering",
-  "desc": "Expert database reliability engineer (DBRE) — high availability and replication, automated failover, backup and point-in-time recovery, zero-downtime online schema migrations, connection pooling, and disaster-recovery drills. Focused on keeping data safe and available, not query tuning.",
+  "desc": "Expert database reliability engineer (DBRE) \u2014 high availability and replication, automated failover, backup and point-in-time recovery, zero-downtime online schema migrations, connection pooling, and disaster-recovery drills. Focused on keeping data safe and available, not query tuning.",
   "vibe": "The backup you never tested is a file, not a backup. Prove the restore, rehearse the failover, migrate without a maintenance window.",
   "brief_path": "engineering/engineering-database-reliability-engineer.md",
   "color": "#4f8ff7",
@@ -227,7 +195,7 @@
   "id": "engineering-desktop-app-engineer",
   "name": "Desktop App Engineer",
   "division": "engineering",
-  "desc": "Expert desktop application engineer for Electron and Tauri — secure IPC and process isolation, code signing and notarization, auto-update pipelines, native OS integration, and resource-footprint discipline.",
+  "desc": "Expert desktop application engineer for Electron and Tauri \u2014 secure IPC and process isolation, code signing and notarization, auto-update pipelines, native OS integration, and resource-footprint discipline.",
   "vibe": "The web is your UI, the OS is your API. Small binaries, locked-down IPC, and updates that never brick anyone.",
   "brief_path": "engineering/engineering-desktop-app-engineer.md",
   "color": "#4f8ff7",
@@ -243,7 +211,7 @@
   "id": "engineering-developer-tooling-engineer",
   "name": "Developer Tooling Engineer",
   "division": "engineering",
-  "desc": "Expert developer-tooling and CLI engineer — building command-line tools and internal developer platforms with great DX: intuitive command design, helpful errors, shell completions, fast startup, cross-platform distribution, and scriptable, composable interfaces.",
+  "desc": "Expert developer-tooling and CLI engineer \u2014 building command-line tools and internal developer platforms with great DX: intuitive command design, helpful errors, shell completions, fast startup, cross-platform distribution, and scriptable, composable interfaces.",
   "vibe": "The tool developers reach for is the one that respects their time. Fast, obvious, scriptable, and it fails with a fix, not a stack trace.",
   "brief_path": "engineering/engineering-developer-tooling-engineer.md",
   "color": "#4f8ff7",
@@ -267,38 +235,6 @@
   "hair": "#4a3222",
   "desk": {
    "x": -58.1,
-   "y": 0,
-   "z": 4.8
-  }
- },
- {
-  "id": "engineering-drupal-performance",
-  "name": "Drupal Performance Engineer",
-  "division": "engineering",
-  "desc": "Expert Drupal 10/11 performance engineer specializing in Core Web Vitals, render and dynamic page caching, BigPipe, cache tags and contexts, database query and Views optimization, CSS/JS aggregation, responsive images and lazy loading, CDN integration, and opcache/PHP-FPM tuning for fast, audit-pass",
-  "vibe": "A relentless Drupal performance engineer who treats every slow query, cache miss, and render bottleneck as a personal affront — profiling before guess",
-  "brief_path": "engineering/engineering-drupal-performance.md",
-  "color": "#4f8ff7",
-  "skin": "#e0ac69",
-  "hair": "#7a4a21",
-  "desk": {
-   "x": -55.7,
-   "y": 0,
-   "z": 4.8
-  }
- },
- {
-  "id": "engineering-drupal-shopping-cart",
-  "name": "Drupal Shopping Cart Engineer",
-  "division": "engineering",
-  "desc": "Expert Drupal e-commerce engineer specializing in Drupal Commerce for product catalog management, payment gateway integration, checkout workflow design, order management, tax and promotion configuration, and high-reliability storefront delivery on Drupal 10/11",
-  "vibe": "A meticulous Drupal commerce engineer who treats every storefront as a system of record for someone's revenue — building reliable, scalable shopping e",
-  "brief_path": "engineering/engineering-drupal-shopping-cart.md",
-  "color": "#4f8ff7",
-  "skin": "#f1c27d",
-  "hair": "#232323",
-  "desk": {
-   "x": -53.3,
    "y": 0,
    "z": 4.8
   }
@@ -336,27 +272,11 @@
   }
  },
  {
-  "id": "engineering-feishu-integration-developer",
-  "name": "Feishu Integration Developer",
-  "division": "engineering",
-  "desc": "Full-stack integration expert specializing in the Feishu (Lark) Open Platform — proficient in Feishu bots, mini programs, approval workflows, Bitable (multidimensional spreadsheets), interactive message cards, Webhooks, SSO authentication, and workflow automation, building enterprise-grade collabora",
-  "vibe": "Builds enterprise integrations on the Feishu (Lark) platform — bots, approvals, data sync, and SSO — so your team's workflows run on autopilot.",
-  "brief_path": "engineering/engineering-feishu-integration-developer.md",
-  "color": "#4f8ff7",
-  "skin": "#ffdbac",
-  "hair": "#7a4a21",
-  "desk": {
-   "x": -70.1,
-   "y": 0,
-   "z": 7.0
-  }
- },
- {
   "id": "engineering-filament-optimization-specialist",
   "name": "Filament Optimization Specialist",
   "division": "engineering",
-  "desc": "Expert in restructuring and optimizing Filament PHP admin interfaces for maximum usability and efficiency. Focuses on impactful structural changes — not just cosmetic tweaks.",
-  "vibe": "Pragmatic perfectionist — streamlines complex admin environments.",
+  "desc": "Expert in restructuring and optimizing Filament PHP admin interfaces for maximum usability and efficiency. Focuses on impactful structural changes \u2014 not just cosmetic tweaks.",
+  "vibe": "Pragmatic perfectionist \u2014 streamlines complex admin environments.",
   "brief_path": "engineering/engineering-filament-optimization-specialist.md",
   "color": "#4f8ff7",
   "skin": "#f1c27d",
@@ -371,7 +291,7 @@
   "id": "engineering-finops-engineer",
   "name": "FinOps Engineer",
   "division": "engineering",
-  "desc": "Expert cloud cost engineer for AWS/GCP/Azure — cost allocation and tagging, rightsizing, commitment planning (reserved instances/savings plans), egress and storage optimization, and unit-economics dashboards that tie spend to business value.",
+  "desc": "Expert cloud cost engineer for AWS/GCP/Azure \u2014 cost allocation and tagging, rightsizing, commitment planning (reserved instances/savings plans), egress and storage optimization, and unit-economics dashboards that tie spend to business value.",
   "vibe": "Every idle resource is a subscription nobody canceled. Allocate first, optimize second, and never trade a reliability incident for a rounding error.",
   "brief_path": "engineering/engineering-finops-engineer.md",
   "color": "#4f8ff7",
@@ -395,22 +315,6 @@
   "hair": "#9e9e9e",
   "desk": {
    "x": -62.9,
-   "y": 0,
-   "z": 7.0
-  }
- },
- {
-  "id": "engineering-gaussdb-expert",
-  "name": "GaussDB Expert Engineer",
-  "division": "engineering",
-  "desc": "Expert database specialist focusing on GaussDB OLTP — Huawei's self-developed enterprise-grade relational database (NOT GaussDB(DWS) OLAP, NOT GaussDB(for openGauss) cloud service, NOT GaussDB(for MySQL)). Covers schema design, distributed table design, query optimization, indexing, Ustore engine, a",
-  "vibe": "Distribution keys, CN/DN query plans, Ustore engine — GaussDB databases that don't wake you at 3am.",
-  "brief_path": "engineering/engineering-gaussdb-expert.md",
-  "color": "#4f8ff7",
-  "skin": "#f1c27d",
-  "hair": "#e8e8e8",
-  "desk": {
-   "x": -60.5,
    "y": 0,
    "z": 7.0
   }
@@ -483,7 +387,7 @@
   "id": "engineering-iot-fleet-engineer",
   "name": "IoT Fleet Engineer",
   "division": "engineering",
-  "desc": "Expert IoT and edge fleet engineer — device provisioning and identity, MQTT/telemetry pipelines, staged over-the-air (OTA) firmware updates with rollback, edge compute, and observability across fleets of unreliable, intermittently-connected devices.",
+  "desc": "Expert IoT and edge fleet engineer \u2014 device provisioning and identity, MQTT/telemetry pipelines, staged over-the-air (OTA) firmware updates with rollback, edge compute, and observability across fleets of unreliable, intermittently-connected devices.",
   "vibe": "A field device is a computer you can't reboot, on a network that isn't there, that you shipped a year ago. Update it carefully or brick a thousand at ",
   "brief_path": "engineering/engineering-iot-fleet-engineer.md",
   "color": "#4f8ff7",
@@ -499,8 +403,8 @@
   "id": "engineering-it-service-manager",
   "name": "IT Service Manager",
   "division": "engineering",
-  "desc": "Expert IT service management specialist using ITIL 4 framework for service catalog design, incident and problem management, change control, SLA governance, CMDB maintenance, and continual service improvement — ensuring IT delivers reliable, measurable business value across any organization size",
-  "vibe": "IT exists to serve the business — not the other way around. Every ticket, every SLA, every change window is a promise made to the people who depend on",
+  "desc": "Expert IT service management specialist using ITIL 4 framework for service catalog design, incident and problem management, change control, SLA governance, CMDB maintenance, and continual service improvement \u2014 ensuring IT delivers reliable, measurable business value across any organization size",
+  "vibe": "IT exists to serve the business \u2014 not the other way around. Every ticket, every SLA, every change window is a promise made to the people who depend on",
   "brief_path": "engineering/engineering-it-service-manager.md",
   "color": "#4f8ff7",
   "skin": "#f1c27d",
@@ -515,7 +419,7 @@
   "id": "engineering-knowledge-graph-engineer",
   "name": "Knowledge Graph Engineer",
   "division": "engineering",
-  "desc": "Structures information and capabilities into interconnected nodes (entities) and edges (relationships) — enabling dynamic context navigation, modular competency chaining, lower token costs, and hallucination reduction.",
+  "desc": "Structures information and capabilities into interconnected nodes (entities) and edges (relationships) \u2014 enabling dynamic context navigation, modular competency chaining, lower token costs, and hallucination reduction.",
   "vibe": "Flat files are dead. Every piece of information is a node; every relationship is an edge. Navigate the graph, not the noise.",
   "brief_path": "engineering/engineering-knowledge-graph-engineer.md",
   "color": "#4f8ff7",
@@ -547,8 +451,8 @@
   "id": "engineering-minimal-change-engineer",
   "name": "Minimal Change Engineer",
   "division": "engineering",
-  "desc": "Engineering specialist focused on minimum-viable diffs — fixes only what was asked, refuses scope creep, prefers three similar lines over a premature abstraction. The discipline that prevents bug-fix PRs from becoming refactor avalanches.",
-  "vibe": "The smallest diff that solves the problem — every extra line is a liability.",
+  "desc": "Engineering specialist focused on minimum-viable diffs \u2014 fixes only what was asked, refuses scope creep, prefers three similar lines over a premature abstraction. The discipline that prevents bug-fix PRs from becoming refactor avalanches.",
+  "vibe": "The smallest diff that solves the problem \u2014 every extra line is a liability.",
   "brief_path": "engineering/engineering-minimal-change-engineer.md",
   "color": "#4f8ff7",
   "skin": "#c68642",
@@ -579,8 +483,8 @@
   "id": "engineering-mobile-release-engineer",
   "name": "Mobile Release Engineer",
   "division": "engineering",
-  "desc": "Expert mobile release and distribution engineer for iOS and Android — code signing, provisioning, fastlane pipelines, App Store Connect and Play Console submission, phased rollouts, and crash-triaged release health.",
-  "vibe": "Building the app is half the job. Shipping it — signed, reviewed, rolled out, and rollback-ready — is the half that pages you at midnight.",
+  "desc": "Expert mobile release and distribution engineer for iOS and Android \u2014 code signing, provisioning, fastlane pipelines, App Store Connect and Play Console submission, phased rollouts, and crash-triaged release health.",
+  "vibe": "Building the app is half the job. Shipping it \u2014 signed, reviewed, rolled out, and rollback-ready \u2014 is the half that pages you at midnight.",
   "brief_path": "engineering/engineering-mobile-release-engineer.md",
   "color": "#4f8ff7",
   "skin": "#e0ac69",
@@ -595,8 +499,8 @@
   "id": "engineering-multi-agent-systems-architect",
   "name": "Multi-Agent Systems Architect",
   "division": "engineering",
-  "desc": "Systems architect specializing in the design, coordination, and governance of multi-agent AI pipelines — covering topology selection, context management, inter-agent trust, failure recovery, human-in-the-loop gating, and observability for production-grade agent systems.",
-  "vibe": "Treats a team of AI agents like a distributed system — if it only survives the demo and not production load, ambiguous inputs, and cascading failures,",
+  "desc": "Systems architect specializing in the design, coordination, and governance of multi-agent AI pipelines \u2014 covering topology selection, context management, inter-agent trust, failure recovery, human-in-the-loop gating, and observability for production-grade agent systems.",
+  "vibe": "Treats a team of AI agents like a distributed system \u2014 if it only survives the demo and not production load, ambiguous inputs, and cascading failures,",
   "brief_path": "engineering/engineering-multi-agent-systems-architect.md",
   "color": "#4f8ff7",
   "skin": "#c68642",
@@ -619,22 +523,6 @@
   "hair": "#e8e8e8",
   "desk": {
    "x": -53.3,
-   "y": 0,
-   "z": 9.2
-  }
- },
- {
-  "id": "engineering-orgscript-engineer",
-  "name": "OrgScript Engineer",
-  "division": "engineering",
-  "desc": "Expert in designing, parsing, and implementing OrgScript grammar, AST validation, and business logic definitions.",
-  "vibe": "Process-oriented, strict on semantics, focused on turning human processes into AI-friendly logic.",
-  "brief_path": "engineering/engineering-orgscript-engineer.md",
-  "color": "#4f8ff7",
-  "skin": "#e0ac69",
-  "hair": "#e8e8e8",
-  "desk": {
-   "x": -50.9,
    "y": 0,
    "z": 9.2
   }
@@ -691,7 +579,7 @@
   "id": "engineering-privacy-engineer",
   "name": "Privacy Engineer",
   "division": "engineering",
-  "desc": "Expert privacy engineer who implements privacy in code — PII discovery and classification, data minimization, consent enforcement at the API layer, automated DSAR and deletion across services, pseudonymization/tokenization, and retention automation. Builds the technical controls a privacy policy onl",
+  "desc": "Expert privacy engineer who implements privacy in code \u2014 PII discovery and classification, data minimization, consent enforcement at the API layer, automated DSAR and deletion across services, pseudonymization/tokenization, and retention automation. Builds the technical controls a privacy policy onl",
   "vibe": "A privacy policy is a promise; the code is whether you kept it. Delete means deleted, everywhere, provably.",
   "brief_path": "engineering/engineering-privacy-engineer.md",
   "color": "#4f8ff7",
@@ -707,7 +595,7 @@
   "id": "engineering-prompt-engineer",
   "name": "Prompt Engineer",
   "division": "engineering",
-  "desc": "Specialist in crafting, testing, and systematically optimizing prompts for LLMs — turning vague instructions into reliable, production-grade AI behaviors.",
+  "desc": "Specialist in crafting, testing, and systematically optimizing prompts for LLMs \u2014 turning vague instructions into reliable, production-grade AI behaviors.",
   "vibe": "I don't write prompts, I write contracts between humans and models.",
   "brief_path": "engineering/engineering-prompt-engineer.md",
   "color": "#4f8ff7",
@@ -723,7 +611,7 @@
   "id": "engineering-rag-pipeline-engineer",
   "name": "RAG Pipeline Engineer",
   "division": "engineering",
-  "desc": "Production RAG specialist focused on chunking strategy, retrieval quality, hybrid search, re-ranking, and eval-driven iteration. Builds pipelines that actually retrieve the right context — not just pipelines that run.",
+  "desc": "Production RAG specialist focused on chunking strategy, retrieval quality, hybrid search, re-ranking, and eval-driven iteration. Builds pipelines that actually retrieve the right context \u2014 not just pipelines that run.",
   "vibe": "The LLM gets the blame. The retrieval is the crime scene. I have the evals to prove otherwise.",
   "brief_path": "engineering/engineering-rag-pipeline-engineer.md",
   "color": "#4f8ff7",
@@ -756,7 +644,7 @@
   "name": "Realtime Collaboration Engineer",
   "division": "engineering",
   "desc": "Expert realtime systems engineer for WebSocket/SSE infrastructure, presence, CRDT and OT-based collaborative editing, offline-first sync engines, and fan-out scaling with reconnect-safe protocols.",
-  "vibe": "Every keystroke is a distributed system. Converge, don't collide — and assume the network just dropped.",
+  "vibe": "Every keystroke is a distributed system. Converge, don't collide \u2014 and assume the network just dropped.",
   "brief_path": "engineering/engineering-realtime-collaboration-engineer.md",
   "color": "#4f8ff7",
   "skin": "#c68642",
@@ -768,26 +656,10 @@
   }
  },
  {
-  "id": "engineering-rust-refactoring-specialist",
-  "name": "Rust Refactoring Specialist",
-  "division": "engineering",
-  "desc": "Expert Rust engineer for repository-scale refactoring, safe renames, module restructuring, duplication removal, panic hardening, ownership improvements, and compiler or Clippy remediation.",
-  "vibe": "Complete the coherent refactor, prove its safety, and leave no half-migration behind.",
-  "brief_path": "engineering/engineering-rust-refactoring-specialist.md",
-  "color": "#4f8ff7",
-  "skin": "#e0ac69",
-  "hair": "#e8e8e8",
-  "desk": {
-   "x": -53.3,
-   "y": 0,
-   "z": 11.4
-  }
- },
- {
   "id": "engineering-search-relevance-engineer",
   "name": "Search Relevance Engineer",
   "division": "engineering",
-  "desc": "Expert search engineer for Elasticsearch and OpenSearch — index and analyzer design, BM25 query tuning, hybrid lexical+vector retrieval, and judgment-based relevance evaluation with nDCG and online experiments.",
+  "desc": "Expert search engineer for Elasticsearch and OpenSearch \u2014 index and analyzer design, BM25 query tuning, hybrid lexical+vector retrieval, and judgment-based relevance evaluation with nDCG and online experiments.",
   "vibe": "Recall finds it, precision ranks it, evaluation proves it. Untested relevance changes are just vibes with a deploy button.",
   "brief_path": "engineering/engineering-search-relevance-engineer.md",
   "color": "#4f8ff7",
@@ -800,27 +672,11 @@
   }
  },
  {
-  "id": "engineering-section-508-specialist",
-  "name": "Section 508 Accessibility Specialist",
-  "division": "engineering",
-  "desc": "Expert U.S. federal Section 508 accessibility engineer (the 508 legal baseline is WCAG 2.0 Level AA; WCAG 2.1/2.2 AA are recommended best practice, and ADA Title II requires WCAG 2.1 AA for state/local government) specializing in accessible web development, ARIA implementation, screen reader testing",
-  "vibe": "A meticulous accessibility engineer who makes sure every user — regardless of ability — can perceive, navigate, understand, and operate a site, holdin",
-  "brief_path": "engineering/engineering-section-508-specialist.md",
-  "color": "#4f8ff7",
-  "skin": "#8d5524",
-  "hair": "#9e9e9e",
-  "desk": {
-   "x": -72.5,
-   "y": 0,
-   "z": 13.6
-  }
- },
- {
   "id": "engineering-senior-developer",
   "name": "Senior Developer",
   "division": "engineering",
   "desc": "Premium implementation specialist - Masters Laravel/Livewire/FluxUI, advanced CSS, Three.js integration",
-  "vibe": "Premium full-stack craftsperson — Laravel, Livewire, Three.js, advanced CSS.",
+  "vibe": "Premium full-stack craftsperson \u2014 Laravel, Livewire, Three.js, advanced CSS.",
   "brief_path": "engineering/engineering-senior-developer.md",
   "color": "#4f8ff7",
   "skin": "#8d5524",
@@ -832,27 +688,11 @@
   }
  },
  {
-  "id": "engineering-servicenow-developer-mentor",
-  "name": "ServiceNow Developer & Mentor",
-  "division": "engineering",
-  "desc": "ServiceNow platform developer and step-by-step troubleshooter — Business Rules, Script Includes, GlideRecord/GlideAggregate, Flow Designer, ACLs, and \"is this OOTB or did custom break it?\" isolation",
-  "vibe": "Check the logs and isolate OOTB vs custom before you guess — the instance almost always told you what's wrong.",
-  "brief_path": "engineering/engineering-servicenow-developer-mentor.md",
-  "color": "#4f8ff7",
-  "skin": "#c68642",
-  "hair": "#4a3222",
-  "desk": {
-   "x": -67.7,
-   "y": 0,
-   "z": 13.6
-  }
- },
- {
   "id": "engineering-software-architect",
   "name": "Software Architect",
   "division": "engineering",
   "desc": "Expert software architect specializing in system design, domain-driven design, architectural patterns, and technical decision-making for scalable, maintainable systems.",
-  "vibe": "Designs systems that survive the team that built them. Every decision has a trade-off — name it.",
+  "vibe": "Designs systems that survive the team that built them. Every decision has a trade-off \u2014 name it.",
   "brief_path": "engineering/engineering-software-architect.md",
   "color": "#4f8ff7",
   "skin": "#e0ac69",
@@ -864,27 +704,11 @@
   }
  },
  {
-  "id": "engineering-solidity-smart-contract-engineer",
-  "name": "Solidity Smart Contract Engineer",
-  "division": "engineering",
-  "desc": "Expert Solidity developer specializing in EVM smart contract architecture, gas optimization, upgradeable proxy patterns, DeFi protocol development, and security-first contract design across Ethereum and L2 chains.",
-  "vibe": "Battle-hardened Solidity developer who lives and breathes the EVM.",
-  "brief_path": "engineering/engineering-solidity-smart-contract-engineer.md",
-  "color": "#4f8ff7",
-  "skin": "#ffdbac",
-  "hair": "#e8e8e8",
-  "desk": {
-   "x": -62.9,
-   "y": 0,
-   "z": 13.6
-  }
- },
- {
   "id": "engineering-sre",
   "name": "SRE (Site Reliability Engineer)",
   "division": "engineering",
   "desc": "Expert site reliability engineer specializing in SLOs, error budgets, observability, chaos engineering, and toil reduction for production systems at scale.",
-  "vibe": "Reliability is a feature. Error budgets fund velocity — spend them wisely.",
+  "vibe": "Reliability is a feature. Error budgets fund velocity \u2014 spend them wisely.",
   "brief_path": "engineering/engineering-sre.md",
   "color": "#4f8ff7",
   "skin": "#c68642",
@@ -928,26 +752,10 @@
   }
  },
  {
-  "id": "engineering-uswds-developer",
-  "name": "USWDS Developer",
-  "division": "engineering",
-  "desc": "Expert U.S. Web Design System frontend developer specializing in USWDS components and design tokens, accessible-by-default patterns, responsive government UI, Sass settings/theming, the federal design language, integration into CMS platforms (Drupal/WordPress), and compliance with 21st Century IDEA ",
-  "vibe": "A government-focused frontend developer who builds trustworthy, accessible, consistent federal interfaces with the U.S. Web Design System — theming th",
-  "brief_path": "engineering/engineering-uswds-developer.md",
-  "color": "#4f8ff7",
-  "skin": "#c68642",
-  "hair": "#4a3222",
-  "desk": {
-   "x": -53.3,
-   "y": 0,
-   "z": 13.6
-  }
- },
- {
   "id": "engineering-video-streaming-engineer",
   "name": "Video Streaming Engineer",
   "division": "engineering",
-  "desc": "Expert video streaming engineer for adaptive bitrate delivery — HLS/DASH packaging, ffmpeg transcode ladders, CMAF low-latency, DRM, CDN delivery, and QoE-driven player tuning.",
+  "desc": "Expert video streaming engineer for adaptive bitrate delivery \u2014 HLS/DASH packaging, ffmpeg transcode ladders, CMAF low-latency, DRM, CDN delivery, and QoE-driven player tuning.",
   "vibe": "Every buffering spinner is a user leaving. Encode once, adapt to every network, measure the rebuffer.",
   "brief_path": "engineering/engineering-video-streaming-engineer.md",
   "color": "#4f8ff7",
@@ -963,7 +771,7 @@
   "id": "engineering-voice-ai-integration-engineer",
   "name": "Voice AI Integration Engineer",
   "division": "engineering",
-  "desc": "Expert in building end-to-end speech transcription pipelines using Whisper-style models and cloud ASR services — from raw audio ingestion through preprocessing, transcript cleanup, subtitle generation, speaker diarization, and structured downstream integration into apps, APIs, and CMS platforms.",
+  "desc": "Expert in building end-to-end speech transcription pipelines using Whisper-style models and cloud ASR services \u2014 from raw audio ingestion through preprocessing, transcript cleanup, subtitle generation, speaker diarization, and structured downstream integration into apps, APIs, and CMS platforms.",
   "vibe": "Turns raw audio into structured, production-ready text that machines and humans can actually use.",
   "brief_path": "engineering/engineering-voice-ai-integration-engineer.md",
   "color": "#4f8ff7",
@@ -979,7 +787,7 @@
   "id": "engineering-webassembly-engineer",
   "name": "WebAssembly Engineer",
   "division": "engineering",
-  "desc": "Expert WebAssembly engineer — compiling Rust/C++/Go to Wasm, JS interop and the boundary marshalling cost, WASI and server-side runtimes (Wasmtime/Wasmer), the component model, and near-native performance tuning.",
+  "desc": "Expert WebAssembly engineer \u2014 compiling Rust/C++/Go to Wasm, JS interop and the boundary marshalling cost, WASI and server-side runtimes (Wasmtime/Wasmer), the component model, and near-native performance tuning.",
   "vibe": "The boundary is where performance goes to die. Keep the hot loop inside the module and stop copying strings across it.",
   "brief_path": "engineering/engineering-webassembly-engineer.md",
   "color": "#4f8ff7",
@@ -989,70 +797,6 @@
    "x": -70.1,
    "y": 0,
    "z": 15.8
-  }
- },
- {
-  "id": "engineering-wechat-mini-program-developer",
-  "name": "WeChat Mini Program Developer",
-  "division": "engineering",
-  "desc": "Expert WeChat Mini Program developer specializing in 小程序 development with WXML/WXSS/WXS, WeChat API integration, payment systems, subscription messaging, and the full WeChat ecosystem.",
-  "vibe": "Builds performant Mini Programs that thrive in the WeChat ecosystem.",
-  "brief_path": "engineering/engineering-wechat-mini-program-developer.md",
-  "color": "#4f8ff7",
-  "skin": "#e0ac69",
-  "hair": "#6d4c41",
-  "desk": {
-   "x": -67.7,
-   "y": 0,
-   "z": 15.8
-  }
- },
- {
-  "id": "engineering-wordpress-performance",
-  "name": "WordPress Performance Engineer",
-  "division": "engineering",
-  "desc": "Expert WordPress performance engineer specializing in Core Web Vitals, object caching (Redis/Memcached), page caching, database and WP_Query optimization, the Transients API, asset minification/deferral/critical CSS, image optimization and lazy loading, CDN integration, plugin performance auditing, ",
-  "vibe": "A pragmatic WordPress performance engineer who turns sluggish sites into fast, Core-Web-Vitals-passing storefronts through smart caching and query dis",
-  "brief_path": "engineering/engineering-wordpress-performance.md",
-  "color": "#4f8ff7",
-  "skin": "#e0ac69",
-  "hair": "#6d4c41",
-  "desk": {
-   "x": -65.3,
-   "y": 0,
-   "z": 15.8
-  }
- },
- {
-  "id": "engineering-wordpress-shopping-cart",
-  "name": "WordPress Shopping Cart Engineer",
-  "division": "engineering",
-  "desc": "Expert WordPress e-commerce engineer specializing in WooCommerce for product catalog management, payment gateway integration, checkout customization, order management, tax and coupon configuration, and conversion-optimized storefront delivery on WordPress",
-  "vibe": "A pragmatic WordPress commerce engineer who turns WooCommerce into powerful, conversion-optimized storefronts — shipping fast without shipping fragile",
-  "brief_path": "engineering/engineering-wordpress-shopping-cart.md",
-  "color": "#4f8ff7",
-  "skin": "#8d5524",
-  "hair": "#e8e8e8",
-  "desk": {
-   "x": -62.9,
-   "y": 0,
-   "z": 15.8
-  }
- },
- {
-  "id": "accounts-payable-agent",
-  "name": "Accounts Payable Agent",
-  "division": "specialized",
-  "desc": "Autonomous payment processing specialist that executes vendor payments, contractor invoices, and recurring bills across any payment rail — crypto, fiat, stablecoins. Integrates with AI agent workflows via tool calls.",
-  "vibe": "Moves money across any rail — crypto, fiat, stablecoins — so you don't have to.",
-  "brief_path": "specialized/accounts-payable-agent.md",
-  "color": "#9b7ede",
-  "skin": "#f1c27d",
-  "hair": "#9e9e9e",
-  "desk": {
-   "x": -38.5,
-   "y": 0,
-   "z": 2.6
   }
  },
  {
@@ -1107,7 +851,7 @@
   "id": "business-strategist",
   "name": "Business Strategist",
   "division": "specialized",
-  "desc": "Senior management consulting specialist for competitive analysis, market entry strategy, business model design, growth planning, organizational strategy, and strategic decision-making — translating complex market dynamics into clear, actionable strategies that create sustainable competitive advantag",
+  "desc": "Senior management consulting specialist for competitive analysis, market entry strategy, business model design, growth planning, organizational strategy, and strategic decision-making \u2014 translating complex market dynamics into clear, actionable strategies that create sustainable competitive advantag",
   "vibe": "Strategy without execution is hallucination. Execution without strategy is chaos. The best strategists build the bridge between where you are and wher",
   "brief_path": "specialized/business-strategist.md",
   "color": "#9b7ede",
@@ -1120,27 +864,11 @@
   }
  },
  {
-  "id": "change-management-consultant",
-  "name": "Change Management Consultant",
-  "division": "specialized",
-  "desc": "Expert change management specialist using ADKAR, Kotter, and Prosci frameworks to guide organizations through technology implementations, restructuring, culture transformation, and M&A integration — managing resistance, building adoption, and ensuring changes stick long after go-live",
-  "vibe": "Change doesn't fail because of bad technology or bad strategy — it fails because people don't adopt it. Every transformation is ultimately a human pro",
-  "brief_path": "specialized/change-management-consultant.md",
-  "color": "#9b7ede",
-  "skin": "#f1c27d",
-  "hair": "#6d4c41",
-  "desk": {
-   "x": -26.5,
-   "y": 0,
-   "z": 2.6
-  }
- },
- {
   "id": "chief-financial-officer",
   "name": "Chief Financial Officer",
   "division": "specialized",
-  "desc": "Strategic finance executive who governs capital allocation, treasury operations, financial planning, M&A finance, investor relations, and board reporting — translating financial complexity into clear decisions that drive business performance and stakeholder confidence.",
-  "vibe": "Thinks in trade-offs, risk-adjusted returns, and long-term value creation — turns financial complexity into a clear decision while protecting the bala",
+  "desc": "Strategic finance executive who governs capital allocation, treasury operations, financial planning, M&A finance, investor relations, and board reporting \u2014 translating financial complexity into clear decisions that drive business performance and stakeholder confidence.",
+  "vibe": "Thinks in trade-offs, risk-adjusted returns, and long-term value creation \u2014 turns financial complexity into a clear decision while protecting the bala",
   "brief_path": "specialized/chief-financial-officer.md",
   "color": "#9b7ede",
   "skin": "#ffdbac",
@@ -1152,27 +880,11 @@
   }
  },
  {
-  "id": "corporate-training-designer",
-  "name": "Corporate Training Designer",
-  "division": "specialized",
-  "desc": "Expert in enterprise training system design and curriculum development — proficient in training needs analysis, instructional design methodology, blended learning program design, internal trainer development, leadership programs, and training effectiveness evaluation and continuous optimization.",
-  "vibe": "Designs training programs that drive real behavior change — from needs analysis to Kirkpatrick Level 3 evaluation — because good training is measured ",
-  "brief_path": "specialized/corporate-training-designer.md",
-  "color": "#9b7ede",
-  "skin": "#c68642",
-  "hair": "#232323",
-  "desk": {
-   "x": -21.7,
-   "y": 0,
-   "z": 2.6
-  }
- },
- {
   "id": "customer-service",
   "name": "Customer Service",
   "division": "specialized",
-  "desc": "Friendly, professional customer service specialist for any industry — handling inquiries, complaints, account support, FAQs, and seamless escalation with warmth, efficiency, and a genuine commitment to customer satisfaction",
-  "vibe": "Every customer interaction is a chance to turn a problem into loyalty — handle it with care, speed, and a human touch.",
+  "desc": "Friendly, professional customer service specialist for any industry \u2014 handling inquiries, complaints, account support, FAQs, and seamless escalation with warmth, efficiency, and a genuine commitment to customer satisfaction",
+  "vibe": "Every customer interaction is a chance to turn a problem into loyalty \u2014 handle it with care, speed, and a human touch.",
   "brief_path": "specialized/customer-service.md",
   "color": "#9b7ede",
   "skin": "#c68642",
@@ -1187,8 +899,8 @@
   "id": "customer-success-manager",
   "name": "Customer Success Manager",
   "division": "specialized",
-  "desc": "Strategic customer success specialist for onboarding, health scoring, QBR facilitation, churn prevention, expansion identification, and renewal management — driving net revenue retention by turning customers into long-term partners who achieve measurable outcomes",
-  "vibe": "Customer success isn't a department that reacts to problems — it's a discipline that prevents them. The best CSMs know their customers' goals better t",
+  "desc": "Strategic customer success specialist for onboarding, health scoring, QBR facilitation, churn prevention, expansion identification, and renewal management \u2014 driving net revenue retention by turning customers into long-term partners who achieve measurable outcomes",
+  "vibe": "Customer success isn't a department that reacts to problems \u2014 it's a discipline that prevents them. The best CSMs know their customers' goals better t",
   "brief_path": "specialized/customer-success-manager.md",
   "color": "#9b7ede",
   "skin": "#e0ac69",
@@ -1219,142 +931,14 @@
   "id": "data-privacy-officer",
   "name": "Data Privacy Officer",
   "division": "specialized",
-  "desc": "Corporate data privacy specialist and DPO who builds GDPR, CCPA, and global privacy compliance programs — covering data mapping, privacy impact assessments, consent management, breach response, vendor due diligence, and regulatory engagement.",
-  "vibe": "Treats personal data as a liability to be minimized rather than an asset to be hoarded — reads the regulation precisely, designs privacy in from the s",
+  "desc": "Corporate data privacy specialist and DPO who builds GDPR, CCPA, and global privacy compliance programs \u2014 covering data mapping, privacy impact assessments, consent management, breach response, vendor due diligence, and regulatory engagement.",
+  "vibe": "Treats personal data as a liability to be minimized rather than an asset to be hoarded \u2014 reads the regulation precisely, designs privacy in from the s",
   "brief_path": "specialized/data-privacy-officer.md",
   "color": "#9b7ede",
   "skin": "#c68642",
   "hair": "#e8e8e8",
   "desk": {
    "x": -36.1,
-   "y": 0,
-   "z": 4.8
-  }
- },
- {
-  "id": "esg-sustainability-officer",
-  "name": "ESG & Sustainability Officer",
-  "division": "specialized",
-  "desc": "Corporate sustainability strategist and ESG reporting specialist who builds environmental, social, and governance programs, manages disclosures, drives decarbonization initiatives, and aligns business strategy with stakeholder and regulatory expectations.",
-  "vibe": "Builds sustainability programs that hold up to scrutiny — grounds every claim in audited data and recognized frameworks, because a target without a cr",
-  "brief_path": "specialized/esg-sustainability-officer.md",
-  "color": "#9b7ede",
-  "skin": "#e0ac69",
-  "hair": "#e8e8e8",
-  "desk": {
-   "x": -33.7,
-   "y": 0,
-   "z": 4.8
-  }
- },
- {
-  "id": "government-digital-presales-consultant",
-  "name": "Government Digital Presales Consultant",
-  "division": "specialized",
-  "desc": "Presales expert for China's government digital transformation market (ToG), proficient in policy interpretation, solution design, bid document preparation, POC validation, compliance requirements (classified protection/cryptographic assessment/Xinchuang domestic IT), and stakeholder management — hel",
-  "vibe": "Navigates the Chinese government IT procurement maze — from policy signals to winning bids — so your team lands digital transformation projects.",
-  "brief_path": "specialized/government-digital-presales-consultant.md",
-  "color": "#9b7ede",
-  "skin": "#f1c27d",
-  "hair": "#6d4c41",
-  "desk": {
-   "x": -31.3,
-   "y": 0,
-   "z": 4.8
-  }
- },
- {
-  "id": "grant-writer",
-  "name": "Grant Writer",
-  "division": "specialized",
-  "desc": "Expert grant writing specialist for nonprofits, research institutions, and social enterprises — covering prospect research, letter of inquiry writing, full proposal development, budget narratives, federal and foundation grants, and post-award reporting to maximize funding success",
-  "vibe": "Every grant is a conversation between your mission and a funder's priorities. The best grant writers don't beg — they build a compelling case that a f",
-  "brief_path": "specialized/grant-writer.md",
-  "color": "#9b7ede",
-  "skin": "#c68642",
-  "hair": "#6d4c41",
-  "desk": {
-   "x": -28.9,
-   "y": 0,
-   "z": 4.8
-  }
- },
- {
-  "id": "healthcare-aging-parent-care-companion",
-  "name": "Aging Parent Care Companion",
-  "division": "specialized",
-  "desc": "Compassionate, HIPAA-aligned care coordination and decision-support agent for family caregivers managing an aging parent's appointments, medications, care team communication, and their own caregiver wellbeing",
-  "vibe": "Behind every medication list and appointment reminder is a parent who raised you, and a caregiver doing one of the hardest jobs there is. You deserve ",
-  "brief_path": "specialized/healthcare-aging-parent-care-companion.md",
-  "color": "#9b7ede",
-  "skin": "#ffdbac",
-  "hair": "#e8e8e8",
-  "desk": {
-   "x": -26.5,
-   "y": 0,
-   "z": 4.8
-  }
- },
- {
-  "id": "healthcare-customer-service",
-  "name": "Healthcare Customer Service",
-  "division": "specialized",
-  "desc": "Empathetic healthcare customer service specialist for patient support, billing inquiries, appointment management, insurance questions, complaint resolution, and seamless escalation to clinical or administrative staff",
-  "vibe": "Every patient deserves to feel heard, respected, and supported — especially when they're scared, confused, or frustrated.",
-  "brief_path": "specialized/healthcare-customer-service.md",
-  "color": "#9b7ede",
-  "skin": "#e0ac69",
-  "hair": "#4a3222",
-  "desk": {
-   "x": -24.1,
-   "y": 0,
-   "z": 4.8
-  }
- },
- {
-  "id": "healthcare-marketing-compliance",
-  "name": "Healthcare Marketing Compliance Specialist",
-  "division": "specialized",
-  "desc": "Expert in healthcare marketing compliance in China, proficient in the Advertising Law, Medical Advertisement Management Measures, Drug Administration Law, and related regulations — covering pharmaceuticals, medical devices, medical aesthetics, health supplements, and internet healthcare across conte",
-  "vibe": "Keeps your healthcare marketing legal in China's tightly regulated landscape — reviewing content, flagging violations, and finding creative space with",
-  "brief_path": "specialized/healthcare-marketing-compliance.md",
-  "color": "#9b7ede",
-  "skin": "#c68642",
-  "hair": "#4a3222",
-  "desk": {
-   "x": -21.7,
-   "y": 0,
-   "z": 4.8
-  }
- },
- {
-  "id": "hospitality-guest-services",
-  "name": "Hospitality Guest Services",
-  "division": "specialized",
-  "desc": "Comprehensive hospitality guest services specialist for hotels, resorts, restaurants, and event venues — covering reservations, check-in/check-out, concierge services, guest complaint resolution, loyalty program management, and post-stay follow-up to deliver exceptional guest experiences that drive ",
-  "vibe": "Hospitality is not a transaction — it's a feeling. Every guest interaction is an opportunity to create a memory, earn a return visit, and generate a f",
-  "brief_path": "specialized/hospitality-guest-services.md",
-  "color": "#9b7ede",
-  "skin": "#ffdbac",
-  "hair": "#e8e8e8",
-  "desk": {
-   "x": -19.3,
-   "y": 0,
-   "z": 4.8
-  }
- },
- {
-  "id": "hr-onboarding",
-  "name": "HR Onboarding",
-  "division": "specialized",
-  "desc": "Comprehensive HR onboarding specialist for employee orientation, documentation management, compliance tracking, benefits enrollment, culture integration, and new hire support — delivering a seamless first-day-to-first-year experience that drives retention and productivity",
-  "vibe": "The first 90 days determine whether a new hire becomes a long-term contributor or a regrettable turnover. Get it right from day one.",
-  "brief_path": "specialized/hr-onboarding.md",
-  "color": "#9b7ede",
-  "skin": "#f1c27d",
-  "hair": "#e8e8e8",
-  "desk": {
-   "x": -16.9,
    "y": 0,
    "z": 4.8
   }
@@ -1379,7 +963,7 @@
   "id": "language-translator",
   "name": "Language Translator",
   "division": "specialized",
-  "desc": "Real-time Spanish ↔ English translation specialist with cultural context, regional dialect awareness, travel phrase guidance, and tone-appropriate communication for everyday, business, and emergency situations",
+  "desc": "Real-time Spanish \u2194 English translation specialist with cultural context, regional dialect awareness, travel phrase guidance, and tone-appropriate communication for everyday, business, and emergency situations",
   "vibe": "Bridges languages with precision, cultural respect, and the fluency of a native speaker who's lived in both worlds.",
   "brief_path": "specialized/language-translator.md",
   "color": "#9b7ede",
@@ -1387,70 +971,6 @@
   "hair": "#232323",
   "desk": {
    "x": -36.1,
-   "y": 0,
-   "z": 7.0
-  }
- },
- {
-  "id": "legal-billing-time-tracking",
-  "name": "Legal Billing & Time Tracking",
-  "division": "specialized",
-  "desc": "Comprehensive legal billing and time tracking specialist for accurate time capture, invoice generation, billing narrative writing, collections management, trust account compliance, and billing analysis — maximizing revenue recovery while maintaining client relationships and ethical compliance across",
-  "vibe": "Every six minutes of unbilled time is money left on the table. Every unclear billing narrative is a client dispute waiting to happen. Capture it all. ",
-  "brief_path": "specialized/legal-billing-time-tracking.md",
-  "color": "#9b7ede",
-  "skin": "#c68642",
-  "hair": "#7a4a21",
-  "desk": {
-   "x": -33.7,
-   "y": 0,
-   "z": 7.0
-  }
- },
- {
-  "id": "legal-client-intake",
-  "name": "Legal Client Intake",
-  "division": "specialized",
-  "desc": "Comprehensive legal client intake specialist for qualifying prospects, collecting case information, scheduling consultations, managing conflict checks, and delivering attorney-ready intake summaries across any practice area and firm size",
-  "vibe": "The first conversation with a potential client sets the tone for the entire attorney-client relationship. Get it right — warm, professional, and thoro",
-  "brief_path": "specialized/legal-client-intake.md",
-  "color": "#9b7ede",
-  "skin": "#e0ac69",
-  "hair": "#232323",
-  "desk": {
-   "x": -31.3,
-   "y": 0,
-   "z": 7.0
-  }
- },
- {
-  "id": "legal-document-review",
-  "name": "Legal Document Review",
-  "division": "specialized",
-  "desc": "Comprehensive legal document review specialist for contracts, litigation documents, and real estate agreements — summarizing documents, flagging risk clauses, comparing contract versions, and checking compliance across any law firm size or practice area",
-  "vibe": "Every word in a legal document matters. Every missed clause is a liability. Every risk caught early is a client protected.",
-  "brief_path": "specialized/legal-document-review.md",
-  "color": "#9b7ede",
-  "skin": "#e0ac69",
-  "hair": "#e8e8e8",
-  "desk": {
-   "x": -28.9,
-   "y": 0,
-   "z": 7.0
-  }
- },
- {
-  "id": "loan-officer-assistant",
-  "name": "Loan Officer Assistant",
-  "division": "specialized",
-  "desc": "Comprehensive loan officer assistant for mortgage and lending professionals — covering borrower intake, pre-qualification, document collection, pipeline management, compliance tracking, rate quoting, and closing coordination across residential, commercial, and consumer lending",
-  "vibe": "Every loan is someone's dream — a home, a business, a fresh start. Move it through the pipeline with precision, compliance, and genuine care for the p",
-  "brief_path": "specialized/loan-officer-assistant.md",
-  "color": "#9b7ede",
-  "skin": "#f1c27d",
-  "hair": "#232323",
-  "desk": {
-   "x": -26.5,
    "y": 0,
    "z": 7.0
   }
@@ -1472,43 +992,11 @@
   }
  },
  {
-  "id": "ma-integration-manager",
-  "name": "M&A Integration Manager",
-  "division": "specialized",
-  "desc": "Mergers and acquisitions integration specialist who designs and executes post-merger integration programs — covering Day 1 readiness, 100-day planning, synergy tracking, cultural integration, functional workstream coordination, and transition service agreement management.",
-  "vibe": "Treats the signed deal as the starting line, not the finish — runs post-merger integration like a program with a clock on it, because synergy value er",
-  "brief_path": "specialized/ma-integration-manager.md",
-  "color": "#9b7ede",
-  "skin": "#ffdbac",
-  "hair": "#4a3222",
-  "desk": {
-   "x": -21.7,
-   "y": 0,
-   "z": 7.0
-  }
- },
- {
-  "id": "medical-billing-coding-specialist",
-  "name": "Medical Billing & Coding Specialist",
-  "division": "specialized",
-  "desc": "Expert medical billing and coding specialist for ICD-10-CM/PCS, CPT, and HCPCS coding, claim submission, denial management, revenue cycle optimization, compliance auditing, and payer contract analysis — maximizing clean claim rates and revenue recovery for healthcare providers of all sizes",
-  "vibe": "Every unsubmitted claim is lost revenue. Every unchallenged denial is money left on the table. Every compliance gap is a liability waiting to surface.",
-  "brief_path": "specialized/medical-billing-coding-specialist.md",
-  "color": "#9b7ede",
-  "skin": "#e0ac69",
-  "hair": "#6d4c41",
-  "desk": {
-   "x": -19.3,
-   "y": 0,
-   "z": 7.0
-  }
- },
- {
   "id": "operations-manager",
   "name": "Operations Manager",
   "division": "specialized",
-  "desc": "Business operations specialist who applies Lean, Six Sigma, and systems thinking to process mapping, capacity planning, KPI governance, vendor management, and organizational efficiency — turning operational complexity into repeatable, measurable performance.",
-  "vibe": "Sees every business as a system of processes and treats waste, variation, and undocumented dependencies as defects to be measured and removed — becaus",
+  "desc": "Business operations specialist who applies Lean, Six Sigma, and systems thinking to process mapping, capacity planning, KPI governance, vendor management, and organizational efficiency \u2014 turning operational complexity into repeatable, measurable performance.",
+  "vibe": "Sees every business as a system of processes and treats waste, variation, and undocumented dependencies as defects to be measured and removed \u2014 becaus",
   "brief_path": "specialized/operations-manager.md",
   "color": "#9b7ede",
   "skin": "#8d5524",
@@ -1523,8 +1011,8 @@
   "id": "organizational-psychologist",
   "name": "Organizational Psychologist",
   "division": "specialized",
-  "desc": "Applied organizational psychologist who diagnoses team dynamics, psychological safety, burnout risk, and culture health — using evidence-based frameworks to help leaders build high-performing, resilient, and psychologically safe organizations.",
-  "vibe": "Treats team dysfunction like a clinician reads symptoms — grounds every diagnosis and intervention in peer-reviewed evidence, names the invisible patt",
+  "desc": "Applied organizational psychologist who diagnoses team dynamics, psychological safety, burnout risk, and culture health \u2014 using evidence-based frameworks to help leaders build high-performing, resilient, and psychologically safe organizations.",
+  "vibe": "Treats team dysfunction like a clinician reads symptoms \u2014 grounds every diagnosis and intervention in peer-reviewed evidence, names the invisible patt",
   "brief_path": "specialized/organizational-psychologist.md",
   "color": "#9b7ede",
   "skin": "#e0ac69",
@@ -1547,38 +1035,6 @@
   "hair": "#e8e8e8",
   "desk": {
    "x": -36.1,
-   "y": 0,
-   "z": 9.2
-  }
- },
- {
-  "id": "real-estate-buyer-seller",
-  "name": "Real Estate Buyer & Seller",
-  "division": "specialized",
-  "desc": "Comprehensive real estate agent assistant for buyer representation, seller representation, listing management, offer negotiation, transaction coordination, and closing support — delivering a world-class client experience from first showing to final closing across residential and investment real esta",
-  "vibe": "Every transaction is someone's biggest financial decision. Every client deserves an agent who is organized, responsive, and genuinely invested in thei",
-  "brief_path": "specialized/real-estate-buyer-seller.md",
-  "color": "#9b7ede",
-  "skin": "#8d5524",
-  "hair": "#4a3222",
-  "desk": {
-   "x": -33.7,
-   "y": 0,
-   "z": 9.2
-  }
- },
- {
-  "id": "recruitment-specialist",
-  "name": "Recruitment Specialist",
-  "division": "specialized",
-  "desc": "Expert recruitment operations and talent acquisition specialist — skilled in China's major hiring platforms, talent assessment frameworks, and labor law compliance. Helps companies efficiently attract, screen, and retain top talent while building a competitive employer brand.",
-  "vibe": "Builds your full-cycle recruiting engine across China's hiring platforms, from sourcing to onboarding to compliance.",
-  "brief_path": "specialized/recruitment-specialist.md",
-  "color": "#9b7ede",
-  "skin": "#ffdbac",
-  "hair": "#6d4c41",
-  "desk": {
-   "x": -31.3,
    "y": 0,
    "z": 9.2
   }
@@ -1619,8 +1075,8 @@
   "id": "retail-customer-returns",
   "name": "Retail Customer Returns",
   "division": "specialized",
-  "desc": "Comprehensive retail customer returns specialist for processing returns, exchanges, and refunds across in-store, online, and omnichannel retail — handling policy enforcement, fraud prevention, customer retention, vendor returns, and returns analytics to maximize recovery while preserving customer lo",
-  "vibe": "A return is not a failure — it's an opportunity. Handle it with speed, fairness, and genuine care, and you'll turn a disappointed customer into a loya",
+  "desc": "Comprehensive retail customer returns specialist for processing returns, exchanges, and refunds across in-store, online, and omnichannel retail \u2014 handling policy enforcement, fraud prevention, customer retention, vendor returns, and returns analytics to maximize recovery while preserving customer lo",
+  "vibe": "A return is not a failure \u2014 it's an opportunity. Handle it with speed, fairness, and genuine care, and you'll turn a disappointed customer into a loya",
   "brief_path": "specialized/retail-customer-returns.md",
   "color": "#9b7ede",
   "skin": "#c68642",
@@ -1648,26 +1104,10 @@
   }
  },
  {
-  "id": "sales-outreach",
-  "name": "Sales Outreach",
-  "division": "specialized",
-  "desc": "Consultative B2B sales outreach specialist for cold prospecting, lead follow-up, objection handling, proposal writing, and pipeline management — combining data-driven targeting with genuine relationship-building to open doors and close deals",
-  "vibe": "The best salespeople don't sell — they help people buy. Every outreach is a conversation starter, not a pitch.",
-  "brief_path": "specialized/sales-outreach.md",
-  "color": "#9b7ede",
-  "skin": "#f1c27d",
-  "hair": "#4a3222",
-  "desk": {
-   "x": -19.3,
-   "y": 0,
-   "z": 9.2
-  }
- },
- {
   "id": "specialized-chief-of-staff",
   "name": "Chief of Staff",
   "division": "specialized",
-  "desc": "Master coordinator for founders and executives — filters noise, owns processes, enforces consistency, routes decisions, and positions outputs for impact so the boss can think clearly.",
+  "desc": "Master coordinator for founders and executives \u2014 filters noise, owns processes, enforces consistency, routes decisions, and positions outputs for impact so the boss can think clearly.",
   "vibe": "I don't own any function. I own the space between all of them.",
   "brief_path": "specialized/specialized-chief-of-staff.md",
   "color": "#9b7ede",
@@ -1680,49 +1120,17 @@
   }
  },
  {
-  "id": "specialized-civil-engineer",
-  "name": "Civil Engineer",
-  "division": "specialized",
-  "desc": "Expert civil and structural engineer with global standards coverage — Eurocode, DIN, ACI, AISC, ASCE, AS/NZS, CSA, GB, IS, AIJ, and more. Specializes in structural analysis, geotechnical design, construction documentation, building code compliance, and multi-standard international projects.",
-  "vibe": "Designs structures that stand across borders — from seismic Tokyo to wind-swept Dubai, always code-compliant and constructible.",
-  "brief_path": "specialized/specialized-civil-engineer.md",
-  "color": "#9b7ede",
-  "skin": "#c68642",
-  "hair": "#232323",
-  "desk": {
-   "x": -38.5,
-   "y": 0,
-   "z": 11.4
-  }
- },
- {
   "id": "specialized-codebase-archaeologist",
   "name": "Codebase Archaeologist",
   "division": "specialized",
   "desc": "Multi-session, multi-tool drift detection specialist who audits codebases touched by several AI coding tools (Claude, Cursor, Copilot, Windsurf, etc.) over time, finding silent logic mismatches, dead code, and doc-vs-code divergence that no single session would ever notice on its own.",
-  "vibe": "I read code like tree rings — I can tell you which layer was written by which hand, and what got left half-finished when the next one took over.",
+  "vibe": "I read code like tree rings \u2014 I can tell you which layer was written by which hand, and what got left half-finished when the next one took over.",
   "brief_path": "specialized/specialized-codebase-archaeologist.md",
   "color": "#9b7ede",
   "skin": "#ffdbac",
   "hair": "#e8e8e8",
   "desk": {
    "x": -36.1,
-   "y": 0,
-   "z": 11.4
-  }
- },
- {
-  "id": "specialized-cultural-intelligence-strategist",
-  "name": "Cultural Intelligence Strategist",
-  "division": "specialized",
-  "desc": "CQ specialist that detects invisible exclusion, researches global context, and ensures software resonates authentically across intersectional identities.",
-  "vibe": "Detects invisible exclusion and ensures your software resonates across cultures.",
-  "brief_path": "specialized/specialized-cultural-intelligence-strategist.md",
-  "color": "#9b7ede",
-  "skin": "#e0ac69",
-  "hair": "#e8e8e8",
-  "desk": {
-   "x": -33.7,
    "y": 0,
    "z": 11.4
   }
@@ -1748,77 +1156,13 @@
   "name": "Document Generator",
   "division": "specialized",
   "desc": "Expert document creation specialist who generates professional PDF, PPTX, DOCX, and XLSX files using code-based approaches with proper formatting, charts, and data visualization.",
-  "vibe": "Professional documents from code — PDFs, slides, spreadsheets, and reports.",
+  "vibe": "Professional documents from code \u2014 PDFs, slides, spreadsheets, and reports.",
   "brief_path": "specialized/specialized-document-generator.md",
   "color": "#9b7ede",
   "skin": "#f1c27d",
   "hair": "#6d4c41",
   "desk": {
    "x": -28.9,
-   "y": 0,
-   "z": 11.4
-  }
- },
- {
-  "id": "specialized-fedramp-rmf-compliance",
-  "name": "FedRAMP & RMF Compliance Engineer",
-  "division": "specialized",
-  "desc": "Expert FedRAMP and NIST Risk Management Framework compliance engineer specializing in both FedRAMP authorization pathways — the traditional Rev5 path (NIST 800-53 Rev 5 control implementation, System Security Plans, 3PAO assessment, agency authorization) and the modernized FedRAMP 20x path (Key Secu",
-  "vibe": "A disciplined compliance engineer who guides systems through both FedRAMP authorization pathways — traditional Rev5 and the modernized, KSI-driven 20x",
-  "brief_path": "specialized/specialized-fedramp-rmf-compliance.md",
-  "color": "#9b7ede",
-  "skin": "#f1c27d",
-  "hair": "#4a3222",
-  "desk": {
-   "x": -26.5,
-   "y": 0,
-   "z": 11.4
-  }
- },
- {
-  "id": "specialized-focus-music-architect",
-  "name": "Focus Music Architect",
-  "division": "specialized",
-  "desc": "Instrumental focus music specialist and neuroacoustic prompt engineer — crafts high-yield prompts, soundscape architectures, BPM curves, and binaural layers for deep cognitive flow and generative audio models.",
-  "vibe": "Transforms mental fatigue into deep cognitive flow state through tailored acoustic science and generative audio engineering.",
-  "brief_path": "specialized/specialized-focus-music-architect.md",
-  "color": "#9b7ede",
-  "skin": "#f1c27d",
-  "hair": "#232323",
-  "desk": {
-   "x": -24.1,
-   "y": 0,
-   "z": 11.4
-  }
- },
- {
-  "id": "specialized-french-consulting-market",
-  "name": "French Consulting Market Navigator",
-  "division": "specialized",
-  "desc": "Navigate the French ESN/SI freelance ecosystem — margin models, platform mechanics (Malt, collective.work), portage salarial, rate positioning, and payment cycle realities",
-  "vibe": "The insider who decodes the opaque French consulting food chain so freelancers stop leaving money on the table",
-  "brief_path": "specialized/specialized-french-consulting-market.md",
-  "color": "#9b7ede",
-  "skin": "#c68642",
-  "hair": "#232323",
-  "desk": {
-   "x": -21.7,
-   "y": 0,
-   "z": 11.4
-  }
- },
- {
-  "id": "specialized-korean-business-navigator",
-  "name": "Korean Business Navigator",
-  "division": "specialized",
-  "desc": "Korean business culture for foreign professionals — 품의 decision process, nunchi reading, KakaoTalk business etiquette, hierarchy navigation, and relationship-first deal mechanics",
-  "vibe": "The bridge between Western directness and Korean relationship dynamics — reads the room so you don't torch the deal",
-  "brief_path": "specialized/specialized-korean-business-navigator.md",
-  "color": "#9b7ede",
-  "skin": "#ffdbac",
-  "hair": "#4a3222",
-  "desk": {
-   "x": -19.3,
    "y": 0,
    "z": 11.4
   }
@@ -1860,7 +1204,7 @@
   "name": "Model QA Specialist",
   "division": "specialized",
   "desc": "Independent model QA expert who audits ML and statistical models end-to-end - from documentation review and data reconstruction to replication, calibration testing, interpretability analysis, performance monitoring, and audit-grade reporting.",
-  "vibe": "Audits ML models end-to-end — from data reconstruction to calibration testing.",
+  "vibe": "Audits ML models end-to-end \u2014 from data reconstruction to calibration testing.",
   "brief_path": "specialized/specialized-model-qa.md",
   "color": "#9b7ede",
   "skin": "#ffdbac",
@@ -1875,30 +1219,14 @@
   "id": "specialized-pricing-analyst",
   "name": "Pricing Analyst",
   "division": "specialized",
-  "desc": "Specialized pricing analyst who develops optimal pricing models through market research, competitor analysis, cost structure evaluation, and margin optimization — turning pricing from guesswork into a data-driven competitive advantage.",
-  "vibe": "Finds the price point where value captured meets value delivered — then proves it with data.",
+  "desc": "Specialized pricing analyst who develops optimal pricing models through market research, competitor analysis, cost structure evaluation, and margin optimization \u2014 turning pricing from guesswork into a data-driven competitive advantage.",
+  "vibe": "Finds the price point where value captured meets value delivered \u2014 then proves it with data.",
   "brief_path": "specialized/specialized-pricing-analyst.md",
   "color": "#9b7ede",
   "skin": "#ffdbac",
   "hair": "#e8e8e8",
   "desk": {
    "x": -33.7,
-   "y": 0,
-   "z": 13.6
-  }
- },
- {
-  "id": "specialized-salesforce-architect",
-  "name": "Salesforce Architect",
-  "division": "specialized",
-  "desc": "Solution architecture for Salesforce platform — multi-cloud design, integration patterns, governor limits, deployment strategy, and data model governance for enterprise-scale orgs",
-  "vibe": "The calm hand that turns a tangled Salesforce org into an architecture that scales — one governor limit at a time",
-  "brief_path": "specialized/specialized-salesforce-architect.md",
-  "color": "#9b7ede",
-  "skin": "#8d5524",
-  "hair": "#4a3222",
-  "desk": {
-   "x": -31.3,
    "y": 0,
    "z": 13.6
   }
@@ -1923,46 +1251,14 @@
   "id": "specialized-workflow-architect",
   "name": "Workflow Architect",
   "division": "specialized",
-  "desc": "Workflow design specialist who maps complete workflow trees for every system, user journey, and agent interaction — covering happy paths, all branch conditions, failure modes, recovery paths, handoff contracts, and observable states to produce build-ready specs that agents can implement against and ",
-  "vibe": "Every path the system can take — mapped, named, and specified before a single line is written.",
+  "desc": "Workflow design specialist who maps complete workflow trees for every system, user journey, and agent interaction \u2014 covering happy paths, all branch conditions, failure modes, recovery paths, handoff contracts, and observable states to produce build-ready specs that agents can implement against and ",
+  "vibe": "Every path the system can take \u2014 mapped, named, and specified before a single line is written.",
   "brief_path": "specialized/specialized-workflow-architect.md",
   "color": "#9b7ede",
   "skin": "#e0ac69",
   "hair": "#232323",
   "desk": {
    "x": -26.5,
-   "y": 0,
-   "z": 13.6
-  }
- },
- {
-  "id": "study-abroad-advisor",
-  "name": "Study Abroad Advisor",
-  "division": "specialized",
-  "desc": "Full-spectrum study abroad planning expert covering the US, UK, Canada, Australia, Europe, Hong Kong, and Singapore — proficient in undergraduate, master's, and PhD application strategy, school selection, essay coaching, profile enhancement, standardized test planning, visa preparation, and overseas",
-  "vibe": "Guides Chinese students through the entire study abroad journey — from school selection and essays to visas — with data-driven advice and zero anxiety",
-  "brief_path": "specialized/study-abroad-advisor.md",
-  "color": "#9b7ede",
-  "skin": "#f1c27d",
-  "hair": "#6d4c41",
-  "desk": {
-   "x": -24.1,
-   "y": 0,
-   "z": 13.6
-  }
- },
- {
-  "id": "supply-chain-strategist",
-  "name": "Supply Chain Strategist",
-  "division": "specialized",
-  "desc": "Expert supply chain management and procurement strategy specialist — skilled in supplier development, strategic sourcing, quality control, and supply chain digitalization. Grounded in China's manufacturing ecosystem, helps companies build efficient, resilient, and sustainable supply chains.",
-  "vibe": "Builds your procurement engine and supply chain resilience across China's manufacturing ecosystem, from supplier sourcing to risk management.",
-  "brief_path": "specialized/supply-chain-strategist.md",
-  "color": "#9b7ede",
-  "skin": "#8d5524",
-  "hair": "#7a4a21",
-  "desk": {
-   "x": -21.7,
    "y": 0,
    "z": 13.6
   }
@@ -1987,8 +1283,8 @@
   "id": "marketing-aeo-foundations",
   "name": "AEO Foundations Architect",
   "division": "marketing",
-  "desc": "Expert in AI Engine Optimization infrastructure — implements llms.txt, AI-aware robots.txt, token-budgeted content, structured Markdown availability, and agent discovery files so AI crawlers, citation engines, and browsing agents can find, parse, and act on your site",
-  "vibe": "The foundation layer everyone skips — making sure AI systems can actually discover, read, and use your content before you worry about rankings, citati",
+  "desc": "Expert in AI Engine Optimization infrastructure \u2014 implements llms.txt, AI-aware robots.txt, token-budgeted content, structured Markdown availability, and agent discovery files so AI crawlers, citation engines, and browsing agents can find, parse, and act on your site",
+  "vibe": "The foundation layer everyone skips \u2014 making sure AI systems can actually discover, read, and use your content before you worry about rankings, citati",
   "brief_path": "marketing/marketing-aeo-foundations.md",
   "color": "#f76fa0",
   "skin": "#8d5524",
@@ -2003,7 +1299,7 @@
   "id": "marketing-agentic-search-optimizer",
   "name": "Agentic Search Optimizer",
   "division": "marketing",
-  "desc": "Expert in WebMCP readiness and agentic task completion — audits whether AI agents can actually accomplish tasks on your site (book, buy, register, subscribe), implements WebMCP declarative and imperative patterns, and measures task completion rates across AI browsing agents",
+  "desc": "Expert in WebMCP readiness and agentic task completion \u2014 audits whether AI agents can actually accomplish tasks on your site (book, buy, register, subscribe), implements WebMCP declarative and imperative patterns, and measures task completion rates across AI browsing agents",
   "vibe": "While everyone else is optimizing to get cited by AI, this agent makes sure AI can actually do the thing on your site",
   "brief_path": "marketing/marketing-agentic-search-optimizer.md",
   "color": "#f76fa0",
@@ -2019,7 +1315,7 @@
   "id": "marketing-ai-citation-strategist",
   "name": "AI Citation Strategist",
   "division": "marketing",
-  "desc": "Expert in AI recommendation engine optimization (AEO/GEO) — audits brand visibility across ChatGPT, Claude, Gemini, and Perplexity, identifies why competitors get cited instead, and delivers content fixes that improve AI citations",
+  "desc": "Expert in AI recommendation engine optimization (AEO/GEO) \u2014 audits brand visibility across ChatGPT, Claude, Gemini, and Perplexity, identifies why competitors get cited instead, and delivers content fixes that improve AI citations",
   "vibe": "Figures out why the AI recommends your competitor and rewires the signals so it recommends you instead",
   "brief_path": "marketing/marketing-ai-citation-strategist.md",
   "color": "#f76fa0",
@@ -2043,38 +1339,6 @@
   "hair": "#6d4c41",
   "desk": {
    "x": 2.7,
-   "y": 0,
-   "z": 2.6
-  }
- },
- {
-  "id": "marketing-baidu-seo-specialist",
-  "name": "Baidu SEO Specialist",
-  "division": "marketing",
-  "desc": "Expert Baidu search optimization specialist focused on Chinese search engine ranking, Baidu ecosystem integration, ICP compliance, Chinese keyword research, and mobile-first indexing for the China market.",
-  "vibe": "Masters Baidu's algorithm so your brand ranks in China's search ecosystem.",
-  "brief_path": "marketing/marketing-baidu-seo-specialist.md",
-  "color": "#f76fa0",
-  "skin": "#c68642",
-  "hair": "#232323",
-  "desk": {
-   "x": 5.1,
-   "y": 0,
-   "z": 2.6
-  }
- },
- {
-  "id": "marketing-bilibili-content-strategist",
-  "name": "Bilibili Content Strategist",
-  "division": "marketing",
-  "desc": "Expert Bilibili marketing specialist focused on UP主 growth, danmaku culture mastery, B站 algorithm optimization, community building, and branded content strategy for China's leading video community platform.",
-  "vibe": "Speaks fluent danmaku and grows your brand on B站.",
-  "brief_path": "marketing/marketing-bilibili-content-strategist.md",
-  "color": "#f76fa0",
-  "skin": "#e0ac69",
-  "hair": "#4a3222",
-  "desk": {
-   "x": 7.5,
    "y": 0,
    "z": 2.6
   }
@@ -2109,38 +1373,6 @@
    "x": 12.3,
    "y": 0,
    "z": 2.6
-  }
- },
- {
-  "id": "marketing-china-ecommerce-operator",
-  "name": "China E-Commerce Operator",
-  "division": "marketing",
-  "desc": "Expert China e-commerce operations specialist covering Taobao, Tmall, Pinduoduo, and JD ecosystems with deep expertise in product listing optimization, live commerce, store operations, 618/Double 11 campaigns, and cross-platform strategy.",
-  "vibe": "Runs your Taobao, Tmall, Pinduoduo, and JD storefronts like a native operator.",
-  "brief_path": "marketing/marketing-china-ecommerce-operator.md",
-  "color": "#f76fa0",
-  "skin": "#8d5524",
-  "hair": "#4a3222",
-  "desk": {
-   "x": -4.5,
-   "y": 0,
-   "z": 4.8
-  }
- },
- {
-  "id": "marketing-china-market-localization-strategist",
-  "name": "China Market Localization Strategist",
-  "division": "marketing",
-  "desc": "Full-stack China market localization expert who transforms real-time trend signals into executable go-to-market strategies across Douyin, Xiaohongshu, WeChat, Bilibili, and beyond",
-  "vibe": "Turns China's chaotic trend landscape into a precision-guided marketing machine — data in, revenue out.",
-  "brief_path": "marketing/marketing-china-market-localization-strategist.md",
-  "color": "#f76fa0",
-  "skin": "#c68642",
-  "hair": "#9e9e9e",
-  "desk": {
-   "x": -2.1,
-   "y": 0,
-   "z": 4.8
   }
  },
  {
@@ -2179,30 +1411,14 @@
   "id": "marketing-developer-community-builder",
   "name": "Developer Community Builder",
   "division": "marketing",
-  "desc": "Grows and sustains developer communities — Discord servers, GitHub discussions, forums, and contributor programs — turning users into advocates and advocates into contributors.",
-  "vibe": "I build the room where developers want to stay — then I make sure they have a reason to bring others.",
+  "desc": "Grows and sustains developer communities \u2014 Discord servers, GitHub discussions, forums, and contributor programs \u2014 turning users into advocates and advocates into contributors.",
+  "vibe": "I build the room where developers want to stay \u2014 then I make sure they have a reason to bring others.",
   "brief_path": "marketing/marketing-developer-community-builder.md",
   "color": "#f76fa0",
   "skin": "#f1c27d",
   "hair": "#232323",
   "desk": {
    "x": 5.1,
-   "y": 0,
-   "z": 4.8
-  }
- },
- {
-  "id": "marketing-douyin-strategist",
-  "name": "Douyin Strategist",
-  "division": "marketing",
-  "desc": "Short-video marketing expert specializing in the Douyin platform, with deep expertise in recommendation algorithm mechanics, viral video planning, livestream commerce workflows, and full-funnel brand growth through content matrix strategies.",
-  "vibe": "Masters the Douyin algorithm so your short videos actually get seen.",
-  "brief_path": "marketing/marketing-douyin-strategist.md",
-  "color": "#f76fa0",
-  "skin": "#ffdbac",
-  "hair": "#232323",
-  "desk": {
-   "x": 7.5,
    "y": 0,
    "z": 4.8
   }
@@ -2244,7 +1460,7 @@
   "name": "Growth Hacker",
   "division": "marketing",
   "desc": "Expert growth strategist specializing in rapid user acquisition through data-driven experimentation. Develops viral loops, optimizes conversion funnels, and finds scalable growth channels for exponential business growth.",
-  "vibe": "Finds the growth channel nobody's exploited yet — then scales it.",
+  "vibe": "Finds the growth channel nobody's exploited yet \u2014 then scales it.",
   "brief_path": "marketing/marketing-growth-hacker.md",
   "color": "#f76fa0",
   "skin": "#8d5524",
@@ -2267,22 +1483,6 @@
   "hair": "#9e9e9e",
   "desk": {
    "x": -2.1,
-   "y": 0,
-   "z": 7.0
-  }
- },
- {
-  "id": "marketing-kuaishou-strategist",
-  "name": "Kuaishou Strategist",
-  "division": "marketing",
-  "desc": "Expert Kuaishou marketing strategist specializing in short-video content for China's lower-tier city markets, live commerce operations, community trust building, and grassroots audience growth on 快手.",
-  "vibe": "Grows grassroots audiences and drives live commerce on 快手.",
-  "brief_path": "marketing/marketing-kuaishou-strategist.md",
-  "color": "#f76fa0",
-  "skin": "#f1c27d",
-  "hair": "#4a3222",
-  "desk": {
-   "x": 0.3,
    "y": 0,
    "z": 7.0
   }
@@ -2320,43 +1520,11 @@
   }
  },
  {
-  "id": "marketing-multi-platform-publisher",
-  "name": "Multi-Platform Publisher",
-  "division": "marketing",
-  "desc": "Expert orchestrator for one-click Chinese blog publishing. Routes a single article to 知乎 / 小红书 / CSDN / B站 / 公众号 / 掘金 via Wechatsync (main channel) with xhs-mcp and biliup as specialized fallbacks. Handles per-platform content adaptation, draft-first publishing, rate control, and risk-avoidance. Doe",
-  "vibe": "One article, all platforms, safely — the traffic conductor for Chinese content creators.",
-  "brief_path": "marketing/marketing-multi-platform-publisher.md",
-  "color": "#f76fa0",
-  "skin": "#8d5524",
-  "hair": "#7a4a21",
-  "desk": {
-   "x": 7.5,
-   "y": 0,
-   "z": 7.0
-  }
- },
- {
-  "id": "marketing-podcast-strategist",
-  "name": "Podcast Strategist",
-  "division": "marketing",
-  "desc": "Content strategy and operations expert for the Chinese podcast market, with deep expertise in Xiaoyuzhou, Ximalaya, and other major audio platforms, covering show positioning, audio production, audience growth, multi-platform distribution, and monetization to help podcast creators build sticky audio",
-  "vibe": "Guides your podcast from concept to loyal audience in China's booming audio scene.",
-  "brief_path": "marketing/marketing-podcast-strategist.md",
-  "color": "#f76fa0",
-  "skin": "#8d5524",
-  "hair": "#6d4c41",
-  "desk": {
-   "x": 9.9,
-   "y": 0,
-   "z": 7.0
-  }
- },
- {
   "id": "marketing-pr-communications-manager",
   "name": "PR & Communications Manager",
   "division": "marketing",
-  "desc": "Strategic public relations and communications specialist for media relations, press releases, crisis communications, executive thought leadership, brand reputation management, and integrated communications planning — building and protecting reputations through earned media, storytelling, and proacti",
-  "vibe": "Reputation is built in years and lost in minutes. Every message, every statement, every interview is either protecting or eroding the brand — there is",
+  "desc": "Strategic public relations and communications specialist for media relations, press releases, crisis communications, executive thought leadership, brand reputation management, and integrated communications planning \u2014 building and protecting reputations through earned media, storytelling, and proacti",
+  "vibe": "Reputation is built in years and lost in minutes. Every message, every statement, every interview is either protecting or eroding the brand \u2014 there is",
   "brief_path": "marketing/marketing-pr-communications-manager.md",
   "color": "#f76fa0",
   "skin": "#ffdbac",
@@ -2365,22 +1533,6 @@
    "x": 12.3,
    "y": 0,
    "z": 7.0
-  }
- },
- {
-  "id": "marketing-private-domain-operator",
-  "name": "Private Domain Operator",
-  "division": "marketing",
-  "desc": "Expert in building enterprise WeChat (WeCom) private domain ecosystems, with deep expertise in SCRM systems, segmented community operations, Mini Program commerce integration, user lifecycle management, and full-funnel conversion optimization.",
-  "vibe": "Builds your WeChat private traffic empire from first contact to lifetime value.",
-  "brief_path": "marketing/marketing-private-domain-operator.md",
-  "color": "#f76fa0",
-  "skin": "#8d5524",
-  "hair": "#4a3222",
-  "desk": {
-   "x": -4.5,
-   "y": 0,
-   "z": 9.2
   }
  },
  {
@@ -2496,38 +1648,6 @@
   }
  },
  {
-  "id": "marketing-wechat-official-account",
-  "name": "WeChat Official Account Manager",
-  "division": "marketing",
-  "desc": "Expert WeChat Official Account (OA) strategist specializing in content marketing, subscriber engagement, and conversion optimization. Masters multi-format content and builds loyal communities through consistent value delivery.",
-  "vibe": "Grows loyal WeChat subscriber communities through consistent value delivery.",
-  "brief_path": "marketing/marketing-wechat-official-account.md",
-  "color": "#f76fa0",
-  "skin": "#ffdbac",
-  "hair": "#4a3222",
-  "desk": {
-   "x": -4.5,
-   "y": 0,
-   "z": 11.4
-  }
- },
- {
-  "id": "marketing-weibo-strategist",
-  "name": "Weibo Strategist",
-  "division": "marketing",
-  "desc": "Full-spectrum operations expert for Sina Weibo, with deep expertise in trending topic mechanics, Super Topic community management, public sentiment monitoring, fan economy strategies, and Weibo advertising, helping brands achieve viral reach and sustained growth on China's leading public discourse p",
-  "vibe": "Makes your brand trend on Weibo and keeps the conversation going.",
-  "brief_path": "marketing/marketing-weibo-strategist.md",
-  "color": "#f76fa0",
-  "skin": "#f1c27d",
-  "hair": "#e8e8e8",
-  "desk": {
-   "x": -2.1,
-   "y": 0,
-   "z": 11.4
-  }
- },
- {
   "id": "marketing-x-twitter-intelligence-analyst",
   "name": "X/Twitter Intelligence Analyst",
   "division": "marketing",
@@ -2539,38 +1659,6 @@
   "hair": "#4a3222",
   "desk": {
    "x": 0.3,
-   "y": 0,
-   "z": 11.4
-  }
- },
- {
-  "id": "marketing-xiaohongshu-specialist",
-  "name": "Xiaohongshu Specialist",
-  "division": "marketing",
-  "desc": "Expert Xiaohongshu marketing specialist focused on lifestyle content, trend-driven strategies, and authentic community engagement. Masters micro-content creation and drives viral growth through aesthetic storytelling.",
-  "vibe": "Masters lifestyle content and aesthetic storytelling on 小红书.",
-  "brief_path": "marketing/marketing-xiaohongshu-specialist.md",
-  "color": "#f76fa0",
-  "skin": "#f1c27d",
-  "hair": "#e8e8e8",
-  "desk": {
-   "x": 2.7,
-   "y": 0,
-   "z": 11.4
-  }
- },
- {
-  "id": "marketing-zhihu-strategist",
-  "name": "Zhihu Strategist",
-  "division": "marketing",
-  "desc": "Expert Zhihu marketing specialist focused on thought leadership, community credibility, and knowledge-driven engagement. Masters question-answering strategy and builds brand authority through authentic expertise sharing.",
-  "vibe": "Builds brand authority through expert knowledge-sharing on 知乎.",
-  "brief_path": "marketing/marketing-zhihu-strategist.md",
-  "color": "#f76fa0",
-  "skin": "#f1c27d",
-  "hair": "#6d4c41",
-  "desk": {
-   "x": 5.1,
    "y": 0,
    "z": 11.4
   }
@@ -2627,7 +1715,7 @@
   "id": "design-persona-walkthrough",
   "name": "Persona Walkthrough Specialist",
   "division": "design",
-  "desc": "Simulate cognitive walkthroughs of web pages from a defined persona's psychological perspective — captures emotional reactions and rational thought at each scroll position, then delivers structured CRO reports grounded in LIFT, Cialdini, and Fogg frameworks",
+  "desc": "Simulate cognitive walkthroughs of web pages from a defined persona's psychological perspective \u2014 captures emotional reactions and rational thought at each scroll position, then delivers structured CRO reports grounded in LIFT, Cialdini, and Fogg frameworks",
   "vibe": "I become your user so you can see what your analytics can't show you.",
   "brief_path": "design/design-persona-walkthrough.md",
   "color": "#ffb74d",
@@ -2736,362 +1824,10 @@
   }
  },
  {
-  "id": "gis-3d-scene-developer",
-  "name": "3D & Scene Developer",
-  "division": "gis",
-  "desc": "Web 3D visualization specialist who creates immersive 3D scenes, terrain models, point cloud visualizations, and interactive web experiences using Cesium, ArcGIS Scene Viewer, and modern 3D web frameworks.",
-  "vibe": "Bringing the third dimension to the web — one scene at a time.",
-  "brief_path": "gis/gis-3d-scene-developer.md",
-  "color": "#34b37a",
-  "skin": "#c68642",
-  "hair": "#9e9e9e",
-  "desk": {
-   "x": 44.3,
-   "y": 0,
-   "z": 2.6
-  }
- },
- {
-  "id": "gis-analyst",
-  "name": "GIS Analyst",
-  "division": "gis",
-  "desc": "Day-to-day GIS operator who creates maps, manages layers, performs spatial queries, and maintains geospatial data integrity across desktop and web environments.",
-  "vibe": "The reliable hands-on operator who keeps the GIS running day to day.",
-  "brief_path": "gis/gis-analyst.md",
-  "color": "#34b37a",
-  "skin": "#e0ac69",
-  "hair": "#6d4c41",
-  "desk": {
-   "x": 46.7,
-   "y": 0,
-   "z": 2.6
-  }
- },
- {
-  "id": "gis-bim-specialist",
-  "name": "BIM/GIS Specialist",
-  "division": "gis",
-  "desc": "Integration specialist who bridges Building Information Modeling and Geographic Information Systems — Revit/IFC data conversion, indoor mapping, digital twin architecture, and facility management data models.",
-  "vibe": "Where buildings meet geography — the spatial side of the built world.",
-  "brief_path": "gis/gis-bim-specialist.md",
-  "color": "#34b37a",
-  "skin": "#c68642",
-  "hair": "#9e9e9e",
-  "desk": {
-   "x": 49.1,
-   "y": 0,
-   "z": 2.6
-  }
- },
- {
-  "id": "gis-cartography-designer",
-  "name": "Cartography Designer",
-  "division": "gis",
-  "desc": "Map aesthetics specialist who designs beautiful, readable, and effective maps — color theory, typography, label placement, basemap selection, and visual hierarchy for both print and web.",
-  "vibe": "A map that communicates beautifully is a map that gets used.",
-  "brief_path": "gis/gis-cartography-designer.md",
-  "color": "#34b37a",
-  "skin": "#c68642",
-  "hair": "#232323",
-  "desk": {
-   "x": 51.5,
-   "y": 0,
-   "z": 2.6
-  }
- },
- {
-  "id": "gis-drone-reality-mapping",
-  "name": "Drone/Reality Mapping Specialist",
-  "division": "gis",
-  "desc": "Photogrammetry and reality capture expert who processes drone imagery into orthomosaics, digital terrain models, point clouds, and 3D meshes — bridging field capture and GIS-ready products.",
-  "vibe": "From raw drone footage to production-ready GIS data — seamless.",
-  "brief_path": "gis/gis-drone-reality-mapping.md",
-  "color": "#34b37a",
-  "skin": "#f1c27d",
-  "hair": "#9e9e9e",
-  "desk": {
-   "x": 53.9,
-   "y": 0,
-   "z": 2.6
-  }
- },
- {
-  "id": "gis-geoai-ml-engineer",
-  "name": "GeoAI/ML Engineer",
-  "division": "gis",
-  "desc": "Geospatial machine learning specialist who builds models for feature extraction, object detection, image segmentation, and land cover classification from satellite and aerial imagery.",
-  "vibe": "Teaching machines to see the Earth — one pixel at a time.",
-  "brief_path": "gis/gis-geoai-ml-engineer.md",
-  "color": "#34b37a",
-  "skin": "#ffdbac",
-  "hair": "#e8e8e8",
-  "desk": {
-   "x": 44.3,
-   "y": 0,
-   "z": 4.8
-  }
- },
- {
-  "id": "gis-geoprocessing-specialist",
-  "name": "Geoprocessing Specialist",
-  "division": "gis",
-  "desc": "ArcPy and Python toolbox expert who automates spatial workflows — builds .pyt toolboxes, Model Builder processes, batch geoprocessing automation, and custom analysis scripts for ArcGIS Pro.",
-  "vibe": "If you've done it manually more than twice, this agent will automate it.",
-  "brief_path": "gis/gis-geoprocessing-specialist.md",
-  "color": "#34b37a",
-  "skin": "#f1c27d",
-  "hair": "#232323",
-  "desk": {
-   "x": 46.7,
-   "y": 0,
-   "z": 4.8
-  }
- },
- {
-  "id": "gis-qa-engineer",
-  "name": "GIS QA Engineer",
-  "division": "gis",
-  "desc": "Quality assurance specialist who validates geospatial data integrity — topology checks, metadata audits, CRS consistency, accuracy assessment, and compliance verification.",
-  "vibe": "Data doesn't ship until QA says it ships.",
-  "brief_path": "gis/gis-qa-engineer.md",
-  "color": "#34b37a",
-  "skin": "#ffdbac",
-  "hair": "#4a3222",
-  "desk": {
-   "x": 49.1,
-   "y": 0,
-   "z": 4.8
-  }
- },
- {
-  "id": "gis-solution-engineer",
-  "name": "Solution Engineer",
-  "division": "gis",
-  "desc": "Hands-on GIS prototype builder who takes strategy from Technical Consultant and turns it into working demos, proof-of-concepts, and technical validations across the full Esri and open-source stack.",
-  "vibe": "The builder who makes strategy real — one working demo at a time.",
-  "brief_path": "gis/gis-solution-engineer.md",
-  "color": "#34b37a",
-  "skin": "#ffdbac",
-  "hair": "#7a4a21",
-  "desk": {
-   "x": 51.5,
-   "y": 0,
-   "z": 4.8
-  }
- },
- {
-  "id": "gis-spatial-data-engineer",
-  "name": "Spatial Data Engineer",
-  "division": "gis",
-  "desc": "ETL specialist who transforms messy geospatial data from any source into clean, standardized, production-ready datasets — format conversion, CRS reprojection, attribute normalization, and automated pipelines.",
-  "vibe": "Data comes in dirty. It leaves clean, documented, and ready to publish.",
-  "brief_path": "gis/gis-spatial-data-engineer.md",
-  "color": "#34b37a",
-  "skin": "#e0ac69",
-  "hair": "#7a4a21",
-  "desk": {
-   "x": 53.9,
-   "y": 0,
-   "z": 4.8
-  }
- },
- {
-  "id": "gis-spatial-data-scientist",
-  "name": "Spatial Data Scientist",
-  "division": "gis",
-  "desc": "Advanced spatial analytics specialist who applies statistical modeling, spatial econometrics, clustering, and predictive analytics to geospatial data — finding patterns that aren't visible on a map.",
-  "vibe": "Finding the patterns in space that even experienced analysts miss.",
-  "brief_path": "gis/gis-spatial-data-scientist.md",
-  "color": "#34b37a",
-  "skin": "#f1c27d",
-  "hair": "#4a3222",
-  "desk": {
-   "x": 44.3,
-   "y": 0,
-   "z": 7.0
-  }
- },
- {
-  "id": "gis-technical-consultant",
-  "name": "Technical Consultant",
-  "division": "gis",
-  "desc": "Strategic GIS advisor who translates business problems into geospatial solutions — gap analysis, technology roadmaps, RFP responses, and digital transformation strategy across Esri and open-source ecosystems.",
-  "vibe": "The strategist who connects business pain points with geospatial solutions that actually deliver ROI.",
-  "brief_path": "gis/gis-technical-consultant.md",
-  "color": "#34b37a",
-  "skin": "#c68642",
-  "hair": "#7a4a21",
-  "desk": {
-   "x": 46.7,
-   "y": 0,
-   "z": 7.0
-  }
- },
- {
-  "id": "gis-web-gis-developer",
-  "name": "Web GIS Developer",
-  "division": "gis",
-  "desc": "Full-stack web GIS engineer who builds interactive mapping applications — MapLibre GL JS, ArcGIS JS API, Leaflet, real-time dashboards, REST API integration, and geospatial web services.",
-  "vibe": "Maps on the web that actually work — fast, responsive, and beautiful.",
-  "brief_path": "gis/gis-web-gis-developer.md",
-  "color": "#34b37a",
-  "skin": "#e0ac69",
-  "hair": "#9e9e9e",
-  "desk": {
-   "x": 49.1,
-   "y": 0,
-   "z": 7.0
-  }
- },
- {
-  "id": "sales-account-strategist",
-  "name": "Account Strategist",
-  "division": "sales",
-  "desc": "Expert post-sale account strategist specializing in land-and-expand execution, stakeholder mapping, QBR facilitation, and net revenue retention. Turns closed deals into long-term platform relationships through systematic expansion planning and multi-threaded account development.",
-  "vibe": "Maps the org, finds the whitespace, and turns customers into platforms.",
-  "brief_path": "sales/sales-account-strategist.md",
-  "color": "#4dd0e1",
-  "skin": "#ffdbac",
-  "hair": "#6d4c41",
-  "desk": {
-   "x": -72.5,
-   "y": 0,
-   "z": 28.0
-  }
- },
- {
-  "id": "sales-coach",
-  "name": "Sales Coach",
-  "division": "sales",
-  "desc": "Expert sales coaching specialist focused on rep development, pipeline review facilitation, call coaching, deal strategy, and forecast accuracy. Makes every rep and every deal better through structured coaching methodology and behavioral feedback.",
-  "vibe": "Asks the question that makes the rep rethink the entire deal.",
-  "brief_path": "sales/sales-coach.md",
-  "color": "#4dd0e1",
-  "skin": "#c68642",
-  "hair": "#e8e8e8",
-  "desk": {
-   "x": -70.1,
-   "y": 0,
-   "z": 28.0
-  }
- },
- {
-  "id": "sales-deal-strategist",
-  "name": "Deal Strategist",
-  "division": "sales",
-  "desc": "Senior deal strategist specializing in MEDDPICC qualification, competitive positioning, and win planning for complex B2B sales cycles. Scores opportunities, exposes pipeline risk, and builds deal strategies that survive forecast review.",
-  "vibe": "Qualifies deals like a surgeon and kills happy ears on contact.",
-  "brief_path": "sales/sales-deal-strategist.md",
-  "color": "#4dd0e1",
-  "skin": "#ffdbac",
-  "hair": "#232323",
-  "desk": {
-   "x": -67.7,
-   "y": 0,
-   "z": 28.0
-  }
- },
- {
-  "id": "sales-discovery-coach",
-  "name": "Discovery Coach",
-  "division": "sales",
-  "desc": "Coaches sales teams on elite discovery methodology — question design, current-state mapping, gap quantification, and call structure that surfaces real buying motivation.",
-  "vibe": "Asks one more question than everyone else — and that's the one that closes the deal.",
-  "brief_path": "sales/sales-discovery-coach.md",
-  "color": "#4dd0e1",
-  "skin": "#ffdbac",
-  "hair": "#7a4a21",
-  "desk": {
-   "x": -65.3,
-   "y": 0,
-   "z": 28.0
-  }
- },
- {
-  "id": "sales-engineer",
-  "name": "Sales Engineer",
-  "division": "sales",
-  "desc": "Senior pre-sales engineer specializing in technical discovery, demo engineering, POC scoping, competitive battlecards, and bridging product capabilities to business outcomes. Wins the technical decision so the deal can close.",
-  "vibe": "Wins the technical decision before the deal even hits procurement.",
-  "brief_path": "sales/sales-engineer.md",
-  "color": "#4dd0e1",
-  "skin": "#f1c27d",
-  "hair": "#4a3222",
-  "desk": {
-   "x": -72.5,
-   "y": 0,
-   "z": 30.2
-  }
- },
- {
-  "id": "sales-offer-lead-gen-strategist",
-  "name": "Offer & Lead Gen Strategist",
-  "division": "sales",
-  "desc": "Top-of-funnel architect who designs irresistible offers and lead magnets that attract qualified buyers at scale. Specializes in value-equation offer construction, lead magnet typology, multi-channel lead generation, and compounding reach through customers, employees, agencies, and affiliates.",
-  "vibe": "Builds the thing buyers can't ignore — then multiplies the channels that deliver it.",
-  "brief_path": "sales/sales-offer-lead-gen-strategist.md",
-  "color": "#4dd0e1",
-  "skin": "#c68642",
-  "hair": "#232323",
-  "desk": {
-   "x": -70.1,
-   "y": 0,
-   "z": 30.2
-  }
- },
- {
-  "id": "sales-outbound-strategist",
-  "name": "Outbound Strategist",
-  "division": "sales",
-  "desc": "Signal-based outbound specialist who designs multi-channel prospecting sequences, defines ICPs, and builds pipeline through research-driven personalization — not volume.",
-  "vibe": "Turns buying signals into booked meetings before the competition even notices.",
-  "brief_path": "sales/sales-outbound-strategist.md",
-  "color": "#4dd0e1",
-  "skin": "#f1c27d",
-  "hair": "#6d4c41",
-  "desk": {
-   "x": -67.7,
-   "y": 0,
-   "z": 30.2
-  }
- },
- {
-  "id": "sales-pipeline-analyst",
-  "name": "Pipeline Analyst",
-  "division": "sales",
-  "desc": "Revenue operations analyst specializing in pipeline health diagnostics, deal velocity analysis, forecast accuracy, and data-driven sales coaching. Turns CRM data into actionable pipeline intelligence that surfaces risks before they become missed quarters.",
-  "vibe": "Tells you your forecast is wrong before you realize it yourself.",
-  "brief_path": "sales/sales-pipeline-analyst.md",
-  "color": "#4dd0e1",
-  "skin": "#ffdbac",
-  "hair": "#4a3222",
-  "desk": {
-   "x": -65.3,
-   "y": 0,
-   "z": 30.2
-  }
- },
- {
-  "id": "sales-proposal-strategist",
-  "name": "Proposal Strategist",
-  "division": "sales",
-  "desc": "Strategic proposal architect who transforms RFPs and sales opportunities into compelling win narratives. Specializes in win theme development, competitive positioning, executive summary craft, and building proposals that persuade rather than merely comply.",
-  "vibe": "Turns RFP responses into stories buyers can't put down.",
-  "brief_path": "sales/sales-proposal-strategist.md",
-  "color": "#4dd0e1",
-  "skin": "#c68642",
-  "hair": "#7a4a21",
-  "desk": {
-   "x": -72.5,
-   "y": 0,
-   "z": 32.4
-  }
- },
- {
   "id": "security-ai-generated-code-auditor",
   "name": "AI-Generated Code Security Auditor",
   "division": "security",
-  "desc": "Security reviewer for AI-generated and vibe-coded apps — hunts the hardcoded secrets, broken row-level security, and prompt-injection sinks that coding assistants ship by default, then drives a scan, fix, and rescan loop with honest, CWE-mapped findings.",
+  "desc": "Security reviewer for AI-generated and vibe-coded apps \u2014 hunts the hardcoded secrets, broken row-level security, and prompt-injection sinks that coding assistants ship by default, then drives a scan, fix, and rescan loop with honest, CWE-mapped findings.",
   "vibe": "Assumes the assistant optimized for the demo, not production, and finds exactly where it cut the corner.",
   "brief_path": "security/security-ai-generated-code-auditor.md",
   "color": "#ef5350",
@@ -3124,29 +1860,13 @@
   "name": "Security Architect",
   "division": "security",
   "desc": "Expert security architect specializing in threat modeling, secure-by-design architecture, trust-boundary analysis, defense-in-depth, and risk-based security reviews across web, API, cloud-native, and distributed systems. Designs the security model; hands code-level SAST/DAST and SDLC work to the App",
-  "vibe": "Designs the security architecture and threat models that hold under adversarial pressure — the blueprint, not the bug-fix.",
+  "vibe": "Designs the security architecture and threat models that hold under adversarial pressure \u2014 the blueprint, not the bug-fix.",
   "brief_path": "security/security-architect.md",
   "color": "#ef5350",
   "skin": "#c68642",
   "hair": "#e8e8e8",
   "desk": {
    "x": -48.1,
-   "y": 0,
-   "z": 28.0
-  }
- },
- {
-  "id": "security-blockchain-security-auditor",
-  "name": "Blockchain Security Auditor",
-  "division": "security",
-  "desc": "Expert smart contract security auditor specializing in vulnerability detection, formal verification, exploit analysis, and comprehensive audit report writing for DeFi protocols and blockchain applications.",
-  "vibe": "Finds the exploit in your smart contract before the attacker does.",
-  "brief_path": "security/security-blockchain-security-auditor.md",
-  "color": "#ef5350",
-  "skin": "#8d5524",
-  "hair": "#7a4a21",
-  "desk": {
-   "x": -45.7,
    "y": 0,
    "z": 28.0
   }
@@ -3165,22 +1885,6 @@
    "x": -43.3,
    "y": 0,
    "z": 28.0
-  }
- },
- {
-  "id": "security-compliance-auditor",
-  "name": "Compliance Auditor",
-  "division": "security",
-  "desc": "Expert technical compliance auditor specializing in SOC 2, ISO 27001, HIPAA, and PCI-DSS audits — from readiness assessment through evidence collection to certification.",
-  "vibe": "Walks you from readiness assessment through evidence collection to SOC 2 certification.",
-  "brief_path": "security/security-compliance-auditor.md",
-  "color": "#ef5350",
-  "skin": "#8d5524",
-  "hair": "#7a4a21",
-  "desk": {
-   "x": -52.9,
-   "y": 0,
-   "z": 30.2
   }
  },
  {
@@ -3219,7 +1923,7 @@
   "id": "security-secrets-credential-engineer",
   "name": "Secrets & Credential Hygiene Engineer",
   "division": "security",
-  "desc": "Owns the full lifecycle of secrets and credentials — detection, prevention, vaulting, rotation, and leak response — so an application runs on short-lived, least-privilege credentials that are never in the code and are already rotated by the time a leak is found.",
+  "desc": "Owns the full lifecycle of secrets and credentials \u2014 detection, prevention, vaulting, rotation, and leak response \u2014 so an application runs on short-lived, least-privilege credentials that are never in the code and are already rotated by the time a leak is found.",
   "vibe": "Treats every committed secret as already compromised, and every long-lived key as a leak that has not happened yet.",
   "brief_path": "security/security-secrets-credential-engineer.md",
   "color": "#ef5350",
@@ -3235,8 +1939,8 @@
   "id": "security-senior-secops",
   "name": "Senior SecOps Engineer",
   "division": "security",
-  "desc": "Defensive application security specialist who scans every code submission for secrets and sensitive data exposure before anything else, then implements or audits security controls following the organization's security standard — covering authentication, authorization, tokens, cookies, HTTP headers, ",
-  "vibe": "Before I read your request, I've already scanned your code for secrets. Security isn't a phase — it's line zero.",
+  "desc": "Defensive application security specialist who scans every code submission for secrets and sensitive data exposure before anything else, then implements or audits security controls following the organization's security standard \u2014 covering authentication, authorization, tokens, cookies, HTTP headers, ",
+  "vibe": "Before I read your request, I've already scanned your code for secrets. Security isn't a phase \u2014 it's line zero.",
   "brief_path": "security/security-senior-secops.md",
   "color": "#ef5350",
   "skin": "#8d5524",
@@ -3283,7 +1987,7 @@
   "id": "testing-accessibility-auditor",
   "name": "Accessibility Auditor",
   "division": "testing",
-  "desc": "Expert accessibility specialist who audits interfaces against WCAG standards, tests with assistive technologies, and ensures inclusive design. Defaults to finding barriers — if it's not tested with a screen reader, it's not accessible.",
+  "desc": "Expert accessibility specialist who audits interfaces against WCAG standards, tests with assistive technologies, and ensures inclusive design. Defaults to finding barriers \u2014 if it's not tested with a screen reader, it's not accessible.",
   "vibe": "If it's not tested with a screen reader, it's not accessible.",
   "brief_path": "testing/testing-accessibility-auditor.md",
   "color": "#aed581",
@@ -3348,7 +2052,7 @@
   "name": "Reality Checker",
   "division": "testing",
   "desc": "Stops fantasy approvals, evidence-based certification - Default to \"NEEDS WORK\", requires overwhelming proof for production readiness",
-  "vibe": "Defaults to \"NEEDS WORK\" — requires overwhelming proof for production readiness.",
+  "vibe": "Defaults to \"NEEDS WORK\" \u2014 requires overwhelming proof for production readiness.",
   "brief_path": "testing/testing-reality-checker.md",
   "color": "#aed581",
   "skin": "#e0ac69",
@@ -3363,8 +2067,8 @@
   "id": "testing-test-automation-engineer",
   "name": "Test Automation Engineer",
   "division": "testing",
-  "desc": "Expert end-to-end test automation engineer for Playwright and Cypress — resilient selectors, flake elimination, isolated test data, CI parallelization, and trace-driven failure debugging.",
-  "vibe": "A flaky test is a bug with your name on it. Deterministic, isolated, fast — you don't get to pick two.",
+  "desc": "Expert end-to-end test automation engineer for Playwright and Cypress \u2014 resilient selectors, flake elimination, isolated test data, CI parallelization, and trace-driven failure debugging.",
+  "vibe": "A flaky test is a bug with your name on it. Deterministic, isolated, fast \u2014 you don't get to pick two.",
   "brief_path": "testing/testing-test-automation-engineer.md",
   "color": "#aed581",
   "skin": "#e0ac69",
@@ -3380,7 +2084,7 @@
   "name": "Test Results Analyzer",
   "division": "testing",
   "desc": "Expert test analysis specialist focused on comprehensive test result evaluation, quality metrics analysis, and actionable insight generation from testing activities",
-  "vibe": "Reads test results like a detective reads evidence — nothing gets past.",
+  "vibe": "Reads test results like a detective reads evidence \u2014 nothing gets past.",
   "brief_path": "testing/testing-test-results-analyzer.md",
   "color": "#aed581",
   "skin": "#c68642",
@@ -3424,75 +2128,11 @@
   }
  },
  {
-  "id": "academic-anthropologist",
-  "name": "Anthropologist",
-  "division": "academic",
-  "desc": "Expert in cultural systems, rituals, kinship, belief systems, and ethnographic method — builds culturally coherent societies that feel lived-in rather than invented",
-  "vibe": "No culture is random — every practice is a solution to a problem you might not see yet",
-  "brief_path": "academic/academic-anthropologist.md",
-  "color": "#fff176",
-  "skin": "#e0ac69",
-  "hair": "#6d4c41",
-  "desk": {
-   "x": -11.3,
-   "y": 0,
-   "z": 28.0
-  }
- },
- {
-  "id": "academic-geographer",
-  "name": "Geographer",
-  "division": "academic",
-  "desc": "Expert in physical and human geography, climate systems, cartography, and spatial analysis — builds geographically coherent worlds where terrain, climate, resources, and settlement patterns make scientific sense",
-  "vibe": "Geography is destiny — where you are determines who you become",
-  "brief_path": "academic/academic-geographer.md",
-  "color": "#fff176",
-  "skin": "#f1c27d",
-  "hair": "#7a4a21",
-  "desk": {
-   "x": -8.9,
-   "y": 0,
-   "z": 28.0
-  }
- },
- {
-  "id": "academic-historian",
-  "name": "Historian",
-  "division": "academic",
-  "desc": "Expert in historical analysis, periodization, material culture, and historiography — validates historical coherence and enriches settings with authentic period detail grounded in primary and secondary sources",
-  "vibe": "History doesn't repeat, but it rhymes — and I know all the verses",
-  "brief_path": "academic/academic-historian.md",
-  "color": "#fff176",
-  "skin": "#ffdbac",
-  "hair": "#9e9e9e",
-  "desk": {
-   "x": -6.5,
-   "y": 0,
-   "z": 28.0
-  }
- },
- {
-  "id": "academic-narratologist",
-  "name": "Narratologist",
-  "division": "academic",
-  "desc": "Expert in narrative theory, story structure, character arcs, and literary analysis — grounds advice in established frameworks from Propp to Campbell to modern narratology",
-  "vibe": "Every story is an argument — I help you find what yours is really saying",
-  "brief_path": "academic/academic-narratologist.md",
-  "color": "#fff176",
-  "skin": "#ffdbac",
-  "hair": "#6d4c41",
-  "desk": {
-   "x": -11.3,
-   "y": 0,
-   "z": 30.2
-  }
- },
- {
   "id": "academic-psychologist",
   "name": "Psychologist",
   "division": "academic",
-  "desc": "Expert in human behavior, personality theory, motivation, and cognitive patterns — builds psychologically credible characters and interactions grounded in clinical and research frameworks",
-  "vibe": "People don't do things for no reason — I find the reason",
+  "desc": "Expert in human behavior, personality theory, motivation, and cognitive patterns \u2014 builds psychologically credible characters and interactions grounded in clinical and research frameworks",
+  "vibe": "People don't do things for no reason \u2014 I find the reason",
   "brief_path": "academic/academic-psychologist.md",
   "color": "#fff176",
   "skin": "#e0ac69",
@@ -3507,8 +2147,8 @@
   "id": "academic-statistician",
   "name": "Statistician",
   "division": "academic",
-  "desc": "Expert in quantitative research methodology, experimental design, and statistical inference — pressure-tests claims, designs sound studies, and separates real signal from noise, chance, and bias",
-  "vibe": "The plural of anecdote is not data, and a p-value is not a proof — show me the design",
+  "desc": "Expert in quantitative research methodology, experimental design, and statistical inference \u2014 pressure-tests claims, designs sound studies, and separates real signal from noise, chance, and bias",
+  "vibe": "The plural of anecdote is not data, and a p-value is not a proof \u2014 show me the design",
   "brief_path": "academic/academic-statistician.md",
   "color": "#fff176",
   "skin": "#e0ac69",
@@ -3524,7 +2164,7 @@
   "name": "Bookkeeper & Controller",
   "division": "finance",
   "desc": "Expert bookkeeper and controller specializing in day-to-day accounting operations, financial reconciliations, month-end close processes, and internal controls. Ensures the accuracy, completeness, and timeliness of financial records while maintaining GAAP compliance and audit readiness at all times.",
-  "vibe": "Every penny accounted for, every close on time — the backbone of financial trust.",
+  "vibe": "Every penny accounted for, every close on time \u2014 the backbone of financial trust.",
   "brief_path": "finance/finance-bookkeeper-controller.md",
   "color": "#ffd54f",
   "skin": "#8d5524",
@@ -3540,7 +2180,7 @@
   "name": "Financial Analyst",
   "division": "finance",
   "desc": "Expert financial analyst specializing in financial modeling, forecasting, scenario analysis, and data-driven decision support. Transforms raw financial data into actionable business intelligence that drives strategic planning, investment decisions, and operational optimization.",
-  "vibe": "Turns spreadsheets into strategy — every number tells a story, every model drives a decision.",
+  "vibe": "Turns spreadsheets into strategy \u2014 every number tells a story, every model drives a decision.",
   "brief_path": "finance/finance-financial-analyst.md",
   "color": "#ffd54f",
   "skin": "#e0ac69",
@@ -3556,7 +2196,7 @@
   "name": "FP&A Analyst",
   "division": "finance",
   "desc": "Expert Financial Planning & Analysis (FP&A) analyst specializing in budgeting, variance analysis, financial planning, rolling forecasts, and strategic decision support. Bridges the gap between the numbers and the business narrative to drive operational performance and strategic resource allocation.",
-  "vibe": "The budget whisperer — turns plans into numbers and numbers into action.",
+  "vibe": "The budget whisperer \u2014 turns plans into numbers and numbers into action.",
   "brief_path": "finance/finance-fpa-analyst.md",
   "color": "#ffd54f",
   "skin": "#c68642",
@@ -3572,7 +2212,7 @@
   "name": "Investment Researcher",
   "division": "finance",
   "desc": "Expert investment researcher specializing in market research, due diligence, portfolio analysis, and asset valuation. Conducts rigorous fundamental and quantitative analysis to identify investment opportunities, assess risks, and support data-driven portfolio decisions across public equities, privat",
-  "vibe": "Digs deeper than the consensus — finds alpha in the footnotes and risks in the narratives.",
+  "vibe": "Digs deeper than the consensus \u2014 finds alpha in the footnotes and risks in the narratives.",
   "brief_path": "finance/finance-investment-researcher.md",
   "color": "#ffd54f",
   "skin": "#e0ac69",
@@ -3588,221 +2228,13 @@
   "name": "Tax Strategist",
   "division": "finance",
   "desc": "Expert tax strategist specializing in tax optimization, multi-jurisdictional compliance, transfer pricing, and strategic tax planning. Navigates complex tax codes to minimize liability while ensuring full regulatory compliance across local, state, federal, and international tax regimes.",
-  "vibe": "Finds every legal dollar of savings in the tax code — compliance is the floor, optimization is the mission.",
+  "vibe": "Finds every legal dollar of savings in the tax code \u2014 compliance is the floor, optimization is the mission.",
   "brief_path": "finance/finance-tax-strategist.md",
   "color": "#ffd54f",
   "skin": "#e0ac69",
   "hair": "#6d4c41",
   "desk": {
    "x": 8.3,
-   "y": 0,
-   "z": 30.2
-  }
- },
- {
-  "id": "economy-designer",
-  "name": "Economy Designer",
-  "division": "game-development",
-  "desc": "Virtual economy architect - Masters currency systems, sources and sinks, monetization modeling, inflation control, and data-driven economic balancing for live games",
-  "vibe": "Sees every game as a flow of currencies, and every player decision as a transaction.",
-  "brief_path": "game-development/economy-designer.md",
-  "color": "#ff8a65",
-  "skin": "#f1c27d",
-  "hair": "#9e9e9e",
-  "desk": {
-   "x": 23.1,
-   "y": 0,
-   "z": 28.0
-  }
- },
- {
-  "id": "game-audio-engineer",
-  "name": "Game Audio Engineer",
-  "division": "game-development",
-  "desc": "Interactive audio specialist - Masters FMOD/Wwise integration, adaptive music systems, spatial audio, and audio performance budgeting across all game engines",
-  "vibe": "Makes every gunshot, footstep, and musical cue feel alive in the game world.",
-  "brief_path": "game-development/game-audio-engineer.md",
-  "color": "#ff8a65",
-  "skin": "#f1c27d",
-  "hair": "#9e9e9e",
-  "desk": {
-   "x": 25.5,
-   "y": 0,
-   "z": 28.0
-  }
- },
- {
-  "id": "game-designer",
-  "name": "Game Designer",
-  "division": "game-development",
-  "desc": "Systems and mechanics architect - Masters GDD authorship, player psychology, economy balancing, and gameplay loop design across all engines and genres",
-  "vibe": "Thinks in loops, levers, and player motivations to architect compelling gameplay.",
-  "brief_path": "game-development/game-designer.md",
-  "color": "#ff8a65",
-  "skin": "#e0ac69",
-  "hair": "#4a3222",
-  "desk": {
-   "x": 27.9,
-   "y": 0,
-   "z": 28.0
-  }
- },
- {
-  "id": "level-designer",
-  "name": "Level Designer",
-  "division": "game-development",
-  "desc": "Spatial storytelling and flow specialist - Masters layout theory, pacing architecture, encounter design, and environmental narrative across all game engines",
-  "vibe": "Treats every level as an authored experience where space tells the story.",
-  "brief_path": "game-development/level-designer.md",
-  "color": "#ff8a65",
-  "skin": "#8d5524",
-  "hair": "#7a4a21",
-  "desk": {
-   "x": 23.1,
-   "y": 0,
-   "z": 30.2
-  }
- },
- {
-  "id": "narrative-designer",
-  "name": "Narrative Designer",
-  "division": "game-development",
-  "desc": "Story systems and dialogue architect - Masters GDD-aligned narrative design, branching dialogue, lore architecture, and environmental storytelling across all game engines",
-  "vibe": "Architects story systems where narrative and gameplay are inseparable.",
-  "brief_path": "game-development/narrative-designer.md",
-  "color": "#ff8a65",
-  "skin": "#c68642",
-  "hair": "#4a3222",
-  "desk": {
-   "x": 25.5,
-   "y": 0,
-   "z": 30.2
-  }
- },
- {
-  "id": "technical-artist",
-  "name": "Technical Artist",
-  "division": "game-development",
-  "desc": "Art-to-engine pipeline specialist - Masters shaders, VFX systems, LOD pipelines, performance budgeting, and cross-engine asset optimization",
-  "vibe": "The bridge between artistic vision and engine reality.",
-  "brief_path": "game-development/technical-artist.md",
-  "color": "#ff8a65",
-  "skin": "#e0ac69",
-  "hair": "#232323",
-  "desk": {
-   "x": 27.9,
-   "y": 0,
-   "z": 30.2
-  }
- },
- {
-  "id": "paid-media-auditor",
-  "name": "Paid Media Auditor",
-  "division": "paid-media",
-  "desc": "Comprehensive paid media auditor who systematically evaluates Google Ads, Microsoft Ads, and Meta accounts across 200+ checkpoints spanning account structure, tracking, bidding, creative, audiences, and competitive positioning. Produces actionable audit reports with prioritized recommendations and p",
-  "vibe": "Finds the waste in your ad spend before your CFO does.",
-  "brief_path": "paid-media/paid-media-auditor.md",
-  "color": "#ba68c8",
-  "skin": "#e0ac69",
-  "hair": "#9e9e9e",
-  "desk": {
-   "x": 40.3,
-   "y": 0,
-   "z": 28.0
-  }
- },
- {
-  "id": "paid-media-creative-strategist",
-  "name": "Ad Creative Strategist",
-  "division": "paid-media",
-  "desc": "Paid media creative specialist focused on ad copywriting, RSA optimization, asset group design, and creative testing frameworks across Google, Meta, Microsoft, and programmatic platforms. Bridges the gap between performance data and persuasive messaging.",
-  "vibe": "Turns ad creative from guesswork into a repeatable science.",
-  "brief_path": "paid-media/paid-media-creative-strategist.md",
-  "color": "#ba68c8",
-  "skin": "#c68642",
-  "hair": "#7a4a21",
-  "desk": {
-   "x": 42.7,
-   "y": 0,
-   "z": 28.0
-  }
- },
- {
-  "id": "paid-media-paid-social-strategist",
-  "name": "Paid Social Strategist",
-  "division": "paid-media",
-  "desc": "Cross-platform paid social advertising specialist covering Meta (Facebook/Instagram), LinkedIn, TikTok, Pinterest, X, and Snapchat. Designs full-funnel social ad programs from prospecting through retargeting with platform-specific creative and audience strategies.",
-  "vibe": "Makes every dollar on Meta, LinkedIn, and TikTok ads work harder.",
-  "brief_path": "paid-media/paid-media-paid-social-strategist.md",
-  "color": "#ba68c8",
-  "skin": "#f1c27d",
-  "hair": "#7a4a21",
-  "desk": {
-   "x": 45.1,
-   "y": 0,
-   "z": 28.0
-  }
- },
- {
-  "id": "paid-media-ppc-strategist",
-  "name": "PPC Campaign Strategist",
-  "division": "paid-media",
-  "desc": "Senior paid media strategist specializing in large-scale search, shopping, and performance max campaign architecture across Google, Microsoft, and Amazon ad platforms. Designs account structures, budget allocation frameworks, and bidding strategies that scale from $10K to $10M+ monthly spend.",
-  "vibe": "Architects PPC campaigns that scale from $10K to $10M+ monthly.",
-  "brief_path": "paid-media/paid-media-ppc-strategist.md",
-  "color": "#ba68c8",
-  "skin": "#c68642",
-  "hair": "#6d4c41",
-  "desk": {
-   "x": 47.5,
-   "y": 0,
-   "z": 28.0
-  }
- },
- {
-  "id": "paid-media-programmatic-buyer",
-  "name": "Programmatic & Display Buyer",
-  "division": "paid-media",
-  "desc": "Display advertising and programmatic media buying specialist covering managed placements, Google Display Network, DV360, trade desk platforms, partner media (newsletters, sponsored content), and ABM display strategies via platforms like Demandbase and 6Sense.",
-  "vibe": "Buys display and video inventory at scale with surgical precision.",
-  "brief_path": "paid-media/paid-media-programmatic-buyer.md",
-  "color": "#ba68c8",
-  "skin": "#ffdbac",
-  "hair": "#9e9e9e",
-  "desk": {
-   "x": 40.3,
-   "y": 0,
-   "z": 30.2
-  }
- },
- {
-  "id": "paid-media-search-query-analyst",
-  "name": "Search Query Analyst",
-  "division": "paid-media",
-  "desc": "Specialist in search term analysis, negative keyword architecture, and query-to-intent mapping. Turns raw search query data into actionable optimizations that eliminate waste and amplify high-intent traffic across paid search accounts.",
-  "vibe": "Mines search queries to find the gold your competitors are missing.",
-  "brief_path": "paid-media/paid-media-search-query-analyst.md",
-  "color": "#ba68c8",
-  "skin": "#ffdbac",
-  "hair": "#7a4a21",
-  "desk": {
-   "x": 42.7,
-   "y": 0,
-   "z": 30.2
-  }
- },
- {
-  "id": "paid-media-tracking-specialist",
-  "name": "Tracking & Measurement Specialist",
-  "division": "paid-media",
-  "desc": "Expert in conversion tracking architecture, tag management, and attribution modeling across Google Tag Manager, GA4, Google Ads, Meta CAPI, LinkedIn Insight Tag, and server-side implementations. Ensures every conversion is counted correctly and every dollar of ad spend is measurable.",
-  "vibe": "If it's not tracked correctly, it didn't happen.",
-  "brief_path": "paid-media/paid-media-tracking-specialist.md",
-  "color": "#ba68c8",
-  "skin": "#f1c27d",
-  "hair": "#232323",
-  "desk": {
-   "x": 45.1,
    "y": 0,
    "z": 30.2
   }
@@ -3827,8 +2259,8 @@
   "id": "product-dx-engineer",
   "name": "DX Engineer",
   "division": "product",
-  "desc": "Removes every unnecessary step between a developer and their first success — SDK samples, onboarding flows, error messages, and the feedback loops that make products feel like they were built by someone who's used them.",
-  "vibe": "If a developer has to guess, I've already failed — friction is a bug and I'm here to fix it.",
+  "desc": "Removes every unnecessary step between a developer and their first success \u2014 SDK samples, onboarding flows, error messages, and the feedback loops that make products feel like they were built by someone who's used them.",
+  "vibe": "If a developer has to guess, I've already failed \u2014 friction is a bug and I'm here to fix it.",
   "brief_path": "product/product-dx-engineer.md",
   "color": "#80cbc4",
   "skin": "#ffdbac",
@@ -3859,8 +2291,8 @@
   "id": "product-manager",
   "name": "Product Manager",
   "division": "product",
-  "desc": "Holistic product leader who owns the full product lifecycle — from discovery and strategy through roadmap, stakeholder alignment, go-to-market, and outcome measurement. Bridges business goals, user needs, and technical reality to ship the right thing at the right time.",
-  "vibe": "Ships the right thing, not just the next thing — outcome-obsessed, user-grounded, and diplomatically ruthless about focus.",
+  "desc": "Holistic product leader who owns the full product lifecycle \u2014 from discovery and strategy through roadmap, stakeholder alignment, go-to-market, and outcome measurement. Bridges business goals, user needs, and technical reality to ship the right thing at the right time.",
+  "vibe": "Ships the right thing, not just the next thing \u2014 outcome-obsessed, user-grounded, and diplomatically ruthless about focus.",
   "brief_path": "product/product-manager.md",
   "color": "#80cbc4",
   "skin": "#ffdbac",
@@ -3920,38 +2352,6 @@
   }
  },
  {
-  "id": "project-management-jira-workflow-steward",
-  "name": "Jira Workflow Steward",
-  "division": "project-management",
-  "desc": "Expert delivery operations specialist who enforces Jira-linked Git workflows, traceable commits, structured pull requests, and release-safe branch strategy across software teams.",
-  "vibe": "Enforces traceable commits, structured PRs, and release-safe branch strategy.",
-  "brief_path": "project-management/project-management-jira-workflow-steward.md",
-  "color": "#7986cb",
-  "skin": "#f1c27d",
-  "hair": "#9e9e9e",
-  "desk": {
-   "x": -70.1,
-   "y": 0,
-   "z": 44.6
-  }
- },
- {
-  "id": "project-management-meeting-notes-specialist",
-  "name": "Meeting Notes Specialist",
-  "division": "project-management",
-  "desc": "Extract structured decisions, action items, and open questions from meeting transcripts or rough notes into a clean 4-section summary.",
-  "vibe": "Precise extractor — finds the signal in the noise, never invents what isn't there.",
-  "brief_path": "project-management/project-management-meeting-notes-specialist.md",
-  "color": "#7986cb",
-  "skin": "#ffdbac",
-  "hair": "#4a3222",
-  "desk": {
-   "x": -67.7,
-   "y": 0,
-   "z": 44.6
-  }
- },
- {
   "id": "project-management-project-shepherd",
   "name": "Project Shepherd",
   "division": "project-management",
@@ -3968,145 +2368,17 @@
   }
  },
  {
-  "id": "project-management-studio-operations",
-  "name": "Studio Operations",
-  "division": "project-management",
-  "desc": "Expert operations manager specializing in day-to-day studio efficiency, process optimization, and resource coordination. Focused on ensuring smooth operations, maintaining productivity standards, and supporting all teams with the tools and processes needed for success.",
-  "vibe": "Keeps the studio running smoothly — processes, tools, and people in sync.",
-  "brief_path": "project-management/project-management-studio-operations.md",
-  "color": "#7986cb",
-  "skin": "#8d5524",
-  "hair": "#232323",
-  "desk": {
-   "x": -72.5,
-   "y": 0,
-   "z": 46.8
-  }
- },
- {
-  "id": "project-management-studio-producer",
-  "name": "Studio Producer",
-  "division": "project-management",
-  "desc": "Senior strategic leader specializing in high-level creative and technical project orchestration, resource allocation, and multi-project portfolio management. Focused on aligning creative vision with business objectives while managing complex cross-functional initiatives and ensuring optimal studio o",
-  "vibe": "Aligns creative vision with business objectives across complex initiatives.",
-  "brief_path": "project-management/project-management-studio-producer.md",
-  "color": "#7986cb",
-  "skin": "#ffdbac",
-  "hair": "#e8e8e8",
-  "desk": {
-   "x": -70.1,
-   "y": 0,
-   "z": 46.8
-  }
- },
- {
   "id": "project-manager-senior",
   "name": "Senior Project Manager",
   "division": "project-management",
   "desc": "Converts specs to tasks and remembers previous projects. Focused on realistic scope, no background processes, exact spec requirements",
-  "vibe": "Converts specs to tasks with realistic scope — no gold-plating, no fantasy.",
+  "vibe": "Converts specs to tasks with realistic scope \u2014 no gold-plating, no fantasy.",
   "brief_path": "project-management/project-manager-senior.md",
   "color": "#7986cb",
   "skin": "#e0ac69",
   "hair": "#7a4a21",
   "desk": {
    "x": -67.7,
-   "y": 0,
-   "z": 46.8
-  }
- },
- {
-  "id": "macos-spatial-metal-engineer",
-  "name": "macOS Spatial/Metal Engineer",
-  "division": "spatial-computing",
-  "desc": "Native Swift and Metal specialist building high-performance 3D rendering systems and spatial computing experiences for macOS and Vision Pro",
-  "vibe": "Pushes Metal to its limits for 3D rendering on macOS and Vision Pro.",
-  "brief_path": "spatial-computing/macos-spatial-metal-engineer.md",
-  "color": "#90a4ae",
-  "skin": "#8d5524",
-  "hair": "#232323",
-  "desk": {
-   "x": -52.9,
-   "y": 0,
-   "z": 44.6
-  }
- },
- {
-  "id": "terminal-integration-specialist",
-  "name": "Terminal Integration Specialist",
-  "division": "spatial-computing",
-  "desc": "Terminal emulation, text rendering optimization, and SwiftTerm integration for modern Swift applications",
-  "vibe": "Masters terminal emulation and text rendering in modern Swift applications.",
-  "brief_path": "spatial-computing/terminal-integration-specialist.md",
-  "color": "#90a4ae",
-  "skin": "#c68642",
-  "hair": "#e8e8e8",
-  "desk": {
-   "x": -50.5,
-   "y": 0,
-   "z": 44.6
-  }
- },
- {
-  "id": "visionos-spatial-engineer",
-  "name": "visionOS Spatial Engineer",
-  "division": "spatial-computing",
-  "desc": "Native visionOS spatial computing, SwiftUI volumetric interfaces, and Liquid Glass design implementation",
-  "vibe": "Builds native volumetric interfaces and Liquid Glass experiences for visionOS.",
-  "brief_path": "spatial-computing/visionos-spatial-engineer.md",
-  "color": "#90a4ae",
-  "skin": "#c68642",
-  "hair": "#6d4c41",
-  "desk": {
-   "x": -48.1,
-   "y": 0,
-   "z": 44.6
-  }
- },
- {
-  "id": "xr-cockpit-interaction-specialist",
-  "name": "XR Cockpit Interaction Specialist",
-  "division": "spatial-computing",
-  "desc": "Specialist in designing and developing immersive cockpit-based control systems for XR environments",
-  "vibe": "Designs immersive cockpit control systems that feel natural in XR.",
-  "brief_path": "spatial-computing/xr-cockpit-interaction-specialist.md",
-  "color": "#90a4ae",
-  "skin": "#f1c27d",
-  "hair": "#6d4c41",
-  "desk": {
-   "x": -52.9,
-   "y": 0,
-   "z": 46.8
-  }
- },
- {
-  "id": "xr-immersive-developer",
-  "name": "XR Immersive Developer",
-  "division": "spatial-computing",
-  "desc": "Expert WebXR and immersive technology developer with specialization in browser-based AR/VR/XR applications",
-  "vibe": "Builds browser-based AR/VR/XR experiences that push WebXR to its limits.",
-  "brief_path": "spatial-computing/xr-immersive-developer.md",
-  "color": "#90a4ae",
-  "skin": "#c68642",
-  "hair": "#e8e8e8",
-  "desk": {
-   "x": -50.5,
-   "y": 0,
-   "z": 46.8
-  }
- },
- {
-  "id": "xr-interface-architect",
-  "name": "XR Interface Architect",
-  "division": "spatial-computing",
-  "desc": "Spatial interaction designer and interface strategist for immersive AR/VR/XR environments",
-  "vibe": "Designs spatial interfaces where interaction feels like instinct, not instruction.",
-  "brief_path": "spatial-computing/xr-interface-architect.md",
-  "color": "#90a4ae",
-  "skin": "#c68642",
-  "hair": "#6d4c41",
-  "desk": {
-   "x": -48.1,
    "y": 0,
    "z": 46.8
   }
@@ -4208,58 +2480,10 @@
   }
  },
  {
-  "id": "healthcare-clinical-evidence-agent",
-  "name": "Clinical Evidence Agent",
-  "division": "healthcare",
-  "desc": "Evidence standards and clinical credibility framework for AI agents",
-  "vibe": "Clinical credibility is earned through evidence standards, not confidence.",
-  "brief_path": "healthcare/healthcare-clinical-evidence-agent.md",
-  "color": "#f48fb1",
-  "skin": "#e0ac69",
-  "hair": "#e8e8e8",
-  "desk": {
-   "x": -18.5,
-   "y": 0,
-   "z": 44.6
-  }
- },
- {
-  "id": "healthcare-innovation-strategist",
-  "name": "Healthcare Innovation Strategist",
-  "division": "healthcare",
-  "desc": "Strategic narrative architect for healthcare founders operating at",
-  "vibe": "Holds the narrative together when the team is heads-down building.",
-  "brief_path": "healthcare/healthcare-innovation-strategist.md",
-  "color": "#f48fb1",
-  "skin": "#ffdbac",
-  "hair": "#7a4a21",
-  "desk": {
-   "x": -16.1,
-   "y": 0,
-   "z": 44.6
-  }
- },
- {
-  "id": "healthcare-sovereign-health-systems-agent",
-  "name": "Sovereign Health Systems Agent",
-  "division": "healthcare",
-  "desc": "Government health mandate engagement framework for AI agents",
-  "vibe": "Global health infrastructure is the largest underserved market in health tech.",
-  "brief_path": "healthcare/healthcare-sovereign-health-systems-agent.md",
-  "color": "#f48fb1",
-  "skin": "#8d5524",
-  "hair": "#e8e8e8",
-  "desk": {
-   "x": -13.7,
-   "y": 0,
-   "z": 44.6
-  }
- },
- {
   "id": "research-synthesist",
   "name": "Research Synthesist",
   "division": "research",
-  "desc": "Expert in literature review, source evaluation, and evidence synthesis — turns a scattered pile of sources into a structured, honestly-weighted map of what the evidence actually supports",
+  "desc": "Expert in literature review, source evaluation, and evidence synthesis \u2014 turns a scattered pile of sources into a structured, honestly-weighted map of what the evidence actually supports",
   "vibe": "A hundred citations pointing the same direction is still one piece of evidence if they all trace back to the same study",
   "brief_path": "research/research-synthesist.md",
   "color": "#ce93d8",
