@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-<title>Kantor AI — Diorama 3D</title>
+<title>Kantor AI — Isometric 2D</title>
 <link rel="stylesheet" href="static/style.css?v=10">
-<script type="importmap">
-{"imports": {"three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}
+<!-- 2D: no three.js -->
+
 </script>
 </head>
 <body>
-<div id="scene-wrap"><canvas id="scene"></canvas></div>
-<div id="labels"></div>
+<div id="scene-wrap"><canvas id="iso-canvas"></canvas></div>
+
 
 <!-- HUD atas -->
 <header id="hud-top">
@@ -110,6 +110,6 @@
 
 <div id="toast" class="hidden"></div>
 
-<script type="module" src="static/app.js?v=15"></script>
+<script src="static/iso2d.js?v=3"></script><script src="static/iso-grid.js?v=1"></script><script src="static/iso-render.js?v=1"></script><script src="static/app2d.js?v=2"></script>
 </body>
 </html>
